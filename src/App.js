@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import { Platform, StyleSheet, Button, Text, View } from 'react-native';
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import CalendarScreen from './Screens/CalendarScreen';
@@ -52,9 +52,34 @@ class Info extends React.Component {
   }
 }
 
-const RouteConfigs = {
+class Tradition extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <InfoScreen />
+      </View>
+    );
+  }
+}
+
+const CalendarStack = createStackNavigator({
   Calendar: {
     screen: Calendar,
+    navigationOptions: {
+      title: 'Calendar',
+    },
+  },
+  Tradition: {
+    screen: Tradition,
+    navigationOptions: ({ navigation }) => ({
+      title: ${navigation.state.params.title},
+    }),
+  },
+});
+
+const RouteConfigs = {
+  Calendar: {
+    screen: CalendarStack,
   },
   Alphabetic: {
     screen: Alphabetic,
