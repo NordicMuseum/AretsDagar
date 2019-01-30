@@ -4,30 +4,37 @@
 
 
 import React, { Component } from 'react';
-import { ActivityIndicator, Text, View, StyleSheet, TouchableOpacity, TouchableHighlight, FlatList  } from 'react-native';
+import { Alert, ActivityIndicator, Text, View, StyleSheet, TouchableWithoutFeedback  } from 'react-native';
+import { FlatList } from 'react-navigation';
 
-export default class Alphabetic extends Component {
+export default class Calendar extends Component {
+  state = {
+    data: []
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
-      dataSource: [],
     }
   }
 
-  componentDidMount() {
-    return fetch('http://dev.aretsdagar.se/api/v1/views/traditions')
-      .then((response) => response.json())
-      .then((responseJson) => {
-       // just setState here e.g.
-       this.setState({ dataSource: responseJson, isLoading: false });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  loadTradition(item) {
+    Alert.alert(item.nid.toString());
   }
 
+  componentWillMount() {
+    this.fetchData();
+  }
+
+  fetchData = async () => {
+    const response = await fetch('http://dev.aretsdagar.se/api/v1/views/traditions');
+    const json = await response.json();
+    this.setState({ data: json, isLoading: false });
+  };
+
   render() {
+
     if (this.state.isLoading) {
       return (
         <View style={{flex: 1, paddingTop: 20}}>
@@ -39,16 +46,13 @@ export default class Alphabetic extends Component {
     return (
       <View style={styles.container}>
         <FlatList
-          data={this.state.dataSource}
-          renderItem={({item, separators}) => (
-            <TouchableHighlight
-              onPress={() => _onPress(item)}
-              onShowUnderlay={separators.highlight}
-              onHideUnderlay={separators.unhighlight}>
+          data={this.state.data}
+          renderItem={({item, index}) => (
+            <TouchableWithoutFeedback onPress={() => this.loadTradition(item)}>
               <View style={styles.rowStyle}>
                 <Text style={styles.rowTextStyle}>{item.title}</Text>
               </View>
-            </TouchableHighlight>
+            </TouchableWithoutFeedback>
           )}
           keyExtractor={(item, index) => index}
         />
@@ -68,7 +72,6 @@ const styles = StyleSheet.create({
   rowStyle: {
     height: 50,
     justifyContent: 'center',
-    // paddingLeft: 10;
   },
   rowTextStyle: {
     color: '#fff',
