@@ -4,7 +4,7 @@
 
 
 import React, { Component } from 'react';
-import { Alert, ActivityIndicator, Text, View, StyleSheet, TouchableWithoutFeedback, FlatList  } from 'react-native';
+import { Alert, ActivityIndicator, Text, View, StyleSheet, TouchableOpacity, FlatList  } from 'react-native';
 
 export default class Calendar extends Component {
   state = {
@@ -18,6 +18,16 @@ export default class Calendar extends Component {
     }
   }
 
+  loadTradition(item) {
+    this.props.navigation.navigate(
+      'Tradition',
+      {
+        id: item.nid,
+        title: item.title
+      }
+    );
+  }
+
   componentWillMount() {
     this.fetchData();
   }
@@ -29,10 +39,9 @@ export default class Calendar extends Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
     if (this.state.isLoading) {
       return (
-        <View style={{flex: 1, paddingTop: 20}}>
+        <View style={{flex: 1}}>
           <ActivityIndicator />
         </View>
       );
@@ -43,11 +52,12 @@ export default class Calendar extends Component {
         <FlatList
           data={this.state.data}
           renderItem={({item, index}) => (
-            <TouchableWithoutFeedback onPress={() => navigate.navigate('Tradition', { id: item }}>
+            <TouchableOpacity
+              onPress={() => this.loadTradition(item)}>
               <View style={styles.rowStyle}>
                 <Text style={styles.rowTextStyle}>{item.title}</Text>
               </View>
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
           )}
           keyExtractor={(item, index) => index}
         />

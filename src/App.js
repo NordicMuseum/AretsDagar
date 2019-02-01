@@ -10,13 +10,14 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import CalendarScreen from './Screens/CalendarScreen';
 import AlphabeticScreen from './Screens/AlphabeticScreen';
 import { InfoScreen } from './Screens/InfoScreen';
+import TraditionScreen from './Screens/TraditionScreen';
 
 
 class Calendar extends React.Component {
   render() {
     return (
       <View style={baseStyles}>
-        <CalendarScreen />
+        <CalendarScreen navigation={this.props.navigation} />
       </View>
     );
   }
@@ -32,17 +33,17 @@ class Alphabetic extends React.Component {
   }
 }
 
-class Reminders extends React.Component {
+class Info extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Reminders Screen</Text>
+        <InfoScreen />
       </View>
     );
   }
 }
 
-class Info extends React.Component {
+class Reminders extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -56,7 +57,7 @@ class Tradition extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <InfoScreen />
+        <TraditionScreen navigation={this.props.navigation} />
       </View>
     );
   }
@@ -65,30 +66,44 @@ class Tradition extends React.Component {
 const CalendarStack = createStackNavigator({
   Calendar: {
     screen: Calendar,
-    navigationOptions: {
+    navigationOptions: () => ({
       title: 'Calendar',
-    },
+      headerBackTitle: null
+    }),
   },
   Tradition: {
     screen: Tradition,
     navigationOptions: ({ navigation }) => ({
-      title: ${navigation.state.params.title},
+      title: navigation.state.params.title,
+      headerBackTitle: 'Tillbaka' // @TODO Doesn't work...
     }),
-  },
-});
+  }
+}, {initialRouteName: 'Calendar'});
 
 const RouteConfigs = {
   Calendar: {
     screen: CalendarStack,
+    navigationOptions: () => ({
+      title: 'Dagar'
+    }),
   },
   Alphabetic: {
     screen: Alphabetic,
+    navigationOptions: () => ({
+      title: 'Lista A - Ö'
+    }),
   },
   Reminders: {
     screen: Reminders,
+    navigationOptions: () => ({
+      title: 'Påminnelser'
+    }),
   },
   Info: {
     screen: Info,
+    navigationOptions: () => ({
+      title: 'Info'
+    }),
   },
 };
 
@@ -109,7 +124,6 @@ const TabNavigatorConfig = {
 const baseStyles = {
   backgroundColor: '#1d1d1d',
   flex: 1,
-  marginTop: 40,
 }
 
 const TabsView = createBottomTabNavigator(RouteConfigs, TabNavigatorConfig);
