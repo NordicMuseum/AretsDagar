@@ -3,11 +3,16 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Alert, ActivityIndicator, Text, View, Image, StyleSheet  } from 'react-native';
+import { ActivityIndicator, Alert, Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View  } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { FormatDate } from '../Utils/helpers';
+
+const { height } = Dimensions.get('window');
 
 export default class Tradition extends Component {
   state = {
-    data: []
+    data: [],
+    screenHeight: 0,
   };
 
   constructor(props) {
@@ -23,6 +28,11 @@ export default class Tradition extends Component {
     this.fetchData(id);
   }
 
+  onContentSizeChange = (contentWidth, contentHeight) => {
+    // Save the content height in state
+    this.setState({ screenHeight: contentHeight });
+  };
+
   fetchData = async (id) => {
     const response = await fetch('http://dev.aretsdagar.se/api/v1/views/tradition?nid='+id);
     const json = await response.json();
@@ -32,29 +42,62 @@ export default class Tradition extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={{flex: 1, paddingTop: 20}}>
+        <View style={styles.loader}>
           <ActivityIndicator />
         </View>
       );
     }
     else {
+      const scrollEnabled = this.state.screenHeight > height;
       const tradition = this.state.data[0];
-      const formattedDate = formatDate(tradition.dates, null);
+      const formattedDate = FormatDate(tradition.dates, null);
+      const imageDir = 'http://aretsdagar.nordiskamuseet.se/sites/default/files/styles/top_image/public/';
 
       return (
-        <View style={styles.container}>
-          <View style={styles.wrapper}>
-          <Image
-            style={{flex: 1, resizeMode: "cover", height: 250, width: null}}
-            source={{uri: 'http://aretsdagar.nordiskamuseet.se/sites/default/files/styles/top_image/public/' + tradition.bild}}
-          />
-          </View>
-          <Text style={[{flex: 2}, styles.text]}>{formattedDate}</Text>
-          <Text style={[{flex: 3}, styles.text]}>{tradition.title}</Text>
-          <View style={{flex: 2}}>
-            <Text style={styles.text}>ASDF</Text>
-          </View>
-        </View>
+        <SafeAreaView style={styles.container}>
+          <ScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={styles.scrollview}
+            scrollEnabled={scrollEnabled}
+            onContentSizeChange={this.onContentSizeChange}
+          >
+            <View style={styles.imageWrapper}>
+              <Image
+                style={styles.image}
+                source={{ uri: imageDir + tradition.bild }}
+                defaultSource={require('AretsDagar/assets/default_top.jpg')}
+              />
+            </View>
+            <View style={styles.contentWrapper}>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.title}>{tradition.title}</Text>
+                <View style={styles.details}>
+                  <Text style={styles.text}>{formattedDate}</Text>
+                  <Text style={{color: '#f2d49c'}}>{tradition.celebrations} FIRANDEN</Text>
+                </View>
+              </View>
+              <View style={[{ flex: 2 }, styles.actionBar]}>
+                <TouchableOpacity style={styles.tabItem}>
+                  <Icon name="favorite" size={25}/>
+                  <Text style={styles.tabTitle}>Fira</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.tabItem}>
+                  <Icon name="place" size={25} />
+                  <Text style={styles.tabTitle}>Visa var</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.tabItem}>
+                  <Icon name="share" size={25} />
+                  <Text style={styles.tabTitle}>Dela</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.tabItem}>
+                  <Icon name="alarm" size={25} />
+                  <Text style={styles.tabTitle}>Påminn</Text>
+                </TouchableOpacity>
+              </View>
+              <Text style={styles.text}>{tradition.intro}</Text>
+            </View>
+          </ScrollView>
+        </SafeAreaView>
       );
     }
   }
@@ -62,61 +105,50 @@ export default class Tradition extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    alignContent:'center',
     backgroundColor: '#1d1d1d',
-    flex:1,
-    flexDirection: 'column',
+    flex: 1
   },
-  wrapper: {
-    flex:1,
+  imageWrapper: {
+    // alignContent:'center',
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    height: 250,
+    width: null
+  },
+  loader: {
+    flex: 1,
+    paddingTop: 20,
+    backgroundColor: '#1d1d1d'
+  },
+  contentWrapper: {
+  },
+  actionBar: {
+    height: 60,
+    borderTopWidth: 0.5,
+    borderColor: '#333333',
     flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  tabItem: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  tabTitle: {
+    fontSize: 11,
+    color: '#fff',
+    paddingTop: 4
+  },
+  title: {
+    color: '#fff',
+    fontSize: 22
+  },
+  details: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   text: {
-    color: '#fff',
+    color: '#fff'
   }
 })
-
-const formatDate = function(dates_string, multiple) {
-  const month_str = {
-    0 : "januari",
-    1 : "februari",
-    2 : "mars",
-    3 : "april",
-    4 : "maj",
-    5 : "juni",
-    6 : "juli",
-    7 : "augusti",
-    8 : "september",
-    9 : "oktober",
-    10 : "november",
-    11 : "december"
-  };
-
-  // Fetching all dates from Drupal but we just set next as date.
-  const dates = dates_string.split(', ');
-  let day = null;
-  let formatted = null;
-  for (let d of dates) {
-    const date = new Date();
-    const unix_now = Math.round(+date.setHours(0, 0, 0, 0) / 1000);
-
-    if (d < unix_now)
-      continue;
-    const date_stamp = parseInt(d) * 1000;
-    // if (isAndroid) {
-    //   date_stamp = date_stamp + (1000 * 60 * 60 * 4);
-    // }
-    const date_obj = new Date(date_stamp);
-    let day = null;
-    if (multiple) {
-      day = multiple;
-    } else {
-      day = date_obj.getDate();
-    }
-    const month = month_str[date_obj.getMonth()];
-    formatted = day + ' ' + month;
-    break;
-  }
-  return formatted;
-};

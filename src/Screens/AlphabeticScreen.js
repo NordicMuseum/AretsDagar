@@ -7,25 +7,36 @@ import React, { Component } from 'react';
 import { ActivityIndicator, Text, View, StyleSheet, TouchableOpacity, TouchableHighlight, FlatList  } from 'react-native';
 
 export default class Alphabetic extends Component {
+  state = {
+    data: []
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
-      dataSource: [],
     }
   }
 
-  componentDidMount() {
-    return fetch('http://dev.aretsdagar.se/api/v1/views/traditions_alphabetic')
-      .then((response) => response.json())
-      .then((responseJson) => {
-       // just setState here e.g.
-       this.setState({ dataSource: responseJson, isLoading: false });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  componentWillMount() {
+    this.fetchData();
   }
+
+  loadTradition(item) {
+    this.props.navigation.navigate(
+      'Tradition',
+      {
+        id: item.nid,
+        title: item.title
+      }
+    );
+  }
+
+  fetchData = async () => {
+    const response = await fetch('http://dev.aretsdagar.se/api/v1/views/traditions_alphabetic');
+    const json = await response.json();
+    this.setState({ data: json, isLoading: false });
+  };
 
   render() {
     if (this.state.isLoading) {
@@ -39,10 +50,10 @@ export default class Alphabetic extends Component {
     return (
       <View style={styles.container}>
         <FlatList
-          data={this.state.dataSource}
+          data={this.state.data}
           renderItem={({item, separators}) => (
             <TouchableHighlight
-              onPress={() => _onPress(item)}
+              onPress={() => this.loadTradition(item)}
               onShowUnderlay={separators.highlight}
               onHideUnderlay={separators.unhighlight}>
               <View style={styles.rowStyle}>
@@ -50,7 +61,8 @@ export default class Alphabetic extends Component {
               </View>
             </TouchableHighlight>
           )}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item)=>item.nid}
+          ItemSeparatorComponent={()=><View style={{ height: 0.5, backgroundColor: '#333333' }}/>}
         />
       </View>
     );
@@ -63,14 +75,14 @@ const styles = StyleSheet.create({
       alignContent:'center',
       flexDirection: 'row',
       flexWrap:'wrap',
-      justifyContent:'center',
+      justifyContent:'center'
   },
   rowStyle: {
     height: 50,
     justifyContent: 'center',
-    // paddingLeft: 10;
+    paddingHorizontal: 15
   },
   rowTextStyle: {
-    color: '#fff',
+    color: '#fff'
   }
 })

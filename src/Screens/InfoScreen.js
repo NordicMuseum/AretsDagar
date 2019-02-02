@@ -22,9 +22,9 @@ export const InfoScreen = () => {
 const styles = StyleSheet.create({
   headerTextStyle: {
     justifyContent: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F5FCFF'
   },
   textBody: {
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 });
