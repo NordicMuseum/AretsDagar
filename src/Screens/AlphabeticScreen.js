@@ -33,7 +33,7 @@ export default class Alphabetic extends Component {
   }
 
   fetchData = async () => {
-    const response = await fetch('http://dev.aretsdagar.se/api/v1/views/traditions_alphabetic');
+    const response = await fetch('http://aretsdagar.nordiskamuseet.se/api/v1/views/traditions_alphabetic');
     const json = await response.json();
     this.setState({ data: json, isLoading: false });
   };

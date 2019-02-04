@@ -3,7 +3,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { ActivityIndicator, Alert, Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View  } from 'react-native';
+import { ActivityIndicator, Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View  } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FormatDate } from '../Utils/helpers';
 
@@ -24,7 +24,6 @@ export default class Tradition extends Component {
 
   componentWillMount() {
     const id = this.props.navigation.getParam('id');
-
     this.fetchData(id);
   }
 
@@ -34,7 +33,7 @@ export default class Tradition extends Component {
   };
 
   fetchData = async (id) => {
-    const response = await fetch('http://dev.aretsdagar.se/api/v1/views/tradition?nid='+id);
+    const response = await fetch('http://aretsdagar.nordiskamuseet.se/api/v1/views/tradition?nid='+id);
     const json = await response.json();
     this.setState({ data: json, isLoading: false });
   };
@@ -81,7 +80,12 @@ export default class Tradition extends Component {
                   <Icon name="favorite" size={25}/>
                   <Text style={styles.tabTitle}>Fira</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.tabItem}>
+                <TouchableOpacity
+                  style={styles.tabItem}
+                  onPress={() => this.props.navigation.navigate('Map', {
+                    id: tradition.nid
+                  })}
+                  >
                   <Icon name="place" size={25} />
                   <Text style={styles.tabTitle}>Visa var</Text>
                 </TouchableOpacity>

@@ -11,6 +11,7 @@ import CalendarScreen from './Screens/CalendarScreen';
 import AlphabeticScreen from './Screens/AlphabeticScreen';
 import { InfoScreen } from './Screens/InfoScreen';
 import TraditionScreen from './Screens/TraditionScreen';
+import MapScreen from './Screens/MapScreen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class Calendar extends React.Component {
@@ -61,6 +62,23 @@ class Tradition extends React.Component {
   }
 }
 
+class Map extends React.Component {
+  render() {
+    return (
+      <MapScreen navigation={this.props.navigation} />
+    );
+  }
+}
+
+const TraditionStack = createStackNavigator({
+  Tradition: {
+    screen: Tradition,
+  },
+  Map: {
+    screen: Map,
+  },
+}, {mode: 'modal', initialRouteName: 'Tradition', headerMode: 'none'});
+
 const CalendarStack = createStackNavigator({
   Calendar: {
     screen: Calendar,
@@ -83,19 +101,25 @@ const CalendarStack = createStackNavigator({
     }),
   },
   Tradition: {
-    screen: Tradition,
+    screen: TraditionStack,
     navigationOptions: ({ navigation }) => ({
       title: navigation.state.params.title,
       headerStyle: {
         backgroundColor: '#111111',
+        borderBottomWidth: 0
       },
       headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
+      headerTitle: (
+        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+          <Image
+            source={require('AretsDagar/assets/logo.png')}
+            style={{ width:100, height: 35, paddingBottom: 3 }}
+          />
+        </View>
+      ),
     }),
   }
-}, {initialRouteName: 'Calendar'});
+}, {initialRouteName: 'Calendar', headerMode: 'screen'});
 
 const AlphabeticStack = createStackNavigator({
   Alphabetic: {
@@ -121,14 +145,18 @@ const AlphabeticStack = createStackNavigator({
   Tradition: {
     screen: Tradition,
     navigationOptions: ({ navigation }) => ({
-      title: navigation.state.params.title,
       headerStyle: {
         backgroundColor: '#111111',
       },
       headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
+      headerTitle: (
+        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+          <Image
+            source={require('AretsDagar/assets/logo.png')}
+            style={{ width:100, height: 35, paddingBottom: 3 }}
+          />
+        </View>
+      ),
     }),
   }
 }, {initialRouteName: 'Alphabetic'});
