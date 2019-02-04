@@ -34,7 +34,7 @@ export default class Calendar extends Component {
   }
 
   fetchData = async () => {
-    const response = await fetch('http://dev.aretsdagar.se/api/v1/views/traditions');
+    const response = await fetch('http://aretsdagar.nordiskamuseet.se/api/v1/views/traditions');
     const json = await response.json();
     this.setState({ data: json, isLoading: false });
   };
