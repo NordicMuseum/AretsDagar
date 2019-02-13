@@ -3,8 +3,10 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { ActivityIndicator, Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View  } from 'react-native';
+import { ActivityIndicator, Dimensions, Image, SafeAreaView, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View  } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Accordion from '../Components/Accordion';
+import ExternalLinks from '../Components/ExternalLinks';
 import { FormatDate } from '../Utils/helpers';
 
 const { height } = Dimensions.get('window');
@@ -38,6 +40,31 @@ export default class Tradition extends Component {
     this.setState({ data: json, isLoading: false });
   };
 
+  onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'React Native | A framework for building native apps using React',
+          // var shareTitle = 'Vad vet du om ' + tradition[0].title + '?';
+          // var baseURL = 'http://aretsdagar.nordiskamuseet.se/';
+          // var shareImage = baseURL + 'sites/default/files/styles/list_image/public/' + tradition[0].bild;
+          // var share = require('lib/share');
+      })
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -47,7 +74,6 @@ export default class Tradition extends Component {
       );
     }
     else {
-      const scrollEnabled = this.state.screenHeight > height;
       const tradition = this.state.data[0];
       const formattedDate = FormatDate(tradition.dates, null);
       const imageDir = 'http://aretsdagar.nordiskamuseet.se/sites/default/files/styles/top_image/public/';
@@ -55,9 +81,8 @@ export default class Tradition extends Component {
       return (
         <SafeAreaView style={styles.container}>
           <ScrollView
-            style={{ flex: 1 }}
-            contentContainerStyle={styles.scrollview}
-            scrollEnabled={scrollEnabled}
+            contentContainerStyle={{ flexGrow: 1 }}
+            scrollEnabled={true}
             onContentSizeChange={this.onContentSizeChange}
           >
             <View style={styles.imageWrapper}>
@@ -89,7 +114,7 @@ export default class Tradition extends Component {
                   <Icon name="place" size={25} />
                   <Text style={styles.tabTitle}>Visa var</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.tabItem}>
+                <TouchableOpacity style={styles.tabItem} onPress={this.onShare}>
                   <Icon name="share" size={25} />
                   <Text style={styles.tabTitle}>Dela</Text>
                 </TouchableOpacity>
@@ -98,8 +123,12 @@ export default class Tradition extends Component {
                   <Text style={styles.tabTitle}>Påminn</Text>
                 </TouchableOpacity>
               </View>
-              <Text style={styles.text}>{tradition.intro}</Text>
+              <View style={styles.intro}>
+                <Text style={styles.text}>{tradition.intro}</Text>
+              </View>
             </View>
+            <Accordion tradition={tradition}/>
+            <ExternalLinks tradition={tradition}/>
           </ScrollView>
         </SafeAreaView>
       );
@@ -127,6 +156,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#1d1d1d'
   },
   contentWrapper: {
+    paddingTop: 10,
+    paddingLeft: 20,
+    paddingRight: 20
   },
   actionBar: {
     height: 60,
@@ -143,6 +175,10 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: '#fff',
     paddingTop: 4
+  },
+  intro: {
+    paddingTop: 20,
+    paddingBottom: 20
   },
   title: {
     color: '#fff',

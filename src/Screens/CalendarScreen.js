@@ -79,12 +79,12 @@ export default class Calendar extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      alignItems: 'center',
-      alignContent:'center',
-      flexDirection: 'row',
-      flexWrap:'wrap',
-      justifyContent:'center'
+    flex: 1,
+    alignItems: 'center',
+    alignContent:'center',
+    flexDirection: 'row',
+    flexWrap:'wrap',
+    justifyContent:'center'
   },
   row: {
     height: 100,
