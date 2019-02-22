@@ -41,3 +41,7 @@ export function FormatDate(datesString, multiple) {
   }
   return formatted;
 }
+
+export function FormatIntro(intro) {
+  return intro.substring(0, 70) + ' ...';
+}

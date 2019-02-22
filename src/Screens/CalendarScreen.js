@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react';
 import { Alert, ActivityIndicator, Image, Text, View, StyleSheet, TouchableOpacity, FlatList  } from 'react-native';
-import { FormatDate } from '../Utils/helpers';
+import { FormatDate, FormatIntro } from '../Utils/helpers';
 
 export default class Calendar extends Component {
   state = {
@@ -55,7 +55,8 @@ export default class Calendar extends Component {
           data={this.state.data}
           renderItem={({item, index}) => (
             <TouchableOpacity
-              onPress={() => this.loadTradition(item)}>
+              onPress={() => this.loadTradition(item)}
+              style={styles.rowWrapper}>
               <View style={styles.row}>
                 <Image
                   source={{ uri: imageDir + item.bild }}
@@ -64,9 +65,11 @@ export default class Calendar extends Component {
                 />
                 <View style={styles.rowContent}>
                   <Text style={styles.rowText}>{item.title}</Text>
-                  <Text style={styles.rowText}>{FormatDate(item.dates, item.multiple_dates)}</Text>
+                  <Text style={styles.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
+                  <Text style={styles.intro}>{FormatIntro(item.intro)}</Text>
                 </View>
               </View>
+              <Text style={styles.celebrations}><Text style={{color: '#fff'}}>{item.celebrations}</Text> FIRANDEN</Text>
             </TouchableOpacity>
           )}
           keyExtractor={(item)=>item.nid}
@@ -85,20 +88,39 @@ const styles = StyleSheet.create({
     flexWrap:'wrap',
     justifyContent:'center'
   },
+  rowWrapper: {
+    paddingHorizontal: 15,
+    paddingVertical: 10
+  },
   row: {
-    height: 100,
     flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 15
+    alignItems: 'center'
   },
   rowContent: {
     paddingHorizontal: 10
   },
   rowText: {
-    color: '#fff'
+    color: '#fff',
+    fontSize: 15,
+  },
+  date: {
+    color: '#5f5f5f',
+    fontSize: 12,
+    fontWeight: 'bold'
+  },
+  intro: {
+    color: '#fff',
+    fontSize: 12,
+    marginTop: 5,
+    width: 170
   },
   thumbnail: {
     height: 85,
     width: 105
+  },
+  celebrations: {
+    color: '#5f5f5f',
+    fontSize: 13,
+    marginTop: 5
   }
 })

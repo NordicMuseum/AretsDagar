@@ -4,6 +4,7 @@
 
 import React, { Component } from 'react';
 import { ActivityIndicator, Text, View, StyleSheet, TouchableOpacity, TouchableHighlight, FlatList  } from 'react-native';
+import { FormatDate } from '../Utils/helpers';
 
 export default class Alphabetic extends Component {
   state = {
@@ -57,6 +58,7 @@ export default class Alphabetic extends Component {
               onHideUnderlay={separators.unhighlight}>
               <View style={styles.rowStyle}>
                 <Text style={styles.rowTextStyle}>{item.title}</Text>
+                <Text style={styles.rowText}>{FormatDate(item.dates, item.multiple_dates)}</Text>
               </View>
             </TouchableHighlight>
           )}
@@ -82,6 +84,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15
   },
   rowTextStyle: {
-    color: '#fff'
+    color: '#fff',
+    fontSize: 16,
+  },
+  rowText: {
+    color: '#5f5f5f',
+    fontSize: 12,
+    fontWeight: 'bold'
   }
 })
