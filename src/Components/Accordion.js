@@ -58,7 +58,7 @@ export default class Accordion extends Component {
   _buildCollapse(item) {
     return (
       <Collapse key={item.key}>
-        <CollapseHeader>
+        <CollapseHeader style={styles.header}>
           <View>
             <Text style={styles.title}>{item.title}</Text>
           </View>
@@ -78,8 +78,12 @@ export default class Accordion extends Component {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    backgroundColor: '#111',
+    borderBottomColor: '#5f5f5f',
+    borderBottomWidth: StyleSheet.hairlineWidth
+  },
   title: {
-    backgroundColor: '#111111',
     color: '#5f5f5f',
     paddingTop: 5,
     paddingRight: 20,

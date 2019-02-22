@@ -55,6 +55,48 @@ class User extends React.Component {
   }
 }
 
+const UserStack = createStackNavigator({
+  User: {
+    screen: User,
+    navigationOptions: () => ({
+      headerStyle: {
+        backgroundColor: '#111',
+        borderBottomWidth: 0
+      },
+      headerTintColor: '#fff',
+      headerTitle: (
+        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+          <Image
+            source={require('AretsDagar/assets/logo.png')}
+            style={{ width:100, height: 35, paddingBottom: 3 }}
+          />
+        </View>
+      ),
+    }),
+  },
+});
+
+const InfoStack = createStackNavigator({
+  Info: {
+    screen: Info,
+    navigationOptions: () => ({
+      headerStyle: {
+        backgroundColor: '#111',
+        borderBottomWidth: 0
+      },
+      headerTintColor: '#fff',
+      headerTitle: (
+        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+          <Image
+            source={require('AretsDagar/assets/logo.png')}
+            style={{ width:100, height: 35, paddingBottom: 3 }}
+          />
+        </View>
+      ),
+    }),
+  },
+});
+
 class Tradition extends React.Component {
   render() {
     return (
@@ -87,7 +129,7 @@ const CalendarStack = createStackNavigator({
       title: 'Calendar',
       headerBackTitle: 'Tillbaka',
       headerStyle: {
-        backgroundColor: '#111111',
+        backgroundColor: '#111',
         borderBottomWidth: 0
       },
       headerTintColor: '#fff',
@@ -106,7 +148,7 @@ const CalendarStack = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: navigation.state.params.title,
       headerStyle: {
-        backgroundColor: '#111111',
+        backgroundColor: '#111',
         borderBottomWidth: 0
       },
       headerTintColor: '#fff',
@@ -129,7 +171,7 @@ const AlphabeticStack = createStackNavigator({
       title: 'Alphabetic',
       headerBackTitle: 'Tillbaka',
       headerStyle: {
-        backgroundColor: '#111111',
+        backgroundColor: '#111',
         borderBottomWidth: 0
       },
       headerTintColor: '#fff',
@@ -147,7 +189,8 @@ const AlphabeticStack = createStackNavigator({
     screen: Tradition,
     navigationOptions: ({ navigation }) => ({
       headerStyle: {
-        backgroundColor: '#111111',
+        backgroundColor: '#111',
+        borderBottomWidth: 0
       },
       headerTintColor: '#fff',
       headerTitle: (
@@ -182,7 +225,7 @@ const RouteConfigs = {
     }),
   },
   User: {
-    screen: User,
+    screen: UserStack,
     navigationOptions: () => ({
       tabBarLabel: 'Påminnelser',
       tabBarIcon: ({tintColor}) => (
@@ -191,7 +234,7 @@ const RouteConfigs = {
     }),
   },
   Info: {
-    screen: Info,
+    screen: InfoStack,
     navigationOptions: () => ({
       tabBarLabel: 'Info',
       tabBarIcon: ({tintColor}) => (
@@ -213,7 +256,7 @@ const TabNavigatorConfig = {
     },
     allowFontScaling: false,
     style: {
-      backgroundColor: '#111111',
+      backgroundColor: '#111',
     }
   },
 };

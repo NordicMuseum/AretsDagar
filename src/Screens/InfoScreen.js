@@ -98,11 +98,11 @@ const styles = StyleSheet.create({
     paddingRight: 20
   },
   headerTextStyle: {
-    color: '#ffffff',
+    color: '#fff',
     fontSize: 22,
     marginBottom: 20
   },
   textBody: {
-    color: '#ffffff'
+    color: '#fff'
   }
 });

@@ -106,6 +106,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15
   },
   rowText: {
-    color: '#ffffff'
+    color: '#fff'
   },
 });

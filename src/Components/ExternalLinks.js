@@ -20,7 +20,7 @@ export default class ExternalLinks extends Component {
       let links = [];
       let linkData = tradition.links.split(', ');
 
-      for (let i = 0; i < linkData.entries().length; i +=1) {
+      for (let i = 0; i < linkData.length; i +=1) {
         let linkText = linkData[i].replace(/<(?:.|\n)*?>/gm, '');
         let splitUrl = linkData[i].split('">');
         let linkUrl = splitUrl[0].replace('<a href="', '');
@@ -58,7 +58,7 @@ export default class ExternalLinks extends Component {
 
 const styles = StyleSheet.create({
   label: {
-    backgroundColor: '#111111',
+    backgroundColor: '#111',
     color: '#5f5f5f',
     paddingTop: 5,
     paddingRight: 20,
