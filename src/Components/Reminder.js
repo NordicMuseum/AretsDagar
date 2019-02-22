@@ -11,6 +11,7 @@ export default class Reminder extends Component {
     nid: null,
     title: null,
     status: 'inactive',
+    color: '#fff',
   };
 
   constructor(props) {
@@ -33,6 +34,7 @@ export default class Reminder extends Component {
         if (status !== null) {
           this.setState({
             status: 'active',
+            color: '#f2d49c',
           });
         }
       });
@@ -51,14 +53,24 @@ export default class Reminder extends Component {
         'title': title,
       }
       try {
-        await AsyncStorage.setItem('reminder:' + nid, JSON.stringify(reminder));
+        await AsyncStorage.setItem('reminder:' + nid, JSON.stringify(reminder)).then(() => {
+          this.setState({
+            status: 'active',
+            color: '#f2d49c',
+          });
+        });
       } catch (error) {
         alert(error.message);
       }
     }
     else {
       try {
-        await AsyncStorage.removeItem('reminder:' + nid);
+        await AsyncStorage.removeItem('reminder:' + nid).then(() => {
+          this.setState({
+            status: 'inactive',
+            color: '#fff',
+          });
+        });
       } catch (error) {
         alert(error.message);
       }
@@ -67,11 +79,10 @@ export default class Reminder extends Component {
 
   render() {
     let status = this.state.status;
-    let text = (status === 'active') ? 'Påminner' : 'Påminn';
     return (
       <TouchableOpacity style={styles.tabItem} onPress={this.setReminder}>
         <Icon name="alarm" size={25} />
-        <Text style={styles.tabTitle}>{text}</Text>
+        <Text style={styles.tabTitle, {color: this.state.color}}>Påminn</Text>
       </TouchableOpacity>
     );
   }
@@ -84,7 +95,6 @@ const styles = StyleSheet.create({
   },
   tabTitle: {
     fontSize: 11,
-    color: '#fff',
     marginTop: 4
   }
 })

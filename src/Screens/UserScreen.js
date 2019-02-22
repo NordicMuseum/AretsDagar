@@ -19,7 +19,16 @@ export default class UserScreen extends Component {
   }
 
   componentDidMount() {
-    this.fetchData();
+    this.didFocusListener = this.props.navigation.addListener(
+      'didFocus',
+      () => {
+        this.fetchData();
+      },
+    );
+  }
+
+  componentWillUnmount() {
+    this.didFocusListener.remove();
   }
 
   fetchData = async () => {
