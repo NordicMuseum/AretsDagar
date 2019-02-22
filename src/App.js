@@ -10,6 +10,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import CalendarScreen from './Screens/CalendarScreen';
 import AlphabeticScreen from './Screens/AlphabeticScreen';
 import InfoScreen from './Screens/InfoScreen';
+import UserScreen from './Screens/UserScreen';
 import TraditionScreen from './Screens/TraditionScreen';
 import MapScreen from './Screens/MapScreen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -44,11 +45,11 @@ class Info extends React.Component {
   }
 }
 
-class Reminders extends React.Component {
+class User extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <InfoScreen />
+      <View style={baseStyles}>
+        <UserScreen />
       </View>
     );
   }
@@ -180,8 +181,8 @@ const RouteConfigs = {
       )
     }),
   },
-  Reminders: {
-    screen: Reminders,
+  User: {
+    screen: User,
     navigationOptions: () => ({
       tabBarLabel: 'Påminnelser',
       tabBarIcon: ({tintColor}) => (

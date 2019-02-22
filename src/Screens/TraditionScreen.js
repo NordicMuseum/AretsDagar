@@ -7,6 +7,7 @@ import { ActivityIndicator, Dimensions, Image, SafeAreaView, ScrollView, Share, 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Accordion from '../Components/Accordion';
 import ExternalLinks from '../Components/ExternalLinks';
+import Reminder from '../Components/Reminder';
 import { FormatDate } from '../Utils/helpers';
 
 const { height } = Dimensions.get('window');
@@ -118,10 +119,7 @@ export default class Tradition extends Component {
                   <Icon name="share" size={25} />
                   <Text style={styles.tabTitle}>Dela</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.tabItem}>
-                  <Icon name="alarm" size={25} />
-                  <Text style={styles.tabTitle}>Påminn</Text>
-                </TouchableOpacity>
+                <Reminder nid={tradition.nid} title={tradition.title}/>
               </View>
               <View style={styles.intro}>
                 <Text style={styles.text}>{tradition.intro}</Text>
@@ -152,7 +150,7 @@ const styles = StyleSheet.create({
   },
   loader: {
     flex: 1,
-    paddingTop: 20,
+    marginTop: 20,
     backgroundColor: '#1d1d1d'
   },
   contentWrapper: {

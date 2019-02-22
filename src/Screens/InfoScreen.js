@@ -3,7 +3,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, AsyncStorage, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default class InfoScreen extends Component {
   state = {
@@ -20,6 +20,7 @@ export default class InfoScreen extends Component {
 
   componentWillMount() {
     this.fetchData();
+    AsyncStorage.clear();
   }
 
   onContentSizeChange = (contentWidth, contentHeight) => {
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
   },
   loader: {
     flex: 1,
-    paddingTop: 20,
+    marginTop: 20,
     backgroundColor: '#1d1d1d'
   },
   contentWrapper: {
