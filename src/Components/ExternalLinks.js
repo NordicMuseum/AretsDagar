@@ -38,6 +38,7 @@ export default class ExternalLinks extends Component {
   _buildLink(item) {
     return (
       <View key={item.key}>
+        <Text style={styles.label}>Länkar</Text>
         <Text
             style={styles.link}
             onPress={() => {Linking.openURL(item.url)}}
@@ -56,6 +57,14 @@ export default class ExternalLinks extends Component {
 }
 
 const styles = StyleSheet.create({
+  label: {
+    backgroundColor: '#111111',
+    color: '#5f5f5f',
+    paddingTop: 5,
+    paddingRight: 20,
+    paddingLeft: 20,
+    paddingBottom: 5
+  },
   link: {
     color: '#fff',
     paddingTop: 5,

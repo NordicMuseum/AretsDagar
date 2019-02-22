@@ -7,6 +7,7 @@ import { ActivityIndicator, Dimensions, Image, SafeAreaView, ScrollView, Share, 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Accordion from '../Components/Accordion';
 import ExternalLinks from '../Components/ExternalLinks';
+import Instagram from '../Components/Instagram';
 import Reminder from '../Components/Reminder';
 import { FormatDate } from '../Utils/helpers';
 
@@ -127,6 +128,7 @@ export default class Tradition extends Component {
             </View>
             <Accordion tradition={tradition}/>
             <ExternalLinks tradition={tradition}/>
+            <Instagram insta_tag={tradition.insta_tag}/>
           </ScrollView>
         </SafeAreaView>
       );
