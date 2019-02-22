@@ -3,7 +3,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { ActivityIndicator, AsyncStorage, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default class InfoScreen extends Component {
   state = {
@@ -20,7 +20,6 @@ export default class InfoScreen extends Component {
 
   componentWillMount() {
     this.fetchData();
-    AsyncStorage.clear();
   }
 
   onContentSizeChange = (contentWidth, contentHeight) => {
