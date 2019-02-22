@@ -82,14 +82,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#111111',
     color: '#5f5f5f',
     paddingTop: 5,
-    paddingBottom: 20,
+    paddingRight: 20,
     paddingLeft: 20,
     paddingBottom: 5
   },
   text: {
     color: '#fff',
     paddingTop: 5,
-    paddingBottom: 20,
+    paddingRight: 20,
     paddingLeft: 20,
     paddingBottom: 5
   }

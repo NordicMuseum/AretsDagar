@@ -2,7 +2,6 @@
 
 'use strict';
 
-
 import React, { Component } from 'react';
 import { Alert, ActivityIndicator, Image, Text, View, StyleSheet, TouchableOpacity, FlatList  } from 'react-native';
 import { FormatDate } from '../Utils/helpers';
