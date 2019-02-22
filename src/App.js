@@ -49,7 +49,7 @@ class User extends React.Component {
   render() {
     return (
       <View style={baseStyles}>
-        <UserScreen />
+        <UserScreen navigation={this.props.navigation}/>
       </View>
     );
   }
