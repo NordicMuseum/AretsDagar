@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   actionBar: {
     height: 60,
     borderTopWidth: 0.5,
-    borderColor: '#333333',
+    borderColor: '#333',
     flexDirection: 'row',
     justifyContent: 'space-around'
   },
