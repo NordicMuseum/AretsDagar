@@ -162,10 +162,15 @@ const styles = StyleSheet.create({
   },
   actionBar: {
     height: 60,
+    borderBottomWidth: 0.5,
     borderTopWidth: 0.5,
     borderColor: '#333',
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    marginBottom: 5,
+    marginTop: 10,
+    paddingBottom: 5,
+    paddingTop: 5
   },
   tabItem: {
     alignItems: 'center',
