@@ -81,7 +81,7 @@ export default class Reminder extends Component {
     let status = this.state.status;
     return (
       <TouchableOpacity style={styles.tabItem} onPress={this.setReminder}>
-        <Icon name="alarm" size={25} />
+        <Icon name="alarm" size={25} style={styles.tabIcon}/>
         <Text style={styles.tabTitle, {color: this.state.color}}>Påminn</Text>
       </TouchableOpacity>
     );
@@ -96,5 +96,8 @@ const styles = StyleSheet.create({
   tabTitle: {
     fontSize: 11,
     marginTop: 4
+  },
+  tabIcon: {
+    color: '#5f5f5f'
   }
 })
