@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
   loader: {
     flex: 1,
-    marginTop: 50,
+    paddingTop: 30,
     backgroundColor: '#1d1d1d'
   },
   row: {
