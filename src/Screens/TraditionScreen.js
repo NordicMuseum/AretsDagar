@@ -98,8 +98,10 @@ export default class Tradition extends Component {
               <View style={{ flex: 1 }}>
                 <Text style={styles.title}>{tradition.title}</Text>
                 <View style={styles.details}>
-                  <Text style={styles.text}>{formattedDate}</Text>
-                  <Text style={{color: '#f2d49c'}}>{tradition.celebrations} FIRANDEN</Text>
+                  <Text style={styles.dateText}>Firas {formattedDate}</Text>
+                  <View style={styles.celebRow}>
+                    <Icon name="favorite" style={styles.celebIcon} size={16}/><Text style={styles.celebText}><Text style={{color: '#f2d49c'}}>{tradition.celebrations}</Text> FIRANDEN</Text>
+                  </View>
                 </View>
               </View>
               <View style={[{ flex: 2 }, styles.actionBar]}>
@@ -194,6 +196,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   text: {
-    color: '#fff'
+    color: '#fff',
+  },
+  dateText: {
+    color: '#7f7f7f',
+    fontSize: 13,
+    fontWeight: 'bold'
+  },
+  celebRow: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  celebIcon: {
+    color: '#5f5f5f',
+    paddingRight: 5
+  },
+  celebText: {
+    color: '#7f7f7f'
   }
 })
