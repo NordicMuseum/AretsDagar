@@ -106,7 +106,7 @@ export default class Tradition extends Component {
               </View>
               <View style={[{ flex: 2 }, styles.actionBar]}>
                 <TouchableOpacity style={styles.tabItem}>
-                  <Icon name="favorite" size={25}/>
+                  <Icon name="favorite" size={25} style={styles.tabIcon}/>
                   <Text style={styles.tabTitle}>Fira</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -115,11 +115,11 @@ export default class Tradition extends Component {
                     id: tradition.nid
                   })}
                   >
-                  <Icon name="place" size={25} />
+                  <Icon name="place" size={25} style={styles.tabIcon}/>
                   <Text style={styles.tabTitle}>Visa var</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.tabItem} onPress={this.onShare}>
-                  <Icon name="share" size={25} />
+                  <Icon name="share" size={25} style={styles.tabIcon}/>
                   <Text style={styles.tabTitle}>Dela</Text>
                 </TouchableOpacity>
                 <Reminder nid={tradition.nid} title={tradition.title}/>
@@ -183,6 +183,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     paddingTop: 4
   },
+  tabIcon: {
+    color: '#5f5f5f'
+  },
   intro: {
     paddingTop: 20,
     paddingBottom: 20
@@ -196,7 +199,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   text: {
-    color: '#fff',
+    color: '#fff'
   },
   dateText: {
     color: '#7f7f7f',
