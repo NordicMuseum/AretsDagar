@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, Text, TextInput, View, SafeAreaView, StyleSheet, TouchableOpacity, TouchableHighlight, FlatList  } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FormatDate } from '../Utils/helpers';
+import gs from '../Utils/styles';
 
 export default class Alphabetic extends Component {
   state = {
@@ -58,7 +59,7 @@ export default class Alphabetic extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={styles.loader}>
+        <View style={gs.loader}>
           <ActivityIndicator />
         </View>
       );
@@ -72,7 +73,7 @@ export default class Alphabetic extends Component {
         data = this.state.data;
       }
       return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={gs.container}>
           <TextInput
             style={styles.input}
             placeholder="Sök efter dag"
@@ -87,21 +88,21 @@ export default class Alphabetic extends Component {
                   onPress={() => this.loadTradition(item)}
                   onShowUnderlay={separators.highlight}
                   onHideUnderlay={separators.unhighlight}>
-                  <View style={styles.row}>
+                  <View style={gs.row}>
                     <View style={styles.rowStyle}>
                       <Text style={styles.rowTextStyle}>{item.title}</Text>
-                      <View style={styles.celebRow}>
-                        <Icon name="favorite" style={styles.icon} size={16}/><Text style={styles.rowText}>{FormatDate(item.dates, item.multiple_dates)}</Text>
+                      <View style={gs.celebRow}>
+                        <Icon name="favorite" style={gs.celebIcon} size={16}/><Text style={styles.rowText}>{FormatDate(item.dates, item.multiple_dates)}</Text>
                       </View>
                     </View>
-                    <View style={styles.nextWrapper}>
-                      <Icon name="navigate-next" size={30} style={styles.next}/>
+                    <View style={gs.nextWrapper}>
+                      <Icon name="navigate-next" size={30} style={gs.next}/>
                     </View>
                   </View>
                 </TouchableHighlight>
               )}
               keyExtractor={(item)=>item.nid}
-              ItemSeparatorComponent={()=><View style={{ height: 0.5, backgroundColor: '#333' }}/>}
+              ItemSeparatorComponent={()=><View style={gs.listSeparator}/>}
             />
           </View>
         </SafeAreaView>
@@ -110,14 +111,6 @@ export default class Alphabetic extends Component {
   }
 }
 const styles = StyleSheet.create({
-  container: {
-    flex:1,
-  },
-  loader: {
-    flex: 1,
-    paddingTop: 30,
-    backgroundColor: '#1d1d1d'
-  },
   listWrapper: {
     alignItems: 'center',
     alignContent:'center',
@@ -136,10 +129,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingHorizontal: 10
   },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
   rowStyle: {
     height: 50,
     justifyContent: 'center',
@@ -153,22 +142,5 @@ const styles = StyleSheet.create({
     color: '#5f5f5f',
     fontSize: 12,
     fontWeight: 'bold'
-  },
-  celebRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 5
-  },
-  icon: {
-    color: '#5f5f5f',
-    paddingTop: 1,
-    paddingRight: 5
-  },
-  nextWrapper: {
-    position: 'absolute',
-    right: 0
-  },
-  next: {
-    color: '#5f5f5f'
   }
 })
