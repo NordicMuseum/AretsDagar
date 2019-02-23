@@ -4,6 +4,7 @@
 
 import React, { Component } from 'react';
 import { Alert, ActivityIndicator, Image, Text, View, StyleSheet, TouchableOpacity, FlatList  } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FormatDate, FormatIntro } from '../Utils/helpers';
 
 export default class Calendar extends Component {
@@ -43,7 +44,7 @@ export default class Calendar extends Component {
 
     if (this.state.isLoading) {
       return (
-        <View style={{ flex: 1 }}>
+        <View style={styles.loader}>
           <ActivityIndicator />
         </View>
       );
@@ -68,8 +69,13 @@ export default class Calendar extends Component {
                   <Text style={styles.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
                   <Text style={styles.intro}>{FormatIntro(item.intro)}</Text>
                 </View>
+                <View style={styles.nextWrapper}>
+                  <Icon name="navigate-next" size={30} style={styles.next}/>
+                </View>
               </View>
-              <Text style={styles.celebrations}><Text style={{color: '#fff'}}>{item.celebrations}</Text> FIRANDEN</Text>
+              <View style={styles.celebRow}>
+                <Icon name="favorite" style={styles.icon} size={18}/><Text style={styles.celebrations}><Text style={{color: '#fff'}}>{item.celebrations}</Text> FIRANDEN</Text>
+              </View>
             </TouchableOpacity>
           )}
           keyExtractor={(item)=>item.nid}
@@ -88,6 +94,11 @@ const styles = StyleSheet.create({
     flexWrap:'wrap',
     justifyContent:'center'
   },
+  loader: {
+    flex: 1,
+    paddingTop: 30,
+    backgroundColor: '#1d1d1d'
+  },
   rowWrapper: {
     paddingHorizontal: 15,
     paddingVertical: 10
@@ -95,6 +106,11 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  celebRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 5
   },
   rowContent: {
     paddingHorizontal: 10
@@ -120,7 +136,18 @@ const styles = StyleSheet.create({
   },
   celebrations: {
     color: '#5f5f5f',
-    fontSize: 13,
-    marginTop: 5
+    fontSize: 13
+  },
+  icon: {
+    color: '#5f5f5f',
+    paddingTop: 1,
+    paddingRight: 5
+  },
+  nextWrapper: {
+    position: 'absolute',
+    right: 0
+  },
+  next: {
+    color: '#5f5f5f'
   }
 })
