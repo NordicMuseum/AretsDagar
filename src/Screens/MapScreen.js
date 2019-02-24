@@ -3,7 +3,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { ActivityIndicator, Button, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Button, Image, StyleSheet, Text, View } from 'react-native';
 import MapView from 'react-native-maps';
 
 export default class MapScreen extends Component {
@@ -26,10 +26,6 @@ export default class MapScreen extends Component {
   fetchData = async (id) => {
     const response = await fetch('http://aretsdagar.nordiskamuseet.se/api/v1/celebration/'+id);
     const json = await response.json();
-    // type LatLng {
-    //   latitude: Number,
-    //   longitude: Number,
-    // }
     this.setState({ data: json, isLoading: false });
   };
 
@@ -54,7 +50,11 @@ export default class MapScreen extends Component {
             style={ {flex:1 }}
           >
           {this.state.data.map(marker => (
-            <MapView.Marker key={marker.id} coordinate={{latitude: parseInt(marker.latitude), longitude: parseInt(marker.longitude)}}>
+            <MapView.Marker key={marker.id} coordinate={{latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude)}}>
+            <Image
+                source={require('AretsDagar/assets/marker.png')}
+                style={{ width: 18, height: 18 }}
+             />
             </MapView.Marker>
           ))}
 

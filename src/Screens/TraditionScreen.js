@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Accordion from '../Components/Accordion';
 import ExternalLinks from '../Components/ExternalLinks';
 import Instagram from '../Components/Instagram';
+import Celebration from '../Components/Celebration';
 import Reminder from '../Components/Reminder';
 import { FormatDate } from '../Utils/helpers';
 
@@ -105,10 +106,7 @@ export default class Tradition extends Component {
                 </View>
               </View>
               <View style={[{ flex: 2 }, styles.actionBar]}>
-                <TouchableOpacity style={styles.tabItem}>
-                  <Icon name="favorite" size={25} style={styles.tabIcon}/>
-                  <Text style={styles.tabTitle}>Fira</Text>
-                </TouchableOpacity>
+                <Celebration nid={tradition.nid} title={tradition.title}/>
                 <TouchableOpacity
                   style={styles.tabItem}
                   onPress={() => this.props.navigation.navigate('Map', {
