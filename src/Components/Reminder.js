@@ -11,7 +11,8 @@ export default class Reminder extends Component {
     nid: null,
     title: null,
     status: 'inactive',
-    color: '#fff',
+    textColor: '#fff',
+    iconColor: '#5f5f5f'
   };
 
   constructor(props) {
@@ -34,7 +35,8 @@ export default class Reminder extends Component {
         if (status !== null) {
           this.setState({
             status: 'active',
-            color: '#f2d49c',
+            textColor: '#f2d49c',
+            iconColor: '#f2d49c'
           });
         }
       });
@@ -56,7 +58,8 @@ export default class Reminder extends Component {
         await AsyncStorage.setItem('reminder:' + nid, JSON.stringify(reminder)).then(() => {
           this.setState({
             status: 'active',
-            color: '#f2d49c',
+            textColor: '#f2d49c',
+            iconColor: '#f2d49c'
           });
         });
       } catch (error) {
@@ -68,7 +71,8 @@ export default class Reminder extends Component {
         await AsyncStorage.removeItem('reminder:' + nid).then(() => {
           this.setState({
             status: 'inactive',
-            color: '#fff',
+            textColor: '#fff',
+            iconColor: '#5f5f5f'
           });
         });
       } catch (error) {
@@ -81,8 +85,12 @@ export default class Reminder extends Component {
     let status = this.state.status;
     return (
       <TouchableOpacity style={styles.tabItem} onPress={this.setReminder}>
-        <Icon name="alarm" size={25} style={styles.tabIcon}/>
-        <Text style={styles.tabTitle, {color: this.state.color}}>Påminn</Text>
+        <Icon name="alarm" size={25} style={{color: this.state.iconColor}}/>
+        <Text style={{
+          color: this.state.textColor,
+          fontSize: 11,
+          marginTop: 4
+        }}>Påminn</Text>
       </TouchableOpacity>
     );
   }
@@ -92,12 +100,5 @@ const styles = StyleSheet.create({
   tabItem: {
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  tabTitle: {
-    fontSize: 11,
-    marginTop: 4
-  },
-  tabIcon: {
-    color: '#5f5f5f'
   }
 })

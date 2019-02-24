@@ -25,6 +25,7 @@ export default class Accordion extends Component {
         key: 1,
         title: tradition.collection1_title,
         text: tradition.collection1_text,
+        image: tradition.collection1_image,
       };
       collapses.push(this._buildCollapse(collapse));
     }
@@ -33,6 +34,7 @@ export default class Accordion extends Component {
         key: 2,
         title: tradition.collection2_title,
         text: tradition.collection2_text,
+        image: tradition.collection2_image,
       };
       collapses.push(this._buildCollapse(collapse));
     }
@@ -41,6 +43,7 @@ export default class Accordion extends Component {
         key: 3,
         title: tradition.collection3_title,
         text: tradition.collection3_text,
+        image: tradition.collection3_image,
       };
       collapses.push(this._buildCollapse(collapse));
     }
@@ -49,6 +52,7 @@ export default class Accordion extends Component {
         key: 4,
         title: tradition.collection4_title,
         text: tradition.collection4_text,
+        image: tradition.collection4_image,
       };
       collapses.push(this._buildCollapse(collapse));
     }
@@ -56,6 +60,7 @@ export default class Accordion extends Component {
   }
 
   _buildCollapse(item) {
+    const imageDir = 'http://aretsdagar.nordiskamuseet.se/sites/default/files/styles/content_image/public/';
     return (
       <Collapse key={item.key}>
         <CollapseHeader style={styles.header}>
@@ -64,6 +69,12 @@ export default class Accordion extends Component {
           </View>
         </CollapseHeader>
         <CollapseBody>
+          <View style={styles.imageWrapper}>
+            <Image
+              style={styles.image}
+              source={{ uri: imageDir + item.image }}
+            />
+          </View>
           <Text style={styles.text}>{item.text}</Text>
         </CollapseBody>
       </Collapse>
@@ -89,6 +100,16 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 20,
     paddingBottom: 5
+  },
+  imageWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 10
+  },
+  image: {
+    height: 300,
+    width: 300
   },
   text: {
     color: '#fff',
