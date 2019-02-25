@@ -106,7 +106,7 @@ export default class Tradition extends Component {
                 </View>
               </View>
               <View style={[{ flex: 2 }, styles.actionBar]}>
-                <Celebration nid={tradition.nid} title={tradition.title}/>
+                <Celebration tradition={tradition.nid}/>
                 <TouchableOpacity
                   style={styles.tabItem}
                   onPress={() => this.props.navigation.navigate('Map', {
