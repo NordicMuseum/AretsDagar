@@ -20,11 +20,10 @@ export default class Celebration extends Component {
   }
 
   componentWillMount() {
-    const nid = this.props.nid;
-    const title = this.props.title;
+    const nid = this.props.tradition.nid;
     this.setState({
       nid: nid,
-      title: title,
+      title: this.props.tradition.title,
     });
     this.setStatus(nid);
   }
@@ -49,27 +48,6 @@ export default class Celebration extends Component {
     let status = this.state.status;
     let nid = this.state.nid;
     let title = this.state.title;
-    // Dialog for FB share.
-    Alert.alert(
-      '',
-      'Visa att du firar på Facebook?',
-      [
-        {
-          text: 'Ja!',
-          onPress: () => console.log('Ja.')
-        },
-        {
-          text: 'Nej',
-          onPress: () => console.log('Nej.'),
-        },
-      ],
-      {cancelable: false},
-    );
-
-    // var shareImage = 'http://aretsdagar.nordiskamuseet.se/sites/default/files/styles/list_image/public/' + tradition[0].bild;
-    // var celebrateTitle = 'Jag firar ' + tradition[0].title + '!';
-    // var share = require('lib/share');
-    // share.createShare(celebrateTitle, tradition[0].url, shareImage);
 
     // if (status === 'inactive') {
     //   let celebration = {
@@ -124,20 +102,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 })
-
-
-// Works on both iOS and Android
-// Alert.alert(
-//   'Alert Title',
-//   'My Alert Msg',
-//   [
-//     {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-//     {
-//       text: 'Cancel',
-//       onPress: () => console.log('Cancel Pressed'),
-//       style: 'cancel',
-//     },
-//     {text: 'OK', onPress: () => console.log('OK Pressed')},
-//   ],
-//   {cancelable: false},
-// );
