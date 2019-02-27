@@ -3,7 +3,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, AsyncStorage, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default class InfoScreen extends Component {
   state = {
@@ -34,6 +34,7 @@ export default class InfoScreen extends Component {
   };
 
   render () {
+    AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
     if (this.state.isLoading) {
       return (
         <View style={styles.loader}>

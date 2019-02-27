@@ -32,11 +32,13 @@ export default class Celebration extends Component {
     try {
       await AsyncStorage.getItem('celebration:' + nid).then((status) => {
         if (status !== null) {
-          this.setState({
-            status: 'active',
-            textColor: '#f2d49c',
-            iconColor: '#f2d49c'
-          });
+          if (Object.keys(status).length === 0 && status.constructor === Object) {
+            this.setState({
+              status: 'active',
+              textColor: '#f2d49c',
+              iconColor: '#f2d49c'
+            });
+          }
         }
       });
     } catch (error) {
@@ -49,36 +51,23 @@ export default class Celebration extends Component {
     let nid = this.state.nid;
     let title = this.state.title;
 
-    // if (status === 'inactive') {
-    //   let celebration = {
-    //     'nid': nid,
-    //     'title': title,
-    //   }
-    //   try {
-    //     await AsyncStorage.setItem('celebration:' + nid, JSON.stringify(celebration)).then(() => {
-    //       this.setState({
-    //         status: 'active',
-    //         textColor: '#f2d49c',
-    //         iconColor: '#f2d49c'
-    //       });
-    //     });
-    //   } catch (error) {
-    //     alert(error.message);
-    //   }
-    // }
-    // else {
-    //   try {
-    //     await AsyncStorage.removeItem('celebration:' + nid).then(() => {
-    //       this.setState({
-    //         status: 'inactive',
-    //         textColor: '#fff',
-    //         iconColor: '#5f5f5f'
-    //       });
-    //     });
-    //   } catch (error) {
-    //     alert(error.message);
-    //   }
-    // }
+    if (status === 'inactive') {
+      let celebration = {
+        nid: nid,
+        title: title,
+      }
+      try {
+        await AsyncStorage.setItem('celebration:' + nid, JSON.stringify(celebration)).then(() => {
+          this.setState({
+            status: 'active',
+            textColor: '#f2d49c',
+            iconColor: '#f2d49c'
+          });
+        });
+      } catch (error) {
+        alert(error.message);
+      }
+    }
   };
 
   render() {

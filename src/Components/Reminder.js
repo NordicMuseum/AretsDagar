@@ -33,11 +33,13 @@ export default class Reminder extends Component {
     try {
       await AsyncStorage.getItem('reminder:' + nid).then((status) => {
         if (status !== null) {
-          this.setState({
-            status: 'active',
-            textColor: '#f2d49c',
-            iconColor: '#f2d49c'
-          });
+          if (Object.keys(status).length === 0 && status.constructor === Object) {
+            this.setState({
+              status: 'active',
+              textColor: '#f2d49c',
+              iconColor: '#f2d49c'
+            });
+          }
         }
       });
     } catch (error) {
@@ -51,8 +53,8 @@ export default class Reminder extends Component {
     let title = this.state.title;
     if (status === 'inactive') {
       let reminder = {
-        'nid': nid,
-        'title': title,
+        nid: nid,
+        title: title,
       }
       try {
         await AsyncStorage.setItem('reminder:' + nid, JSON.stringify(reminder)).then(() => {
