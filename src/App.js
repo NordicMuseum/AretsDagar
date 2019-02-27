@@ -227,9 +227,9 @@ const RouteConfigs = {
   User: {
     screen: UserStack,
     navigationOptions: () => ({
-      tabBarLabel: 'Påminnelser',
+      tabBarLabel: 'Mina dagar',
       tabBarIcon: ({tintColor}) => (
-        <Icon name="alarm" color={tintColor} size={24} />
+        <Icon name="person" color={tintColor} size={24} />
       )
     }),
   },
