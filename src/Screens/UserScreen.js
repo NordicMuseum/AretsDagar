@@ -14,6 +14,7 @@ class ListItem extends Component {
   deleteReminder = async (nid) => {
     try {
       await AsyncStorage.removeItem('reminder:' + nid).then(() => {
+        // @TODO Give user feedback.
       });
     } catch (error) {
       alert(error.message);

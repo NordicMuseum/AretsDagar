@@ -43,25 +43,20 @@ export default class Tradition extends Component {
     this.setState({ data: json, isLoading: false });
   };
 
-  onShare = async () => {
+  onShare = async (title) => {
     try {
       const result = await Share.share({
-        message:
-          'React Native | A framework for building native apps using React',
-          // var shareTitle = 'Vad vet du om ' + tradition[0].title + '?';
-          // var baseURL = 'http://aretsdagar.nordiskamuseet.se/';
-          // var shareImage = baseURL + 'sites/default/files/styles/list_image/public/' + tradition[0].bild;
-          // var share = require('lib/share');
+        message: 'Lär dig om våra högtidsdagar med Nordiska museets app Årets dagar',
+        title: 'Vad vet du om ' + title + '?',
+        url: 'http://aretsdagar.nordiskamuseet.se/',
       })
 
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
+          // @TODO ?
         }
       } else if (result.action === Share.dismissedAction) {
-        // dismissed
+        // @TODO dismissed
       }
     } catch (error) {
       alert(error.message);
@@ -116,7 +111,7 @@ export default class Tradition extends Component {
                   <Icon name="place" size={25} style={styles.tabIcon}/>
                   <Text style={styles.tabTitle}>Visa var</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.tabItem} onPress={this.onShare}>
+                <TouchableOpacity style={styles.tabItem} onPress={() => this.onShare(tradition.title)}>
                   <Icon name="share" size={25} style={styles.tabIcon}/>
                   <Text style={styles.tabTitle}>Dela</Text>
                 </TouchableOpacity>
