@@ -1,3 +1,7 @@
+// @flow
+
+'use strict';
+
 export function FormatDate(datesString, multiple) {
   const monthStr = {
     0 : "januari",
@@ -44,4 +48,21 @@ export function FormatDate(datesString, multiple) {
 
 export function FormatIntro(intro) {
   return intro.substring(0, 70) + ' ...';
+}
+
+export function FormatCoords(position) {
+  // Storing 6 digit floats in backend.
+  let latitude = position.latitude;
+  let longitude = position.longitude;
+  if (latitude.toString().length > 6) {
+    latitude = parseFloat(latitude).toPrecision(6);
+  }
+  if (longitude.toString().length > 6) {
+    longitude = parseFloat(longitude).toPrecision(6);
+  }
+  const coords = {
+    latitude: latitude,
+    longitude: longitude,
+  }
+  return coords;
 }
