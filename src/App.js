@@ -13,6 +13,7 @@ import InfoScreen from './Screens/InfoScreen';
 import UserScreen from './Screens/UserScreen';
 import TraditionScreen from './Screens/TraditionScreen';
 import MapScreen from './Screens/MapScreen';
+import ImagesScreen from './Screens/ImagesScreen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class Calendar extends React.Component {
@@ -113,6 +114,15 @@ class Map extends React.Component {
   }
 }
 
+class Images extends React.Component {
+  render() {
+    return (
+      <ImagesScreen navigation={this.props.navigation} />
+    );
+  }
+}
+
+
 const TraditionStack = createStackNavigator({
   Tradition: {
     screen: Tradition,
@@ -120,6 +130,9 @@ const TraditionStack = createStackNavigator({
   Map: {
     screen: Map,
   },
+  Images: {
+    screen: Images,
+  }
 }, {mode: 'modal', initialRouteName: 'Tradition', headerMode: 'none'});
 
 const CalendarStack = createStackNavigator({

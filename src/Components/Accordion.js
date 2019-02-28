@@ -3,8 +3,9 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, View  } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View  } from 'react-native';
 import { Collapse, CollapseHeader, CollapseBody } from 'accordion-collapse-react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class Accordion extends Component {
   state = {
@@ -59,6 +60,12 @@ export default class Accordion extends Component {
     this.setState({ accordion: collapses });
   }
 
+  openImage = (image) => {
+    this.props.navigation.navigate('Images', {
+      image: image
+    });
+  }
+
   _buildCollapse(item) {
     const imageDir = 'http://aretsdagar.nordiskamuseet.se/sites/default/files/styles/content_image/public/';
     return (
@@ -69,12 +76,17 @@ export default class Accordion extends Component {
           </View>
         </CollapseHeader>
         <CollapseBody>
-          <View style={styles.imageWrapper}>
-            <Image
-              style={styles.image}
-              source={{ uri: imageDir + item.image }}
-            />
-          </View>
+          <TouchableWithoutFeedback onPress={() => this.openImage(item.image)}>
+            <View style={styles.imageWrapper}>
+              <Image
+                style={styles.image}
+                source={{ uri: imageDir + item.image }}
+              />
+              <TouchableOpacity style={styles.enlarge} onPress={() => this.openImage(item.image)}>
+                <Icon name="zoom-in" size={30} style={styles.enlargeIcon}/>
+              </TouchableOpacity>
+            </View>
+          </TouchableWithoutFeedback>
           <Text style={styles.text}>{item.text}</Text>
         </CollapseBody>
       </Collapse>
@@ -110,6 +122,18 @@ const styles = StyleSheet.create({
   image: {
     height: 300,
     width: 300
+  },
+  enlarge: {
+    backgroundColor: '#111',
+    borderRadius: 3,
+    bottom: 12,
+    height: 35,
+    position: 'absolute',
+    right: 40,
+    width: 35
+  },
+  enlargeIcon: {
+    color: '#fff',
   },
   text: {
     color: '#fff',
