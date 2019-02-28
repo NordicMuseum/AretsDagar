@@ -4,12 +4,11 @@
 
 import React, { Component } from 'react';
 import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export default class MapScreen extends Component {
+export default class ImageScreen extends Component {
   state = {
-    data: [],
+    image: null,
   };
 
   constructor(props) {
@@ -20,15 +19,10 @@ export default class MapScreen extends Component {
   }
 
   componentWillMount() {
-    const id = this.props.navigation.getParam('id');
-    this.fetchData(id);
+    const dir = 'http://aretsdagar.nordiskamuseet.se/sites/default/files/styles/full_image/public/';
+    const image = this.props.navigation.getParam('image');
+    this.setState({ image: dir + image, isLoading: false });
   }
-
-  fetchData = async (id) => {
-    const response = await fetch('http://aretsdagar.nordiskamuseet.se/api/v1/celebration/'+id);
-    const json = await response.json();
-    this.setState({ data: json, isLoading: false });
-  };
 
   render() {
     if (this.state.isLoading) {
@@ -44,25 +38,10 @@ export default class MapScreen extends Component {
           <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
             <Icon name="highlight-off" size={30} style={styles.close}/>
           </TouchableOpacity>
-          <MapView
-            initialRegion={{
-              latitude : 62.00,
-              longitude : 15.00,
-              latitudeDelta : 13.00,
-              longitudeDelta : 13.00
-            }}
-            style={ {flex:1 }}
-          >
-          {this.state.data.map(marker => (
-            <MapView.Marker key={marker.id} coordinate={{latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude)}}>
-            <Image
-                source={require('AretsDagar/assets/marker.png')}
-                style={{ width: 18, height: 18 }}
-             />
-            </MapView.Marker>
-          ))}
-
-          </MapView>
+          <Image
+            style={styles.image}
+            source={{ uri: this.state.image }}
+          />
         </View>
       );
     }
@@ -82,5 +61,8 @@ const styles = StyleSheet.create({
   close: {
     alignSelf: 'flex-end',
     color: '#fff'
+  },
+  image: {
+    flex: 1,
   }
 })

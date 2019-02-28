@@ -121,7 +121,7 @@ export default class Tradition extends Component {
                 <Text style={styles.text}>{tradition.intro}</Text>
               </View>
             </View>
-            <Accordion tradition={tradition}/>
+            <Accordion tradition={tradition} navigation={this.props.navigation}/>
             <ExternalLinks tradition={tradition}/>
             <Instagram insta_tag={tradition.insta_tag}/>
           </ScrollView>
