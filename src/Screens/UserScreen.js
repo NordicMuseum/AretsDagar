@@ -6,39 +6,6 @@ import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-class ListItem extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  deleteReminder = async (nid) => {
-    try {
-      await AsyncStorage.removeItem('reminder:' + nid).then(() => {
-        // @TODO Give user feedback.
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  }
-
-  render () {
-    let item = this.props.reminder;
-    if (item.nid !== '0') {
-      return (
-        <View style={styles.row}>
-          <Text style={styles.rowText}>{item.title}</Text>
-          <TouchableOpacity style={styles.tabItem} onPress={() => this.deleteReminder(item.nid)}>
-            <Icon name="clear" size={25} style={styles.remove}/>
-          </TouchableOpacity>
-        </View>
-      );
-    }
-    else {
-      return null;
-    }
-  }
-}
-
 export default class UserScreen extends Component {
   state = {
     reload: null
@@ -105,6 +72,18 @@ export default class UserScreen extends Component {
     this.setState({ celebrations: celebrations, reminders: reminders, isLoading: false });
   };
 
+  deleteReminder = async (nid) => {
+    try {
+      await AsyncStorage.removeItem('reminder:' + nid).then(() => {
+        // @TODO Give user feedback?
+        const filteredData = this.state.reminders.filter(item => item.nid !== nid);
+        this.setState({ reminders: filteredData });
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
   render () {
     if (this.state.isLoading) {
       return (
@@ -122,7 +101,12 @@ export default class UserScreen extends Component {
           <FlatList
             data={this.state.reminders}
             renderItem={({item, index}) => (
-              <ListItem reminder={item}/>
+              <View style={styles.row}>
+                <Text style={styles.rowText}>{item.title}</Text>
+                <TouchableOpacity style={styles.tabItem} onPress={() => this.deleteReminder(item.nid)}>
+                  <Icon name="clear" size={25} style={styles.remove}/>
+                </TouchableOpacity>
+              </View>
             )}
             keyExtractor={(item)=>item.nid}
             ItemSeparatorComponent={()=><View style={{height:0.5,backgroundColor:'#333333'}}/>}
