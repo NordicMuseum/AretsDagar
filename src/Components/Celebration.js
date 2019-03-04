@@ -7,6 +7,7 @@ import { Alert, AsyncStorage, Platform, StyleSheet, Text, TouchableOpacity, View
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Geolocation from 'react-native-geolocation-service';
 import { FormatCoords } from '../Utils/helpers';
+import Config from 'react-native-config';
 
 export default class Celebration extends Component {
   state = {
@@ -112,8 +113,7 @@ export default class Celebration extends Component {
 
       // Store celebration in backend to be displayed on map.
       try {
-        const url = 'http://aretsdagar.nordiskamuseet.se/api/v1/celebration';
-        // const url = 'http://dev.aretsdagar.se/api/v1/celebration';
+        const url = Config.NM_API_URL + 'celebration';
         let params = {
             nid: nid,
             latitude: this.state.latitude,

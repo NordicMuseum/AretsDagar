@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Config from 'react-native-config';
 
 export default class MapScreen extends Component {
   state = {
@@ -25,7 +26,7 @@ export default class MapScreen extends Component {
   }
 
   fetchData = async (id) => {
-    const response = await fetch('http://aretsdagar.nordiskamuseet.se/api/v1/celebration/'+id);
+    const response = await fetch(Config.NM_API_URL + 'celebration/'+id);
     const json = await response.json();
     this.setState({ data: json, isLoading: false });
   };

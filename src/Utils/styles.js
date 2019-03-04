@@ -30,7 +30,7 @@ export default StyleSheet.create({
     right: 0
   },
   next: {
-    color: lightGray
+    color: iconGray
   },
   celebIcon: {
     color: textGray,

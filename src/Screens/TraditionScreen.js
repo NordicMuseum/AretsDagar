@@ -11,6 +11,7 @@ import Instagram from '../Components/Instagram';
 import Celebration from '../Components/Celebration';
 import Reminder from '../Components/Reminder';
 import { FormatDate } from '../Utils/helpers';
+import Config from 'react-native-config';
 
 const { height } = Dimensions.get('window');
 
@@ -38,7 +39,7 @@ export default class Tradition extends Component {
   };
 
   fetchData = async (id) => {
-    const response = await fetch('http://aretsdagar.nordiskamuseet.se/api/v1/views/tradition?nid='+id);
+    const response = await fetch(Config.NM_API_URL + 'views/tradition?nid='+id);
     const json = await response.json();
     this.setState({ data: json, isLoading: false });
   };
