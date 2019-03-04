@@ -35,6 +35,7 @@ export default class Calendar extends Component {
   }
 
   fetchData = async () => {
+    // Fetcing days from API backend.
     const response = await fetch('http://aretsdagar.nordiskamuseet.se/api/v1/views/traditions');
     const json = await response.json();
     this.setState({ data: json, isLoading: false });
@@ -67,7 +68,7 @@ export default class Calendar extends Component {
                 />
                 <View style={styles.rowContent}>
                   <Text style={styles.rowText}>{item.title}</Text>
-                  <Text style={styles.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
+                  <Text style={gs.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
                   <Text style={styles.intro}>{FormatIntro(item.intro)}</Text>
                 </View>
                 <View style={gs.nextWrapper}>

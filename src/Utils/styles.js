@@ -1,5 +1,8 @@
 import { StyleSheet } from 'react-native';
 
+const iconGray = '#5f5f5f';
+const textGray = '#5f5f5f';
+
 export default StyleSheet.create({
   container: {
     flex: 1
@@ -11,7 +14,7 @@ export default StyleSheet.create({
   },
   listSeparator: {
     height: 0.5,
-    backgroundColor: '#333' 
+    backgroundColor: '#333'
   },
   row: {
     flexDirection: 'row',
@@ -27,11 +30,16 @@ export default StyleSheet.create({
     right: 0
   },
   next: {
-    color: '#5f5f5f'
+    color: lightGray
   },
   celebIcon: {
-    color: '#5f5f5f',
+    color: textGray,
     paddingTop: 1,
     paddingRight: 5
+  },
+  date: {
+    color: textGray,
+    fontSize: 12,
+    fontWeight: 'bold'
   }
 });

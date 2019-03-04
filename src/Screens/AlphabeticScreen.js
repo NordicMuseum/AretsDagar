@@ -92,7 +92,7 @@ export default class Alphabetic extends Component {
                     <View style={styles.rowStyle}>
                       <Text style={styles.rowTextStyle}>{item.title}</Text>
                       <View style={gs.celebRow}>
-                        <Icon name="favorite" style={gs.celebIcon} size={16}/><Text style={styles.rowText}>{FormatDate(item.dates, item.multiple_dates)}</Text>
+                        <Icon name="favorite" style={gs.celebIcon} size={16}/><Text style={gs.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
                       </View>
                     </View>
                     <View style={gs.nextWrapper}>
@@ -137,10 +137,5 @@ const styles = StyleSheet.create({
   rowTextStyle: {
     color: '#fff',
     fontSize: 16,
-  },
-  rowText: {
-    color: '#5f5f5f',
-    fontSize: 12,
-    fontWeight: 'bold'
   }
 })
