@@ -75,12 +75,16 @@ export default class Alphabetic extends Component {
       }
       return (
         <SafeAreaView style={gs.container}>
-          <TextInput
-            style={styles.input}
-            placeholder="Sök efter dag"
-            onChangeText={(text) => this.SearchFilterFunction(text)}
-            value={this.state.searchInput}
-          />
+          <View style={styles.searchWrapper}>
+            <Icon name="search" style={styles.searchIcon} size={18}/>
+            <TextInput
+              style={styles.input}
+              placeholder="Sök efter dag"
+              placeholderTextColor="#7f7f7f"
+              onChangeText={(text) => this.SearchFilterFunction(text)}
+              value={this.state.searchInput}
+            />
+          </View>
           <View>
             <FlatList
               data={data}
@@ -119,16 +123,27 @@ const styles = StyleSheet.create({
     flexWrap:'wrap',
     justifyContent:'center'
   },
-  input: {
-    textAlign: 'left',
-    height: 35,
+  searchWrapper: {
+    borderBottomWidth: 1,
     borderWidth: 1,
     borderColor: '#5f5f5f',
     borderRadius: 5,
     backgroundColor: '#fff',
+    flexDirection: 'row',
     marginHorizontal: 10,
     marginVertical: 10,
-    paddingHorizontal: 10
+  },
+  searchIcon: {
+    color: '#7f7f7f',
+    padding: 10
+  },
+  input: {
+    backgroundColor: '#fff',
+    flex: 1,
+    paddingTop: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
+    paddingLeft: 0
   },
   rowStyle: {
     height: 50,
