@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const iconGray = '#5f5f5f';
-const textGray = '#5f5f5f';
+const textGray = '#7f7f7f';
 
 export default StyleSheet.create({
   container: {

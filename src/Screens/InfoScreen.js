@@ -80,13 +80,10 @@ const styles = StyleSheet.create({
   },
   imageWrapper: {
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginVertical: 15
   },
   image: {
-    // flex: 1,
-    // resizeMode: "cover",
-    // height: 250,
-    // width: null
   },
   loader: {
     flex: 1,

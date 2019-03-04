@@ -108,11 +108,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 15,
   },
-  date: {
-    color: '#5f5f5f',
-    fontSize: 12,
-    fontWeight: 'bold'
-  },
   intro: {
     color: '#fff',
     fontSize: 12,
@@ -124,7 +119,7 @@ const styles = StyleSheet.create({
     width: 105
   },
   celebrations: {
-    color: '#5f5f5f',
+    color: '#7f7f7f',
     fontSize: 13
   }
 })
