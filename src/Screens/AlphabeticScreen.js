@@ -7,6 +7,7 @@ import { ActivityIndicator, Text, TextInput, View, SafeAreaView, StyleSheet, Tou
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FormatDate } from '../Utils/helpers';
 import gs from '../Utils/styles';
+import Config from 'react-native-config';
 
 export default class Alphabetic extends Component {
   state = {
@@ -38,7 +39,7 @@ export default class Alphabetic extends Component {
   }
 
   fetchData = async () => {
-    const response = await fetch('http://aretsdagar.nordiskamuseet.se/api/v1/views/traditions_alphabetic');
+    const response = await fetch(Config.NM_API_URL + 'views/traditions_alphabetic');
     const json = await response.json();
     this.setState({ data: json, searchData: json, isLoading: false });
     this.arrayholder = json;

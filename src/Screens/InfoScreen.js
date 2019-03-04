@@ -4,6 +4,7 @@
 
 import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import Config from 'react-native-config'
 
 export default class InfoScreen extends Component {
   state = {
@@ -28,7 +29,7 @@ export default class InfoScreen extends Component {
   };
 
   fetchData = async () => {
-    const response = await fetch('http://aretsdagar.nordiskamuseet.se/api/v1/views/info');
+    const response = await fetch(Config.NM_API_URL + 'views/info');
     const json = await response.json();
     this.setState({ data: json, isLoading: false });
   };

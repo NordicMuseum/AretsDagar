@@ -7,6 +7,7 @@ import { Alert, ActivityIndicator, Image, Text, View, StyleSheet, TouchableOpaci
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FormatDate, FormatIntro } from '../Utils/helpers';
 import gs from '../Utils/styles';
+import Config from 'react-native-config';
 
 export default class Calendar extends Component {
   state = {
@@ -36,7 +37,7 @@ export default class Calendar extends Component {
 
   fetchData = async () => {
     // Fetcing days from API backend.
-    const response = await fetch('http://aretsdagar.nordiskamuseet.se/api/v1/views/traditions');
+    const response = await fetch(Config.NM_API_URL + 'views/traditions');
     const json = await response.json();
     this.setState({ data: json, isLoading: false });
   };
