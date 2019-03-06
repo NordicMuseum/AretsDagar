@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth
   },
   title: {
-    color: '#5f5f5f',
+    color: '#7f7f7f',
     paddingTop: 5,
     paddingRight: 20,
     paddingLeft: 20,
