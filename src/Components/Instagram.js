@@ -25,35 +25,24 @@ export default class Instagram extends Component {
     let hashtag = this.state.hashtag;
     let url = 'https://instagram.com/explore/tags/' + hashtag.substring(1);
     return (
-      <View>
-        <Text
-          style={styles.labelWrapper}
-          onPress={() => {Linking.openURL(url)}}
-        >
-          Instagram{' '}
-          <Text style={styles.link}>{hashtag}</Text>
-        </Text>
-        <Text style={styles.info}>Lägg till en Instagrambild för den här dagen med hashtaggen {hashtag}</Text>
+      <View style={styles.wrapper}>
+        <Text style={styles.info}>Lägg till en Instagrambild för den här dagen
+        med hashtaggen <Text style={styles.link} onPress={() => {Linking.openURL(url)}}
+        >{hashtag}</Text></Text>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  labelWrapper: {
-    backgroundColor: '#111',
-    color: '#5f5f5f',
-    fontWeight: 'bold',
-    paddingTop: 5,
-    paddingRight: 20,
-    paddingLeft: 20,
-    paddingBottom: 5
+  wrapper: {
+    marginVertical: 15
   },
   link: {
     color: '#fff'
   },
   info: {
-    color: '#5f5f5f',
+    color: '#7f7f7f',
     paddingTop: 5,
     paddingRight: '20%',
     paddingBottom: 5,

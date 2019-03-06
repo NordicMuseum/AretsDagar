@@ -4,6 +4,7 @@
 
 import React, { Component } from 'react';
 import { Linking, StyleSheet, Text, View  } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class ExternalLinks extends Component {
   state = {
@@ -38,12 +39,13 @@ export default class ExternalLinks extends Component {
   _buildLink(item) {
     return (
       <View key={item.key}>
-        <Text style={styles.label}>Länkar</Text>
+        <Text style={styles.label}>Läs mer</Text>
         <Text
             style={styles.link}
             onPress={() => {Linking.openURL(item.url)}}
           >
-          {item.text}
+          {this.props.tradition.title} på {item.text}
+          <Icon name="launch" size={14} style={styles.linkicon}/>
         </Text>
       </View>
     );
@@ -59,7 +61,7 @@ export default class ExternalLinks extends Component {
 const styles = StyleSheet.create({
   label: {
     backgroundColor: '#111',
-    color: '#5f5f5f',
+    color: '#7f7f7f',
     paddingTop: 5,
     paddingRight: 20,
     paddingLeft: 20,
@@ -71,5 +73,8 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 20,
     paddingBottom: 5
+  },
+  linkicon: {
+    paddingLeft: 10,
   }
 })
