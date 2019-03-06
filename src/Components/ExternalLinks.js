@@ -39,7 +39,7 @@ export default class ExternalLinks extends Component {
   _buildLink(item) {
     return (
       <View key={item.key}>
-        <Text style={styles.label}>Läs mer</Text>
+        {item.key === 0 && <Text style={styles.label}>Läs mer</Text>}
         <Text
             style={styles.link}
             onPress={() => {Linking.openURL(item.url)}}
