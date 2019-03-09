@@ -74,7 +74,7 @@ export default class Alphabetic extends Component {
         data = this.state.data;
       }
       return (
-        <SafeAreaView style={gs.container}>
+        <View>
           <View style={styles.searchWrapper}>
             <Icon name="search" style={styles.searchIcon} size={18}/>
             <TextInput
@@ -110,7 +110,7 @@ export default class Alphabetic extends Component {
               ItemSeparatorComponent={()=><View style={gs.listSeparator}/>}
             />
           </View>
-        </SafeAreaView>
+        </View>
       );
     }
   }

@@ -27,6 +27,7 @@ export default class Accordion extends Component {
         title: tradition.collection1_title,
         text: tradition.collection1_text,
         image: tradition.collection1_image,
+        imageText: tradition.field_collection1_image_text,
       };
       collapses.push(this._buildCollapse(collapse));
     }
@@ -36,6 +37,7 @@ export default class Accordion extends Component {
         title: tradition.collection2_title,
         text: tradition.collection2_text,
         image: tradition.collection2_image,
+        imageText: tradition.field_collection2_image_text,
       };
       collapses.push(this._buildCollapse(collapse));
     }
@@ -45,6 +47,7 @@ export default class Accordion extends Component {
         title: tradition.collection3_title,
         text: tradition.collection3_text,
         image: tradition.collection3_image,
+        imageText: tradition.field_collection3_image_text,
       };
       collapses.push(this._buildCollapse(collapse));
     }
@@ -54,15 +57,17 @@ export default class Accordion extends Component {
         title: tradition.collection4_title,
         text: tradition.collection4_text,
         image: tradition.collection4_image,
+        imageText: tradition.field_collection4_image_text,
       };
       collapses.push(this._buildCollapse(collapse));
     }
     this.setState({ accordion: collapses });
   }
 
-  openImage = (image) => {
+  openImage = (image, imageText) => {
     this.props.navigation.navigate('Images', {
-      image: image
+      image: image,
+      imageText: imageText,
     });
   }
 
@@ -76,13 +81,10 @@ export default class Accordion extends Component {
           </View>
         </CollapseHeader>
         <CollapseBody>
-          <TouchableWithoutFeedback onPress={() => this.openImage(item.image)}>
+          <TouchableWithoutFeedback onPress={() => this.openImage(item.image, item.imageText)}>
             <View style={styles.imageWrapper}>
-              <Image
-                style={styles.image}
-                source={{ uri: imageDir + item.image }}
-              />
-              <TouchableOpacity style={styles.enlarge} onPress={() => this.openImage(item.image)}>
+              {item.image.length && <Image style={styles.image} source={{ uri: imageDir + item.image }} />}
+              <TouchableOpacity style={styles.enlarge} onPress={() => this.openImage(item.image, item.imageText)}>
                 <Icon name="zoom-in" size={30} style={styles.enlargeIcon}/>
               </TouchableOpacity>
             </View>
