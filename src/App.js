@@ -3,7 +3,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import { Button, Image, Platform, StyleSheet, Text, View } from 'react-native';
+import { Button, Image, Platform, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
@@ -19,9 +19,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 class Calendar extends React.Component {
   render() {
     return (
-      <View style={baseStyles}>
+      <SafeAreaView style={baseStyles}>
+        <StatusBar
+          barStyle="light-content"
+        />
         <CalendarScreen navigation={this.props.navigation} />
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -29,9 +32,9 @@ class Calendar extends React.Component {
 class Alphabetic extends React.Component {
   render() {
     return (
-      <View style={baseStyles}>
+      <SafeAreaView style={baseStyles}>
         <AlphabeticScreen navigation={this.props.navigation} />
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -39,9 +42,9 @@ class Alphabetic extends React.Component {
 class Info extends React.Component {
   render() {
     return (
-      <View style={baseStyles}>
+      <SafeAreaView style={baseStyles}>
         <InfoScreen />
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -49,9 +52,9 @@ class Info extends React.Component {
 class User extends React.Component {
   render() {
     return (
-      <View style={baseStyles}>
+      <SafeAreaView style={baseStyles}>
         <UserScreen navigation={this.props.navigation}/>
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -101,7 +104,9 @@ const InfoStack = createStackNavigator({
 class Tradition extends React.Component {
   render() {
     return (
-      <TraditionScreen navigation={this.props.navigation} />
+      <SafeAreaView style={baseStyles}>
+        <TraditionScreen navigation={this.props.navigation} />
+      </SafeAreaView>
     );
   }
 }
@@ -109,7 +114,9 @@ class Tradition extends React.Component {
 class Map extends React.Component {
   render() {
     return (
-      <MapScreen navigation={this.props.navigation} />
+      <SafeAreaView style={baseStyles}>
+        <MapScreen navigation={this.props.navigation} />
+      </SafeAreaView>
     );
   }
 }
@@ -117,7 +124,9 @@ class Map extends React.Component {
 class Images extends React.Component {
   render() {
     return (
-      <ImagesScreen navigation={this.props.navigation} />
+      <SafeAreaView style={baseStyles}>
+        <ImagesScreen navigation={this.props.navigation} />
+      </SafeAreaView>
     );
   }
 }
@@ -126,19 +135,78 @@ class Images extends React.Component {
 const TraditionStack = createStackNavigator({
   Tradition: {
     screen: Tradition,
+    navigationOptions: ({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: '#111',
+        borderBottomWidth: 0
+      },
+      headerTintColor: '#fff',
+      headerTitle: (
+        <View style={{flex:1, flexDirection:'row', justifyContent:'center', zIndex: 100}}>
+          <Image
+            source={require('AretsDagar/assets/logo.png')}
+            style={{ width:100, height: 35, paddingBottom: 3 }}
+          />
+        </View>
+      ),
+      headerLeft: <TouchableOpacity
+        onPress = {() => navigation.navigate('Calendar')} >
+        <Text style={backButtonStyles}>Tillbaka</Text>
+        </TouchableOpacity>
+    }),
   },
   Map: {
     screen: Map,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Map',
+      headerStyle: {
+        backgroundColor: '#111',
+        borderBottomWidth: 0
+      },
+      headerTintColor: '#fff',
+      headerTitle: (
+        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+          <Image
+            source={require('AretsDagar/assets/logo.png')}
+            style={{ width:100, height: 35, paddingBottom: 3 }}
+          />
+        </View>
+      ),
+      headerLeft: <TouchableOpacity
+        onPress = {() => navigation.navigate('Tradition')} >
+        <Text style={backButtonStyles}>Tillbaka</Text>
+        </TouchableOpacity>
+    }),
   },
   Images: {
     screen: Images,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Map',
+      headerStyle: {
+        backgroundColor: '#111',
+        borderBottomWidth: 0
+      },
+      headerTintColor: '#fff',
+      headerTitle: (
+        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+          <Image
+            source={require('AretsDagar/assets/logo.png')}
+            style={{ width:100, height: 35, paddingBottom: 3 }}
+          />
+        </View>
+      ),
+      headerLeft: <TouchableOpacity
+        onPress = {() => navigation.navigate('Tradition')} >
+        <Text style={backButtonStyles}>Tillbaka</Text>
+        </TouchableOpacity>
+    }),
   }
-}, {mode: 'modal', initialRouteName: 'Tradition', headerMode: 'none'});
+}, {initialRouteName: 'Tradition'});
 
 const CalendarStack = createStackNavigator({
   Calendar: {
     screen: Calendar,
-    navigationOptions: () => ({
+    navigationOptions: ({ navigation }) => ({
       title: 'Calendar',
       headerBackTitle: 'Tillbaka',
       headerStyle: {
@@ -159,28 +227,19 @@ const CalendarStack = createStackNavigator({
   Tradition: {
     screen: TraditionStack,
     navigationOptions: ({ navigation }) => ({
-      title: navigation.state.params.title,
+      header: null,
       headerStyle: {
         backgroundColor: '#111',
         borderBottomWidth: 0
       },
-      headerTintColor: '#fff',
-      headerTitle: (
-        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
-          <Image
-            source={require('AretsDagar/assets/logo.png')}
-            style={{ width:100, height: 35, paddingBottom: 3 }}
-          />
-        </View>
-      ),
     }),
   }
-}, {initialRouteName: 'Calendar', headerMode: 'screen'});
+}, {initialRouteName: 'Calendar'});
 
 const AlphabeticStack = createStackNavigator({
   Alphabetic: {
     screen: Alphabetic,
-    navigationOptions: () => ({
+    navigationOptions: ({ navigation }) => ({
       title: 'Alphabetic',
       headerBackTitle: 'Tillbaka',
       headerStyle: {
@@ -277,6 +336,11 @@ const TabNavigatorConfig = {
 const baseStyles = {
   backgroundColor: '#1d1d1d',
   flex: 1
+}
+
+const backButtonStyles = {
+  color: '#fff',
+  marginLeft: 20
 }
 
 const TabsView = createBottomTabNavigator(RouteConfigs, TabNavigatorConfig);

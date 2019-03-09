@@ -3,7 +3,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Config from 'react-native-config';
@@ -42,9 +42,6 @@ export default class MapScreen extends Component {
     else {
       return (
         <View style={styles.container}>
-          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-            <Icon name="highlight-off" size={30} style={styles.close}/>
-          </TouchableOpacity>
           <MapView
             initialRegion={{
               latitude : 62.00,
