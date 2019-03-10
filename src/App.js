@@ -76,10 +76,18 @@ const UserStack = createStackNavigator({
           />
         </View>
       ),
-      headerRight: <TouchableOpacity
+      headerRight:
+        <View>
+        {navigation.getParam('update') ?
+        <TouchableOpacity
+        onPress = {() => navigation.setParams({update: false})} >
+        <Text style={changeButtonStyles}>Avbryt</Text>
+        </TouchableOpacity>
+        : <TouchableOpacity
         onPress = {() => navigation.setParams({update: true})} >
         <Text style={changeButtonStyles}>Ändra</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>}
+        </View>
     }),
   },
 });
