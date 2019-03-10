@@ -12,15 +12,16 @@
     ]
   },
   "dependencies": {
-    "accordion-collapse-react-native": "^0.1.9",
+    "accordion-collapse-react-native": "0.1.9",
     "react": "16.6.3",
     "react-native": "0.57.8",
-    "react-native-config": "^0.11.7",
-    "react-native-geolocation-service": "^2.0.0",
-    "react-native-gesture-handler": "^1.0.12",
-    "react-native-maps": "^0.23.0",
-    "react-native-vector-icons": "^6.2.0",
-    "react-navigation": "^3.0.8"
+    "react-native-config": "0.11.7",
+    "react-native-geolocation-service": "2.0.0",
+    "react-native-gesture-handler": "1.0.12",
+    "react-native-hyperlink": "0.0.14",
+    "react-native-maps": "0.23.0",
+    "react-native-vector-icons": "6.2.0",
+    "react-navigation": "3.0.8"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",

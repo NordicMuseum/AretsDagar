@@ -4,7 +4,8 @@
 
 import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
-import Config from 'react-native-config'
+import Config from 'react-native-config';
+import Hyperlink from 'react-native-hyperlink';
 
 export default class InfoScreen extends Component {
   state = {
@@ -62,9 +63,11 @@ export default class InfoScreen extends Component {
               <Text style={styles.headerTextStyle}>
                 {info.title}
               </Text>
-              <Text style={styles.textBody}>
-                {info.body}
-              </Text>
+              <Hyperlink linkStyle={{ fontWeight: 'bold' }} linkDefault={true}>
+                <Text style={styles.textBody}>
+                  {info.body}
+                </Text>
+              </Hyperlink>
             </View>
           </ScrollView>
         </SafeAreaView>
