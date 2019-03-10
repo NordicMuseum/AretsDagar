@@ -62,7 +62,7 @@ class User extends React.Component {
 const UserStack = createStackNavigator({
   User: {
     screen: User,
-    navigationOptions: () => ({
+    navigationOptions: ({navigation}) => ({
       headerStyle: {
         backgroundColor: '#111',
         borderBottomWidth: 0
@@ -76,6 +76,10 @@ const UserStack = createStackNavigator({
           />
         </View>
       ),
+      headerRight: <TouchableOpacity
+        onPress = {() => navigation.setParams({update: true})} >
+        <Text style={changeButtonStyles}>Ändra</Text>
+        </TouchableOpacity>
     }),
   },
 });
@@ -341,6 +345,11 @@ const baseStyles = {
 const backButtonStyles = {
   color: '#fff',
   marginLeft: 20
+}
+
+const changeButtonStyles = {
+  color: '#fff',
+  marginRight: 20
 }
 
 const TabsView = createBottomTabNavigator(RouteConfigs, TabNavigatorConfig);

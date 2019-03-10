@@ -5,26 +5,16 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import gs from '../Utils/styles';
 
 export default class UserScreen extends Component {
-  state = {
-    reload: null
-  };
-
-  _emptyText = (text) => {
-    return(
-      <View style={styles.empty}>
-          <Text style={styles.emptyText}>Inga {text}</Text>
-      </View>
-    );
-  }
-
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
       reminders: [],
-      celebrations: []
+      celebrations: [],
+      reload: null
     }
   }
 
@@ -39,6 +29,15 @@ export default class UserScreen extends Component {
 
   componentWillUnmount() {
     this.didFocusListener.remove();
+    this.props.navigation.setParams({update: false});
+  }
+
+  _emptyText = (text) => {
+    return(
+      <View style={styles.empty}>
+          <Text style={styles.emptyText}>Inga {text}</Text>
+      </View>
+    );
   }
 
   fetchData = async () => {
@@ -62,8 +61,13 @@ export default class UserScreen extends Component {
               }
             }
           });
-          reminders.push({nid: '0'});
-          celebrations.push({nid: '0'});
+          // Add row because Flatlist renders empty text if only one item.
+          if (reminders.length === 1) {
+            reminders.push({nid: '0'});
+          }
+          if (celebrations.length === 1) {
+            celebrations.push({nid: '0'});
+          }
         });
       });
     } catch (error) {
@@ -84,6 +88,16 @@ export default class UserScreen extends Component {
     }
   }
 
+  loadTradition(item) {
+    this.props.navigation.navigate(
+      'Tradition',
+      {
+        id: item.nid,
+        title: item.title
+      }
+    );
+  }
+
   render () {
     if (this.state.isLoading) {
       return (
@@ -93,19 +107,29 @@ export default class UserScreen extends Component {
       );
     }
     else {
+      const { navigation } = this.props;
+      const update = navigation.getParam('update', false);
+      const reminders = this.state.reminders;
       return (
         <View style={styles.container}>
           <View style={styles.section}>
             <Text style={styles.sectionText}>Påminnelser</Text>
           </View>
           <FlatList
-            data={this.state.reminders}
+            data={reminders}
             renderItem={({item, index}) => (
               <View style={styles.row}>
-                <Text style={styles.rowText}>{item.title}</Text>
+                {(update === true && item.nid !== '0') ?
                 <TouchableOpacity style={styles.tabItem} onPress={() => this.deleteReminder(item.nid)}>
-                  <Icon name="clear" size={25} style={styles.remove}/>
+                  <Text style={styles.rowText}>{item.title}</Text>
+                  <Icon name="delete" size={25} style={styles.remove}/>
                 </TouchableOpacity>
+                : (item.nid !== '0') ?
+                <TouchableOpacity style={styles.tabItem} onPress={() => this.loadTradition(item)}>
+                  <Text style={styles.rowText}>{item.title}</Text>
+                  <Icon name="navigate-next" size={30} style={gs.next}/>
+                </TouchableOpacity>
+                : null}
               </View>
             )}
             keyExtractor={(item)=>item.nid}
@@ -145,9 +169,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#1d1d1d'
   },
   row: {
-    height: 60,
+  },
+  tabItem: {
     flexDirection: 'row',
     alignItems: 'center',
+    height: 60,
     justifyContent: 'space-between',
     paddingHorizontal: 15
   },

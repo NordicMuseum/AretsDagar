@@ -35,7 +35,7 @@ export default class InfoScreen extends Component {
   };
 
   render () {
-    AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
+    // AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
     if (this.state.isLoading) {
       return (
         <View style={styles.loader}>
