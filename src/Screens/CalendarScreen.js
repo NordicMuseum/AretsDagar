@@ -5,6 +5,7 @@
 import React, { Component } from 'react';
 import { Alert, ActivityIndicator, Image, Text, View, StyleSheet, TouchableOpacity, FlatList  } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Ribbon from '../Components/Ribbon';
 import { FormatDate, FormatIntro } from '../Utils/helpers';
 import gs from '../Utils/styles';
 import Config from 'react-native-config';
@@ -62,11 +63,14 @@ export default class Calendar extends Component {
               onPress={() => this.loadTradition(item)}
               style={styles.rowWrapper}>
               <View style={gs.row}>
-                <Image
-                  source={{ uri: imageDir + item.bild }}
-                  style={styles.thumbnail}
-                  defaultSource={require('AretsDagar/assets/default_thumb.jpg')}
-                />
+                <View style={{overflow: 'hidden'}}>
+                  <Image
+                    source={{ uri: imageDir + item.bild }}
+                    style={styles.thumbnail}
+                    defaultSource={require('AretsDagar/assets/default_thumb.jpg')}
+                  />
+                  <Ribbon date={item.dates}/>
+                </View>
                 <View style={styles.rowContent}>
                   <Text style={styles.rowText}>{item.title}</Text>
                   <Text style={gs.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
