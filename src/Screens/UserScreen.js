@@ -79,9 +79,9 @@ export default class UserScreen extends Component {
   deleteReminder = async (nid) => {
     try {
       await AsyncStorage.removeItem('reminder:' + nid).then(() => {
-        // @TODO Give user feedback?
         const filteredData = this.state.reminders.filter(item => item.nid !== nid);
         this.setState({ reminders: filteredData });
+        this.props.navigation.setParams({update: false});
       });
     } catch (error) {
       alert(error.message);
@@ -192,13 +192,13 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   remove: {
-    color: '#5f5f5f'
+    color: '#7f7f7f'
   },
   empty: {
     alignItems: 'center',
     paddingTop: 10
   },
   emptyText: {
-    color: '#5f5f5f'
+    color: '#7f7f7f'
   }
 });
