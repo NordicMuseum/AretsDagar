@@ -7,7 +7,7 @@ import { Alert, ActivityIndicator, Image, Text, View, StyleSheet, TouchableOpaci
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Ribbon from '../Components/Ribbon';
 import { FormatDate, FormatIntro } from '../Utils/helpers';
-import gs from '../Utils/styles';
+import Gs from '../Utils/styles';
 import Config from 'react-native-config';
 
 export default class Calendar extends Component {
@@ -48,7 +48,7 @@ export default class Calendar extends Component {
 
     if (this.state.isLoading) {
       return (
-        <View style={gs.loader}>
+        <View style={Gs.loader}>
           <ActivityIndicator />
         </View>
       );
@@ -62,7 +62,7 @@ export default class Calendar extends Component {
             <TouchableOpacity
               onPress={() => this.loadTradition(item)}
               style={styles.rowWrapper}>
-              <View style={gs.row}>
+              <View style={Gs.row}>
                 <View style={{overflow: 'hidden'}}>
                   <Image
                     source={{ uri: imageDir + item.bild }}
@@ -73,20 +73,20 @@ export default class Calendar extends Component {
                 </View>
                 <View style={styles.rowContent}>
                   <Text style={styles.rowText}>{item.title}</Text>
-                  <Text style={gs.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
+                  <Text style={Gs.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
                   <Text style={styles.intro}>{FormatIntro(item.intro)}</Text>
                 </View>
-                <View style={gs.nextWrapper}>
-                  <Icon name="navigate-next" size={30} style={gs.next}/>
+                <View style={Gs.nextWrapper}>
+                  <Icon name="navigate-next" size={30} style={Gs.next}/>
                 </View>
               </View>
-              <View style={gs.celebRow}>
-                <Icon name="favorite" style={gs.celebIcon} size={18}/><Text style={styles.celebrations}><Text style={{color: '#fff'}}>{item.celebrations}</Text> FIRANDEN</Text>
+              <View style={Gs.celebRow}>
+                <Icon name="favorite" style={Gs.celebIcon} size={18}/><Text style={styles.celebrations}><Text style={{color: '#fff'}}>{item.celebrations}</Text> FIRANDEN</Text>
               </View>
             </TouchableOpacity>
           )}
           keyExtractor={(item)=>item.nid}
-          ItemSeparatorComponent={()=><View style={gs.listSeparator}/>}
+          ItemSeparatorComponent={()=><View style={Gs.listSeparator}/>}
         />
       </View>
     );

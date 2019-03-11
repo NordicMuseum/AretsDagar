@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import gs from '../Utils/styles';
+import Gs from '../Utils/styles';
 
 export default class UserScreen extends Component {
   constructor(props) {
@@ -127,7 +127,7 @@ export default class UserScreen extends Component {
                 : (item.nid !== '0') ?
                 <TouchableOpacity style={styles.tabItem} onPress={() => this.loadTradition(item)}>
                   <Text style={styles.rowText}>{item.title}</Text>
-                  <Icon name="navigate-next" size={30} style={gs.next}/>
+                  <Icon name="navigate-next" size={30} style={Gs.next}/>
                 </TouchableOpacity>
                 : null}
               </View>
