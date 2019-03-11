@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, Text, TextInput, View, SafeAreaView, StyleSheet, TouchableOpacity, TouchableHighlight, FlatList  } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { FormatDate } from '../Utils/helpers';
-import gs from '../Utils/styles';
+import Gs from '../Utils/styles';
 import Config from 'react-native-config';
 
 export default class Alphabetic extends Component {
@@ -60,7 +60,7 @@ export default class Alphabetic extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={gs.loader}>
+        <View style={Gs.loader}>
           <ActivityIndicator />
         </View>
       );
@@ -93,21 +93,21 @@ export default class Alphabetic extends Component {
                   onPress={() => this.loadTradition(item)}
                   onShowUnderlay={separators.highlight}
                   onHideUnderlay={separators.unhighlight}>
-                  <View style={gs.row}>
+                  <View style={Gs.row}>
                     <View style={styles.rowStyle}>
                       <Text style={styles.rowTextStyle}>{item.title}</Text>
-                      <View style={gs.celebRow}>
-                        <Icon name="favorite" style={gs.celebIcon} size={16}/><Text style={gs.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
+                      <View style={Gs.celebRow}>
+                        <Icon name="favorite" style={Gs.celebIcon} size={16}/><Text style={Gs.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
                       </View>
                     </View>
-                    <View style={gs.nextWrapper}>
-                      <Icon name="navigate-next" size={30} style={gs.next}/>
+                    <View style={Gs.nextWrapper}>
+                      <Icon name="navigate-next" size={30} style={Gs.next}/>
                     </View>
                   </View>
                 </TouchableHighlight>
               )}
               keyExtractor={(item)=>item.nid}
-              ItemSeparatorComponent={()=><View style={gs.listSeparator}/>}
+              ItemSeparatorComponent={()=><View style={Gs.listSeparator}/>}
             />
           </View>
         </View>

@@ -24,12 +24,13 @@
     "react-navigation": "3.0.8"
   },
   "devDependencies": {
-    "babel-jest": "23.6.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "24.1.0",
+    "jest": "24.1.0",
+    "metro-react-native-babel-preset": "0.52.0",
+    "react-test-renderer": "16.6.3",
     "flow-bin": "^0.78.0",
-    "jest": "23.6.0",
-    "metro-react-native-babel-preset": "0.48.5",
-    "pre-commit": "^1.2.2",
-    "react-test-renderer": "16.6.3"
+    "pre-commit": "^1.2.2"
   },
   "jest": {
     "preset": "react-native"
