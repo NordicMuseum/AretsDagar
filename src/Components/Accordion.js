@@ -7,61 +7,18 @@ import { Image, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, Vi
 import { Collapse, CollapseHeader, CollapseBody } from 'accordion-collapse-react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export default class Accordion extends Component {
-  state = {
-    accordion: [],
-  };
-
+class Collection extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      collapsed: false,
+      collection: null
+    }
   }
 
   componentWillMount() {
-    const tradition = this.props.tradition;
-    let collapses = [];
-
-    // @TODO
-    if (tradition.collection1_title && tradition.collection1_title.length) {
-      let collapse = {
-        key: 1,
-        title: tradition.collection1_title,
-        text: tradition.collection1_text,
-        image: tradition.collection1_image,
-        imageText: tradition.field_collection1_image_text,
-      };
-      collapses.push(this._buildCollapse(collapse));
-    }
-    if (tradition.collection2_title && tradition.collection2_title.length) {
-      let collapse = {
-        key: 2,
-        title: tradition.collection2_title,
-        text: tradition.collection2_text,
-        image: tradition.collection2_image,
-        imageText: tradition.field_collection2_image_text,
-      };
-      collapses.push(this._buildCollapse(collapse));
-    }
-    if (tradition.collection3_title && tradition.collection3_title.length) {
-      let collapse = {
-        key: 3,
-        title: tradition.collection3_title,
-        text: tradition.collection3_text,
-        image: tradition.collection3_image,
-        imageText: tradition.field_collection3_image_text,
-      };
-      collapses.push(this._buildCollapse(collapse));
-    }
-    if (tradition.collection4_title && tradition.collection4_title.length) {
-      let collapse = {
-        key: 4,
-        title: tradition.collection4_title,
-        text: tradition.collection4_text,
-        image: tradition.collection4_image,
-        imageText: tradition.field_collection4_image_text,
-      };
-      collapses.push(this._buildCollapse(collapse));
-    }
-    this.setState({ accordion: collapses });
+    const collection = this.props.collection;
+    this.setState({collection: collection});
   }
 
   openImage = (image, imageText) => {
@@ -71,33 +28,112 @@ export default class Accordion extends Component {
     });
   }
 
-  _buildCollapse(item) {
+  render() {
     const imageDir = 'http://aretsdagar.nordiskamuseet.se/sites/default/files/styles/content_image/public/';
+    const collection = this.state.collection;
+    const key = collection.key;
+    let collapsed = this.state.collapsed;
+    let name = collapsed ? 'expand-less' : 'expand-more';
     return (
-      <Collapse key={item.key}>
+      <Collapse key={key}
+        isCollapsed={collapsed}
+        onToggle={(isCollapsed) => {
+          if (isCollapsed) {
+            this.setState({collapsed: true})
+          } else  {
+            this.setState({collapsed: false});
+          }
+        }}>
         <CollapseHeader style={styles.header}>
-          <View>
-            <Text style={styles.title}>{item.title}</Text>
+          <View style={styles.colHeader}>
+            <Text style={styles.title}>{collection.title}</Text>
+            <Icon style={styles.colIcon} size={20} name={name}/>
           </View>
         </CollapseHeader>
         <CollapseBody>
-          <TouchableWithoutFeedback onPress={() => this.openImage(item.image, item.imageText)}>
+          {collection.image.length ?
+          <TouchableWithoutFeedback onPress={() => this.openImage(collection.image, collection.imageText)}>
             <View style={styles.imageWrapper}>
-              {item.image.length && <Image style={styles.image} source={{ uri: imageDir + item.image }} />}
-              <TouchableOpacity style={styles.enlarge} onPress={() => this.openImage(item.image, item.imageText)}>
+              <Image style={styles.image} source={{ uri: imageDir + collection.image }}/>
+              <TouchableOpacity style={styles.enlarge} onPress={() => this.openImage(collection.image, collection.imageText)}>
                 <Icon name="zoom-in" size={30} style={styles.enlargeIcon}/>
               </TouchableOpacity>
             </View>
           </TouchableWithoutFeedback>
-          <Text style={styles.text}>{item.text}</Text>
+           : null}
+          <Text style={styles.text}>{collection.text}</Text>
         </CollapseBody>
       </Collapse>
     );
   }
+}
+
+export default class Accordion extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      accordion: [],
+    };
+  }
+
+  componentWillMount() {
+    const tradition = this.props.tradition;
+    let collapses = [];
+
+    // Structure our data.
+    if (tradition.collection1_title && tradition.collection1_title.length) {
+      let collapse = {
+        key: 1,
+        title: tradition.collection1_title,
+        text: tradition.collection1_text,
+        image: tradition.collection1_image,
+        imageText: tradition.field_collection1_image_text,
+      };
+      collapses.push(collapse);
+    }
+    if (tradition.collection2_title && tradition.collection2_title.length) {
+      let collapse = {
+        key: 2,
+        title: tradition.collection2_title,
+        text: tradition.collection2_text,
+        image: tradition.collection2_image,
+        imageText: tradition.field_collection2_image_text,
+      };
+      collapses.push(collapse);
+    }
+    if (tradition.collection3_title && tradition.collection3_title.length) {
+      let collapse = {
+        key: 3,
+        title: tradition.collection3_title,
+        text: tradition.collection3_text,
+        image: tradition.collection3_image,
+        imageText: tradition.field_collection3_image_text,
+      };
+      collapses.push(collapse);
+    }
+    if (tradition.collection4_title && tradition.collection4_title.length) {
+      let collapse = {
+        key: 4,
+        title: tradition.collection4_title,
+        text: tradition.collection4_text,
+        image: tradition.collection4_image,
+        imageText: tradition.field_collection4_image_text,
+      };
+      collapses.push(collapse);
+    }
+    this.setState({ accordion: collapses });
+  }
 
   render() {
+    const data = this.state.accordion;
     return (
-      this.state.accordion
+      <View>
+      {data.map((collection, i) => {
+        return (
+          <Collection key={i} navigation={this.props.navigation} collection={collection}/>
+        )
+      })}
+      </View>
     );
   }
 }
@@ -108,12 +144,18 @@ const styles = StyleSheet.create({
     borderBottomColor: '#5f5f5f',
     borderBottomWidth: StyleSheet.hairlineWidth
   },
+  colHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingVertical: 5
+  },
+  colIcon: {
+    color: '#5f5f5f'
+  },
   title: {
     color: '#7f7f7f',
-    paddingTop: 5,
-    paddingRight: 20,
-    paddingLeft: 20,
-    paddingBottom: 5
   },
   imageWrapper: {
     justifyContent: 'center',

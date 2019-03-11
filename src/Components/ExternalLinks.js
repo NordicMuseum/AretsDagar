@@ -62,19 +62,15 @@ const styles = StyleSheet.create({
   label: {
     backgroundColor: '#111',
     color: '#7f7f7f',
-    paddingTop: 5,
-    paddingRight: 20,
-    paddingLeft: 20,
-    paddingBottom: 5
+    paddingHorizontal: 20,
+    paddingVertical: 5
   },
   link: {
     color: '#fff',
-    paddingTop: 5,
-    paddingRight: 20,
-    paddingLeft: 20,
-    paddingBottom: 5
+    paddingHorizontal: 20,
+    paddingVertical: 5
   },
   linkicon: {
-    paddingLeft: 10,
+    paddingLeft: 10
   }
 })

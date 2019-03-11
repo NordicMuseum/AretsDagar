@@ -35,7 +35,7 @@ export default class UserScreen extends Component {
   _emptyText = (text) => {
     return(
       <View style={styles.empty}>
-          <Text style={styles.emptyText}>Inga {text}</Text>
+        <Text style={styles.emptyText}>Inga {text}</Text>
       </View>
     );
   }
