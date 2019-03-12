@@ -58,7 +58,6 @@ export default class Celebration extends Component {
       title: this.props.tradition.title,
     });
     this.setStatus(nid);
-    this.getPosition();
   }
 
   setStatus = async (nid) => {
@@ -100,9 +99,12 @@ export default class Celebration extends Component {
   }
 
   setCelebration = async () => {
+    // Users position.
+    this.getPosition();
+
     let status = this.state.status;
-    let nid = this.state.nid;
-    let title = this.state.title;
+    const nid = this.state.nid;
+    const title = this.state.title;
 
     if (status === 'inactive') {
       let celebration = {
