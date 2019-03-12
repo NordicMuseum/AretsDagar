@@ -79,7 +79,7 @@ export default class InfoScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#1d1d1d',
-    flex: 1
+    flex: 1,
   },
   imageWrapper: {
     alignItems: 'center',
@@ -88,13 +88,9 @@ const styles = StyleSheet.create({
   },
   image: {
   },
-  loader: {
-    flex: 1,
-    paddingTop: 30,
-    backgroundColor: '#1d1d1d'
-  },
   contentWrapper: {
     paddingTop: 10,
+    paddingBottom: 10,
     paddingLeft: 20,
     paddingRight: 20
   },
