@@ -16,6 +16,12 @@ export default StyleSheet.create({
     flex: 1,
     paddingTop: 30
   },
+  loaderText: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#fff',
+    paddingBottom: 30
+  },
   listSeparator: {
     height: 0.5,
     backgroundColor: '#333'
