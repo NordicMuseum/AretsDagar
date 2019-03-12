@@ -61,6 +61,9 @@ export default class Alphabetic extends Component {
     if (this.state.isLoading) {
       return (
         <View style={Gs.loader}>
+          <Text style={Gs.loaderText}>
+            Laddar innehåll…
+          </Text>
           <ActivityIndicator color='#fff'/>
         </View>
       );

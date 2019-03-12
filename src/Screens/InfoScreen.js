@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Config from 'react-native-config';
 import Hyperlink from 'react-native-hyperlink';
+import Gs from '../Utils/styles';
 
 export default class InfoScreen extends Component {
   state = {
@@ -40,6 +41,9 @@ export default class InfoScreen extends Component {
     if (this.state.isLoading) {
       return (
         <View style={styles.loader}>
+          <Text style={Gs.loaderText}>
+            Laddar innehåll…
+          </Text>
           <ActivityIndicator color='#fff'/>
         </View>
       );
