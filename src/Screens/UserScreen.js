@@ -102,6 +102,9 @@ export default class UserScreen extends Component {
     if (this.state.isLoading) {
       return (
         <View style={styles.loader}>
+          <Text style={Gs.loaderText}>
+            Laddar innehåll…
+          </Text>
           <ActivityIndicator color='#fff'/>
         </View>
       );

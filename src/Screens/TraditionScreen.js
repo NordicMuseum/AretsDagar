@@ -12,6 +12,7 @@ import Celebration from '../Components/Celebration';
 import Reminder from '../Components/Reminder';
 import { FormatDate } from '../Utils/helpers';
 import Config from 'react-native-config';
+import Gs from '../Utils/styles';
 
 const { height } = Dimensions.get('window');
 
@@ -68,6 +69,9 @@ export default class Tradition extends Component {
     if (this.state.isLoading) {
       return (
         <View style={styles.loader}>
+          <Text style={gs.loaderText}>
+            Laddar innehåll…
+          </Text>
           <ActivityIndicator color='#fff'/>
         </View>
       );
