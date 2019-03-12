@@ -9,6 +9,7 @@ import Accordion from '../Components/Accordion';
 import ExternalLinks from '../Components/ExternalLinks';
 import Instagram from '../Components/Instagram';
 import Celebration from '../Components/Celebration';
+import Loader from '../Components/Loader';
 import Reminder from '../Components/Reminder';
 import { FormatDate } from '../Utils/helpers';
 import Config from 'react-native-config';
@@ -68,12 +69,7 @@ export default class Tradition extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={styles.loader}>
-          <Text style={Gs.loaderText}>
-            Laddar innehåll…
-          </Text>
-          <ActivityIndicator color='#fff'/>
-        </View>
+        <Loader/>
       );
     }
     else {
