@@ -31,7 +31,7 @@ export default class ImageScreen extends Component {
     if (this.state.isLoading) {
       return (
         <View style={styles.loader}>
-          <ActivityIndicator />
+          <ActivityIndicator color='#fff'/>
         </View>
       );
     }
