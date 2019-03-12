@@ -69,7 +69,7 @@ export default class Tradition extends Component {
     if (this.state.isLoading) {
       return (
         <View style={styles.loader}>
-          <Text style={gs.loaderText}>
+          <Text style={Gs.loaderText}>
             Laddar innehåll…
           </Text>
           <ActivityIndicator color='#fff'/>
