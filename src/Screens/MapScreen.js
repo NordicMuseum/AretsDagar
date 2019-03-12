@@ -72,11 +72,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#1d1d1d',
     flex: 1
   },
-  loader: {
-    flex: 1,
-    paddingTop: 30,
-    backgroundColor: '#1d1d1d'
-  },
   close: {
     alignSelf: 'flex-end',
     color: '#fff'
