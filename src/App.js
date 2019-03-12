@@ -59,60 +59,6 @@ class User extends React.Component {
   }
 }
 
-const UserStack = createStackNavigator({
-  User: {
-    screen: User,
-    navigationOptions: ({navigation}) => ({
-      headerStyle: {
-        backgroundColor: '#111',
-        borderBottomWidth: 0
-      },
-      headerTintColor: '#fff',
-      headerTitle: (
-        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
-          <Image
-            source={require('AretsDagar/assets/logo.png')}
-            style={{ width:100, height: 35, paddingBottom: 3 }}
-          />
-        </View>
-      ),
-      headerRight:
-        <View>
-        {navigation.getParam('update') ?
-        <TouchableOpacity
-        onPress = {() => navigation.setParams({update: false})} >
-        <Text style={changeButtonStyles}>Avbryt</Text>
-        </TouchableOpacity>
-        : <TouchableOpacity
-        onPress = {() => navigation.setParams({update: true})} >
-        <Text style={changeButtonStyles}>Ändra</Text>
-        </TouchableOpacity>}
-        </View>
-    }),
-  },
-});
-
-const InfoStack = createStackNavigator({
-  Info: {
-    screen: Info,
-    navigationOptions: () => ({
-      headerStyle: {
-        backgroundColor: '#111',
-        borderBottomWidth: 0
-      },
-      headerTintColor: '#fff',
-      headerTitle: (
-        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
-          <Image
-            source={require('AretsDagar/assets/logo.png')}
-            style={{ width:100, height: 35, paddingBottom: 3 }}
-          />
-        </View>
-      ),
-    }),
-  },
-});
-
 class Tradition extends React.Component {
   render() {
     return (
@@ -143,7 +89,6 @@ class Images extends React.Component {
   }
 }
 
-
 const TraditionStack = createStackNavigator({
   Tradition: {
     screen: Tradition,
@@ -162,7 +107,7 @@ const TraditionStack = createStackNavigator({
         </View>
       ),
       headerLeft: <TouchableOpacity
-        onPress = {() => navigation.navigate('Calendar')} >
+        onPress = {() => navigation.goBack(null)} >
         <Text style={backButtonStyles}>Tillbaka</Text>
         </TouchableOpacity>
     }),
@@ -214,6 +159,72 @@ const TraditionStack = createStackNavigator({
     }),
   }
 }, {initialRouteName: 'Tradition'});
+
+const UserStack = createStackNavigator({
+  User: {
+    screen: User,
+    navigationOptions: ({navigation}) => ({
+      title: 'User',
+      headerBackTitle: 'Tillbaka',
+      headerStyle: {
+        backgroundColor: '#111',
+        borderBottomWidth: 0
+      },
+      headerTintColor: '#fff',
+      headerTitle: (
+        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+          <Image
+            source={require('AretsDagar/assets/logo.png')}
+            style={{ width:100, height: 35, paddingBottom: 3 }}
+          />
+        </View>
+      ),
+      headerRight:
+        <View>
+        {navigation.getParam('update') ?
+        <TouchableOpacity
+        onPress = {() => navigation.setParams({update: false})} >
+        <Text style={changeButtonStyles}>Avbryt</Text>
+        </TouchableOpacity>
+        : <TouchableOpacity
+        onPress = {() => navigation.setParams({update: true})} >
+        <Text style={changeButtonStyles}>Ändra</Text>
+        </TouchableOpacity>}
+        </View>
+    }),
+  },
+  Tradition: {
+    screen: TraditionStack,
+    navigationOptions: ({ navigation }) => ({
+      header: null,
+      headerStyle: {
+        backgroundColor: '#111',
+        borderBottomWidth: 0
+      },
+    }),
+  }
+}, {initialRouteName: 'User'});
+
+const InfoStack = createStackNavigator({
+  Info: {
+    screen: Info,
+    navigationOptions: () => ({
+      headerStyle: {
+        backgroundColor: '#111',
+        borderBottomWidth: 0
+      },
+      headerTintColor: '#fff',
+      headerTitle: (
+        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+          <Image
+            source={require('AretsDagar/assets/logo.png')}
+            style={{ width:100, height: 35, paddingBottom: 3 }}
+          />
+        </View>
+      ),
+    }),
+  },
+});
 
 const CalendarStack = createStackNavigator({
   Calendar: {
@@ -270,21 +281,13 @@ const AlphabeticStack = createStackNavigator({
     }),
   },
   Tradition: {
-    screen: Tradition,
+    screen: TraditionStack,
     navigationOptions: ({ navigation }) => ({
+      header: null,
       headerStyle: {
         backgroundColor: '#111',
         borderBottomWidth: 0
       },
-      headerTintColor: '#fff',
-      headerTitle: (
-        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
-          <Image
-            source={require('AretsDagar/assets/logo.png')}
-            style={{ width:100, height: 35, paddingBottom: 3 }}
-          />
-        </View>
-      ),
     }),
   }
 }, {initialRouteName: 'Alphabetic'});
