@@ -12,9 +12,9 @@ export default StyleSheet.create({
     flex: 1
   },
   loader: {
+    backgroundColor: '#1d1d1d',
     flex: 1,
-    paddingTop: 30,
-    backgroundColor: '#1d1d1d'
+    paddingTop: 30
   },
   listSeparator: {
     height: 0.5,

@@ -49,7 +49,7 @@ export default class Calendar extends Component {
     if (this.state.isLoading) {
       return (
         <View style={Gs.loader}>
-          <ActivityIndicator />
+          <ActivityIndicator color='#fff'/>
         </View>
       );
     }
