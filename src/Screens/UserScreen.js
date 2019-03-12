@@ -144,7 +144,10 @@ export default class UserScreen extends Component {
             data={this.state.celebrations}
             renderItem={({item, index}) => (
               <View style={styles.row}>
-                <Text style={styles.rowText}>{item.title}</Text>
+                <TouchableOpacity style={styles.tabItem} onPress={() => this.loadTradition(item)}>
+                  <Text style={styles.rowText}>{item.title}</Text>
+                  <Icon name="navigate-next" size={30} style={Gs.next}/>
+                </TouchableOpacity>
               </View>
             )}
             keyExtractor={(item)=>item.nid}
