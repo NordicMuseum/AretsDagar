@@ -7,6 +7,7 @@ import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Config from 'react-native-config';
+import Loader from '../Components/Loader';
 import Gs from '../Utils/styles';
 
 export default class MapScreen extends Component {
@@ -35,12 +36,7 @@ export default class MapScreen extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={styles.loader}>
-          <Text style={Gs.loaderText}>
-            Laddar innehåll…
-          </Text>
-          <ActivityIndicator color='#fff'/>
-        </View>
+        <Loader/>
       );
     }
     else {

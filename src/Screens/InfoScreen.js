@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Config from 'react-native-config';
 import Hyperlink from 'react-native-hyperlink';
+import Loader from '../Components/Loader';
 import Gs from '../Utils/styles';
 
 export default class InfoScreen extends Component {
@@ -40,12 +41,7 @@ export default class InfoScreen extends Component {
     // AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
     if (this.state.isLoading) {
       return (
-        <View style={styles.loader}>
-          <Text style={Gs.loaderText}>
-            Laddar innehåll…
-          </Text>
-          <ActivityIndicator color='#fff'/>
-        </View>
+        <Loader/>
       );
     }
     else {

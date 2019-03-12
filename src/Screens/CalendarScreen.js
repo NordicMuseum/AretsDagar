@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Ribbon from '../Components/Ribbon';
 import { FormatDate, FormatIntro } from '../Utils/helpers';
 import Gs from '../Utils/styles';
+import Loader from '../Components/Loader';
 import Config from 'react-native-config';
 
 export default class Calendar extends Component {
@@ -48,12 +49,7 @@ export default class Calendar extends Component {
 
     if (this.state.isLoading) {
       return (
-        <View style={Gs.loader}>
-          <Text style={Gs.loaderText}>
-            Laddar innehåll…
-          </Text>
-          <ActivityIndicator color='#fff'/>
-        </View>
+        <Loader/>
       );
     }
 
