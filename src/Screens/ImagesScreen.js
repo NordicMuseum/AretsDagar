@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Gs from '../Utils/styles';
+import Loader from '../Components/Loader';
 
 export default class ImageScreen extends Component {
   state = {
@@ -31,12 +32,7 @@ export default class ImageScreen extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={styles.loader}>
-          <Text style={Gs.loaderText}>
-            Laddar innehåll…
-          </Text>
-          <ActivityIndicator color='#fff'/>
-        </View>
+        <Loader/>
       );
     }
     else {

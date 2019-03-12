@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Gs from '../Utils/styles';
+import Loader from '../Components/Loader';
 
 export default class UserScreen extends Component {
   constructor(props) {
@@ -101,12 +102,7 @@ export default class UserScreen extends Component {
   render () {
     if (this.state.isLoading) {
       return (
-        <View style={styles.loader}>
-          <Text style={Gs.loaderText}>
-            Laddar innehåll…
-          </Text>
-          <ActivityIndicator color='#fff'/>
-        </View>
+        <Loader/>
       );
     }
     else {
