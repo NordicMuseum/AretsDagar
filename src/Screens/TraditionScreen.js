@@ -146,11 +146,6 @@ const styles = StyleSheet.create({
     height: 250,
     width: null
   },
-  loader: {
-    flex: 1,
-    paddingTop: 30,
-    backgroundColor: '#1d1d1d'
-  },
   contentWrapper: {
     paddingTop: 10,
     paddingLeft: 20,
