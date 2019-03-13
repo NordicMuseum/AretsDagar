@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import {
-  ActivityIndicator, Text, TextInput, View, SafeAreaView, StyleSheet, TouchableOpacity, TouchableHighlight, FlatList
+  Text, TextInput, View, StyleSheet, TouchableHighlight, FlatList
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Config from 'react-native-config';
@@ -30,6 +30,13 @@ export default class Alphabetic extends Component {
     this.fetchData();
   }
 
+  fetchData = async () => {
+    const response = await fetch(`${Config.NM_API_URL}views/traditions_alphabetic`);
+    const json = await response.json();
+    this.setState({ data: json, searchData: json, isLoading: false });
+    this.arrayholder = json;
+  };
+
   loadTradition(item) {
     this.props.navigation.navigate(
       'Tradition',
@@ -39,13 +46,6 @@ export default class Alphabetic extends Component {
       }
     );
   }
-
-  fetchData = async () => {
-    const response = await fetch(`${Config.NM_API_URL}views/traditions_alphabetic`);
-    const json = await response.json();
-    this.setState({ data: json, searchData: json, isLoading: false });
-    this.arrayholder = json;
-  };
 
   SearchFilterFunction(text) {
     const newData = this.arrayholder.filter((item) => {

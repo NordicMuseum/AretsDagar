@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import {
-  ActivityIndicator, AsyncStorage, FlatList, StyleSheet, Text, TouchableOpacity, View
+  AsyncStorage, FlatList, StyleSheet, Text, TouchableOpacity, View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Gs from '../Utils/styles';
@@ -15,8 +15,7 @@ export default class UserScreen extends Component {
     this.state = {
       isLoading: true,
       reminders: [],
-      celebrations: [],
-      reload: null
+      celebrations: []
     };
   }
 
@@ -34,12 +33,9 @@ export default class UserScreen extends Component {
     this.props.navigation.setParams({ update: false });
   }
 
-  _emptyText = text => (
+  emptyText = text => (
     <View style={styles.empty}>
-      <Text style={styles.emptyText}>
-Inga
-        {text}
-      </Text>
+      <Text style={styles.emptyText}>Inga {text}</Text>
     </View>
   )
 
@@ -134,7 +130,7 @@ Inga
           keyExtractor={item => item.nid}
           ItemSeparatorComponent={() => <View style={{ height: 0.5, backgroundColor: '#333333' }} />}
           extraData={this.state}
-          ListEmptyComponent={this._emptyText('påminnelser')}
+          ListEmptyComponent={this.emptyText('påminnelser')}
         />
         <View style={styles.section}>
           <Text style={styles.sectionText}>Firanden</Text>
@@ -152,7 +148,7 @@ Inga
           keyExtractor={item => item.nid}
           ItemSeparatorComponent={() => <View style={{ height: 0.5, backgroundColor: '#333333' }} />}
           extraData={this.state}
-          ListEmptyComponent={this._emptyText('firanden')}
+          ListEmptyComponent={this.emptyText('firanden')}
         />
       </View>
     );
