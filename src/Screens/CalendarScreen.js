@@ -101,11 +101,13 @@ const styles = StyleSheet.create({
     justifyContent:'center'
   },
   rowWrapper: {
-    paddingHorizontal: 15,
+    paddingLeft: 15,
     paddingVertical: 10
   },
   rowContent: {
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    marginRight: 20,
+    flex: -1
   },
   rowText: {
     color: '#fff',
@@ -114,8 +116,7 @@ const styles = StyleSheet.create({
   intro: {
     color: '#fff',
     fontSize: 12,
-    marginTop: 5,
-    width: 170
+    marginTop: 5
   },
   thumbnail: {
     height: 85,
