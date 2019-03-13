@@ -1,11 +1,17 @@
 // @flow
 
-'use strict';
-
-import React, {Component} from 'react';
-import { Button, Image, Platform, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import {
+  Image,
+  SafeAreaView,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import CalendarScreen from './Screens/CalendarScreen';
 import AlphabeticScreen from './Screens/AlphabeticScreen';
@@ -14,16 +20,16 @@ import UserScreen from './Screens/UserScreen';
 import TraditionScreen from './Screens/TraditionScreen';
 import MapScreen from './Screens/MapScreen';
 import ImagesScreen from './Screens/ImagesScreen';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class Calendar extends React.Component {
   render() {
+    const { navigation } = this.props;
     return (
       <SafeAreaView style={baseStyles}>
         <StatusBar
           barStyle="light-content"
         />
-        <CalendarScreen navigation={this.props.navigation} />
+        <CalendarScreen navigation={navigation} />
       </SafeAreaView>
     );
   }
@@ -31,9 +37,10 @@ class Calendar extends React.Component {
 
 class Alphabetic extends React.Component {
   render() {
+    const { navigation } = this.props;
     return (
       <SafeAreaView style={baseStyles}>
-        <AlphabeticScreen navigation={this.props.navigation} />
+        <AlphabeticScreen navigation={navigation} />
       </SafeAreaView>
     );
   }
@@ -51,9 +58,10 @@ class Info extends React.Component {
 
 class User extends React.Component {
   render() {
+    const { navigation } = this.props;
     return (
       <SafeAreaView style={baseStyles}>
-        <UserScreen navigation={this.props.navigation}/>
+        <UserScreen navigation={navigation} />
       </SafeAreaView>
     );
   }
@@ -61,9 +69,10 @@ class User extends React.Component {
 
 class Tradition extends React.Component {
   render() {
+    const { navigation } = this.props;
     return (
       <SafeAreaView style={baseStyles}>
-        <TraditionScreen navigation={this.props.navigation} />
+        <TraditionScreen navigation={navigation} />
       </SafeAreaView>
     );
   }
@@ -71,9 +80,10 @@ class Tradition extends React.Component {
 
 class Map extends React.Component {
   render() {
+    const { navigation } = this.props;
     return (
       <SafeAreaView style={baseStyles}>
-        <MapScreen navigation={this.props.navigation} />
+        <MapScreen navigation={navigation} />
       </SafeAreaView>
     );
   }
@@ -81,9 +91,10 @@ class Map extends React.Component {
 
 class Images extends React.Component {
   render() {
+    const { navigation } = this.props;
     return (
       <SafeAreaView style={baseStyles}>
-        <ImagesScreen navigation={this.props.navigation} />
+        <ImagesScreen navigation={navigation} />
       </SafeAreaView>
     );
   }
@@ -99,16 +110,19 @@ const TraditionStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{flex:1, flexDirection:'row', justifyContent:'center', zIndex: 100}}>
+        <View style={{
+          flex: 1, flexDirection: 'row', justifyContent: 'center', zIndex: 100
+        }}
+        >
           <Image
             source={require('AretsDagar/assets/logo.png')}
-            style={{ width:100, height: 35, paddingBottom: 3 }}
+            style={{ width: 100, height: 35, paddingBottom: 3 }}
           />
         </View>
       ),
-      headerLeft: <TouchableOpacity
-        onPress = {() => navigation.goBack(null)} >
-        <Text style={backButtonStyles}>Tillbaka</Text>
+      headerLeft:
+        <TouchableOpacity onPress={() => navigation.goBack(null)}>
+          <Text style={backButtonStyles}>Tillbaka</Text>
         </TouchableOpacity>
     }),
   },
@@ -122,15 +136,15 @@ const TraditionStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
           <Image
             source={require('AretsDagar/assets/logo.png')}
-            style={{ width:100, height: 35, paddingBottom: 3 }}
+            style={{ width: 100, height: 35, paddingBottom: 3 }}
           />
         </View>
       ),
-      headerLeft: <TouchableOpacity
-        onPress = {() => navigation.navigate('Tradition')} >
+      headerLeft:
+        <TouchableOpacity onPress={() => navigation.navigate('Tradition')}>
         <Text style={backButtonStyles}>Tillbaka</Text>
         </TouchableOpacity>
     }),
@@ -145,25 +159,25 @@ const TraditionStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
           <Image
             source={require('AretsDagar/assets/logo.png')}
-            style={{ width:100, height: 35, paddingBottom: 3 }}
+            style={{ width: 100, height: 35, paddingBottom: 3 }}
           />
         </View>
       ),
-      headerLeft: <TouchableOpacity
-        onPress = {() => navigation.navigate('Tradition')} >
-        <Text style={backButtonStyles}>Tillbaka</Text>
+      headerLeft:
+        <TouchableOpacity onPress={() => navigation.navigate('Tradition')}>
+          <Text style={backButtonStyles}>Tillbaka</Text>
         </TouchableOpacity>
     }),
   }
-}, {initialRouteName: 'Tradition'});
+}, { initialRouteName: 'Tradition' });
 
 const UserStack = createStackNavigator({
   User: {
     screen: User,
-    navigationOptions: ({navigation}) => ({
+    navigationOptions: ({ navigation }) => ({
       title: 'User',
       headerBackTitle: 'Tillbaka',
       headerStyle: {
@@ -172,30 +186,28 @@ const UserStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
           <Image
             source={require('AretsDagar/assets/logo.png')}
-            style={{ width:100, height: 35, paddingBottom: 3 }}
+            style={{ width: 100, height: 35, paddingBottom: 3 }}
           />
         </View>
       ),
       headerRight:
         <View>
-        {navigation.getParam('update') ?
-        <TouchableOpacity
-        onPress = {() => navigation.setParams({update: false})} >
-        <Text style={changeButtonStyles}>Avbryt</Text>
-        </TouchableOpacity>
-        : <TouchableOpacity
-        onPress = {() => navigation.setParams({update: true})} >
-        <Text style={changeButtonStyles}>Ändra</Text>
-        </TouchableOpacity>}
+          {navigation.getParam('update')
+          ? <TouchableOpacity onPress={() => navigation.setParams({ update: false })}>
+            <Text style={changeButtonStyles}>Avbryt</Text>
+          </TouchableOpacity>
+          : <TouchableOpacity onPress={() => navigation.setParams({ update: true })}>
+            <Text style={changeButtonStyles}>Ändra</Text>
+          </TouchableOpacity>}
         </View>
     }),
   },
   Tradition: {
     screen: TraditionStack,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: () => ({
       header: null,
       headerStyle: {
         backgroundColor: '#111',
@@ -203,7 +215,7 @@ const UserStack = createStackNavigator({
       },
     }),
   }
-}, {initialRouteName: 'User'});
+}, { initialRouteName: 'User' });
 
 const InfoStack = createStackNavigator({
   Info: {
@@ -215,10 +227,10 @@ const InfoStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
           <Image
             source={require('AretsDagar/assets/logo.png')}
-            style={{ width:100, height: 35, paddingBottom: 3 }}
+            style={{ width: 100, height: 35, paddingBottom: 3 }}
           />
         </View>
       ),
@@ -229,7 +241,7 @@ const InfoStack = createStackNavigator({
 const CalendarStack = createStackNavigator({
   Calendar: {
     screen: Calendar,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: () => ({
       title: 'Calendar',
       headerBackTitle: 'Tillbaka',
       headerStyle: {
@@ -238,10 +250,10 @@ const CalendarStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
           <Image
             source={require('AretsDagar/assets/logo.png')}
-            style={{ width:100, height: 35, paddingBottom: 3 }}
+            style={{ width: 100, height: 35, paddingBottom: 3 }}
           />
         </View>
       ),
@@ -249,7 +261,7 @@ const CalendarStack = createStackNavigator({
   },
   Tradition: {
     screen: TraditionStack,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: () => ({
       header: null,
       headerStyle: {
         backgroundColor: '#111',
@@ -257,12 +269,12 @@ const CalendarStack = createStackNavigator({
       },
     }),
   }
-}, {initialRouteName: 'Calendar'});
+}, { initialRouteName: 'Calendar' });
 
 const AlphabeticStack = createStackNavigator({
   Alphabetic: {
     screen: Alphabetic,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: () => ({
       title: 'Alphabetic',
       headerBackTitle: 'Tillbaka',
       headerStyle: {
@@ -271,10 +283,10 @@ const AlphabeticStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{flex:1, flexDirection:'row', justifyContent:'center'}}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
           <Image
             source={require('AretsDagar/assets/logo.png')}
-            style={{ width:100, height: 35, paddingBottom: 3 }}
+            style={{ width: 100, height: 35, paddingBottom: 3 }}
           />
         </View>
       ),
@@ -282,7 +294,7 @@ const AlphabeticStack = createStackNavigator({
   },
   Tradition: {
     screen: TraditionStack,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: () => ({
       header: null,
       headerStyle: {
         backgroundColor: '#111',
@@ -290,14 +302,14 @@ const AlphabeticStack = createStackNavigator({
       },
     }),
   }
-}, {initialRouteName: 'Alphabetic'});
+}, { initialRouteName: 'Alphabetic' });
 
 const RouteConfigs = {
   Calendar: {
     screen: CalendarStack,
     navigationOptions: () => ({
       tabBarLabel: 'Dagar',
-      tabBarIcon: ({tintColor}) => (
+      tabBarIcon: ({ tintColor }) => (
         <Icon name="date-range" color={tintColor} size={24} />
       )
     }),
@@ -306,7 +318,7 @@ const RouteConfigs = {
     screen: AlphabeticStack,
     navigationOptions: () => ({
       tabBarLabel: 'Lista A - Ö',
-      tabBarIcon: ({tintColor}) => (
+      tabBarIcon: ({ tintColor }) => (
         <Icon name="view-list" color={tintColor} size={24} />
       )
     }),
@@ -315,7 +327,7 @@ const RouteConfigs = {
     screen: UserStack,
     navigationOptions: () => ({
       tabBarLabel: 'Mina dagar',
-      tabBarIcon: ({tintColor}) => (
+      tabBarIcon: ({ tintColor }) => (
         <Icon name="person" color={tintColor} size={24} />
       )
     }),
@@ -324,7 +336,7 @@ const RouteConfigs = {
     screen: InfoStack,
     navigationOptions: () => ({
       tabBarLabel: 'Info',
-      tabBarIcon: ({tintColor}) => (
+      tabBarIcon: ({ tintColor }) => (
         <Icon name="info" color={tintColor} size={24} />
       )
     }),
@@ -335,7 +347,6 @@ const TabNavigatorConfig = {
   initialRouteName: 'Calendar',
   swipeEnabled: false,
   lazy: true,
-  animationEnabled: false,
   tabBarOptions: {
     activeTintColor: '#f2d49c',
     labelStyle: {
@@ -351,17 +362,17 @@ const TabNavigatorConfig = {
 const baseStyles = {
   backgroundColor: '#1d1d1d',
   flex: 1
-}
+};
 
 const backButtonStyles = {
   color: '#fff',
   marginLeft: 20
-}
+};
 
 const changeButtonStyles = {
   color: '#fff',
   marginRight: 20
-}
+};
 
 const TabsView = createBottomTabNavigator(RouteConfigs, TabNavigatorConfig);
 
