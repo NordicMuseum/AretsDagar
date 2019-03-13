@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import {
-  Alert, AsyncStorage, Platform, StyleSheet, Text, TouchableOpacity, View
+  AsyncStorage, Platform, StyleSheet, Text, TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Geolocation from 'react-native-geolocation-service';
@@ -20,6 +20,19 @@ export default class Celebration extends Component {
     latitude: null,
     longitude: null
   };
+
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount() {
+    const { nid } = this.props.tradition;
+    this.setState({
+      nid,
+      title: this.props.tradition.title,
+    });
+    this.setStatus(nid);
+  }
 
   hasLocationPermission = async () => {
     if (Platform.OS === 'ios' ||
@@ -46,19 +59,6 @@ export default class Celebration extends Component {
     }
 
     return false;
-  }
-
-  constructor(props) {
-    super(props);
-  }
-
-  componentWillMount() {
-    const { nid } = this.props.tradition;
-    this.setState({
-      nid,
-      title: this.props.tradition.title,
-    });
-    this.setStatus(nid);
   }
 
   setStatus = async (nid) => {

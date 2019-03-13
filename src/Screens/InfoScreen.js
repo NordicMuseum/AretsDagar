@@ -3,12 +3,11 @@
 
 import React, { Component } from 'react';
 import {
-  ActivityIndicator, AsyncStorage, Image, SafeAreaView, ScrollView, StyleSheet, Text, View
+  Image, SafeAreaView, ScrollView, StyleSheet, Text, View
 } from 'react-native';
 import Config from 'react-native-config';
 import Hyperlink from 'react-native-hyperlink';
 import Loader from '../Components/Loader';
-import Gs from '../Utils/styles';
 
 export default class InfoScreen extends Component {
   state = {

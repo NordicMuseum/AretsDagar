@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import {
-  Alert, ActivityIndicator, Image, Text, View, StyleSheet, TouchableOpacity, FlatList
+  Image, Text, View, StyleSheet, TouchableOpacity, FlatList
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Config from 'react-native-config';
@@ -28,6 +28,13 @@ export default class Calendar extends Component {
     this.fetchData();
   }
 
+  fetchData = async () => {
+    // Fetcing days from API backend.
+    const response = await fetch(`${Config.NM_API_URL}views/traditions`);
+    const json = await response.json();
+    this.setState({ data: json, isLoading: false });
+  };
+
   loadTradition(item) {
     this.props.navigation.navigate(
       'Tradition',
@@ -37,13 +44,6 @@ export default class Calendar extends Component {
       }
     );
   }
-
-  fetchData = async () => {
-    // Fetcing days from API backend.
-    const response = await fetch(`${Config.NM_API_URL}views/traditions`);
-    const json = await response.json();
-    this.setState({ data: json, isLoading: false });
-  };
 
   render() {
     const imageDir = 'http://aretsdagar.nordiskamuseet.se/sites/default/files/styles/list_image/public/';
@@ -58,7 +58,7 @@ export default class Calendar extends Component {
       <View style={styles.container}>
         <FlatList
           data={this.state.data}
-          renderItem={({ item, index }) => (
+          renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => this.loadTradition(item)}
               style={styles.rowWrapper}

@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import {
-  ActivityIndicator, Dimensions, Image, SafeAreaView, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View
+  Dimensions, Image, SafeAreaView, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Config from 'react-native-config';
@@ -96,16 +96,12 @@ export default class Tradition extends Component {
             <View style={{ flex: 1 }}>
               <Text style={styles.title}>{tradition.title}</Text>
               <View style={styles.details}>
-                <Text style={styles.dateText}>
-Firas
-                  {formattedDate}
-                </Text>
+                <Text style={styles.dateText}>Firas {formattedDate}</Text>
                 <View style={styles.celebRow}>
                   <Icon name="favorite" style={styles.celebIcon} size={16} />
                   <Text style={styles.celebText}>
                     <Text style={{ color: '#f2d49c' }}>{tradition.celebrations}</Text>
-                    {' '}
-FIRANDEN
+                    {' '}FIRANDEN
                   </Text>
                 </View>
               </View>
@@ -133,7 +129,7 @@ FIRANDEN
           </View>
           <Accordion tradition={tradition} navigation={this.props.navigation} />
           <ExternalLinks tradition={tradition} />
-          <Instagram insta_tag={tradition.insta_tag} />
+          <Instagram instaTag={tradition.insta_tag} />
         </ScrollView>
       </SafeAreaView>
     );

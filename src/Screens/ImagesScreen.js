@@ -3,11 +3,10 @@
 
 import React, { Component } from 'react';
 import {
-  ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View
+  ScrollView, StyleSheet, Text, TouchableOpacity, View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ImageViewer from 'react-native-image-zoom-viewer';
-import Gs from '../Utils/styles';
 import Loader from '../Components/Loader';
 
 export default class ImageScreen extends Component {

@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import {
-  Linking, StyleSheet, Text, TouchableOpacity, View
+  Linking, StyleSheet, Text, View
 } from 'react-native';
 
 export default class Instagram extends Component {
@@ -11,14 +11,10 @@ export default class Instagram extends Component {
     hashtag: null,
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   componentWillMount() {
-    const { insta_tag } = this.props;
-    if (insta_tag && insta_tag.length) {
-      this.setState({ hashtag: insta_tag });
+    const { instaTag } = this.props;
+    if (instaTag && instaTag.length) {
+      this.setState({ hashtag: instaTag });
     }
   }
 
@@ -28,13 +24,11 @@ export default class Instagram extends Component {
     return (
       <View style={styles.wrapper}>
         <Text style={styles.info}>
-Lägg till en Instagrambild för den här dagen
-        med hashtaggen
+          Lägg till en Instagrambild för den här dagen med hashtaggen
           <Text
             style={styles.link}
             onPress={() => { Linking.openURL(url); }}
-          >
-            {hashtag}
+          > {hashtag}
           </Text>
         </Text>
       </View>

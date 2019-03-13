@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import {
-  AsyncStorage, StyleSheet, Text, TouchableOpacity, View
+  AsyncStorage, StyleSheet, Text, TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
