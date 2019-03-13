@@ -1,10 +1,12 @@
 // @flow
 
-'use strict';
 
 import React, { Component } from 'react';
-import { ActivityIndicator, Dimensions, Image, SafeAreaView, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View  } from 'react-native';
+import {
+  ActivityIndicator, Dimensions, Image, SafeAreaView, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Config from 'react-native-config';
 import Accordion from '../Components/Accordion';
 import ExternalLinks from '../Components/ExternalLinks';
 import Instagram from '../Components/Instagram';
@@ -12,7 +14,6 @@ import Celebration from '../Components/Celebration';
 import Loader from '../Components/Loader';
 import Reminder from '../Components/Reminder';
 import { FormatDate } from '../Utils/helpers';
-import Config from 'react-native-config';
 import Gs from '../Utils/styles';
 
 const { height } = Dimensions.get('window');
@@ -27,7 +28,7 @@ export default class Tradition extends Component {
     super(props);
     this.state = {
       isLoading: true,
-    }
+    };
   }
 
   componentWillMount() {
@@ -41,7 +42,7 @@ export default class Tradition extends Component {
   };
 
   fetchData = async (id) => {
-    const response = await fetch(Config.NM_API_URL + 'views/tradition?nid='+id);
+    const response = await fetch(`${Config.NM_API_URL}views/tradition?nid=${id}`);
     const json = await response.json();
     this.setState({ data: json, isLoading: false });
   };
@@ -50,9 +51,9 @@ export default class Tradition extends Component {
     try {
       const result = await Share.share({
         message: 'Lär dig om våra högtidsdagar med Nordiska museets app Årets dagar',
-        title: 'Vad vet du om ' + title + '?',
+        title: `Vad vet du om ${title}?`,
         url: 'http://aretsdagar.nordiskamuseet.se/',
-      })
+      });
 
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -69,66 +70,73 @@ export default class Tradition extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <Loader/>
+        <Loader />
       );
     }
-    else {
-      const tradition = this.state.data[0];
-      const formattedDate = FormatDate(tradition.dates, null);
-      const imageDir = 'http://aretsdagar.nordiskamuseet.se/sites/default/files/styles/top_image/public/';
 
-      return (
-        <SafeAreaView style={styles.container}>
-          <ScrollView
-            contentContainerStyle={{ flexGrow: 1 }}
-            scrollEnabled={true}
-            onContentSizeChange={this.onContentSizeChange}
-          >
-            <View style={styles.imageWrapper}>
-              <Image
-                style={styles.image}
-                source={{ uri: imageDir + tradition.bild }}
-                defaultSource={require('AretsDagar/assets/default_top.jpg')}
-              />
-            </View>
-            <View style={styles.contentWrapper}>
-              <View style={{ flex: 1 }}>
-                <Text style={styles.title}>{tradition.title}</Text>
-                <View style={styles.details}>
-                  <Text style={styles.dateText}>Firas {formattedDate}</Text>
-                  <View style={styles.celebRow}>
-                    <Icon name="favorite" style={styles.celebIcon} size={16}/><Text style={styles.celebText}><Text style={{color: '#f2d49c'}}>{tradition.celebrations}</Text> FIRANDEN</Text>
-                  </View>
+    const tradition = this.state.data[0];
+    const formattedDate = FormatDate(tradition.dates, null);
+    const imageDir = 'http://aretsdagar.nordiskamuseet.se/sites/default/files/styles/top_image/public/';
+
+    return (
+      <SafeAreaView style={styles.container}>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          scrollEnabled
+          onContentSizeChange={this.onContentSizeChange}
+        >
+          <View style={styles.imageWrapper}>
+            <Image
+              style={styles.image}
+              source={{ uri: imageDir + tradition.bild }}
+              defaultSource={require('AretsDagar/assets/default_top.jpg')}
+            />
+          </View>
+          <View style={styles.contentWrapper}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.title}>{tradition.title}</Text>
+              <View style={styles.details}>
+                <Text style={styles.dateText}>
+Firas
+                  {formattedDate}
+                </Text>
+                <View style={styles.celebRow}>
+                  <Icon name="favorite" style={styles.celebIcon} size={16} />
+                  <Text style={styles.celebText}>
+                    <Text style={{ color: '#f2d49c' }}>{tradition.celebrations}</Text>
+                    {' '}
+FIRANDEN
+                  </Text>
                 </View>
               </View>
-              <View style={[{ flex: 2 }, styles.actionBar]}>
-                <Celebration tradition={tradition}/>
-                <TouchableOpacity
-                  style={styles.tabItem}
-                  onPress={() => this.props.navigation.navigate('Map', {
-                    id: tradition.nid
-                  })}
-                  >
-                  <Icon name="place" size={25} style={styles.tabIcon}/>
-                  <Text style={styles.tabTitle}>Visa var</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.tabItem} onPress={() => this.onShare(tradition.title)}>
-                  <Icon name="share" size={25} style={styles.tabIcon}/>
-                  <Text style={styles.tabTitle}>Dela</Text>
-                </TouchableOpacity>
-                <Reminder nid={tradition.nid} title={tradition.title}/>
-              </View>
-              <View style={styles.intro}>
-                <Text style={styles.text}>{tradition.intro}</Text>
-              </View>
             </View>
-            <Accordion tradition={tradition} navigation={this.props.navigation}/>
-            <ExternalLinks tradition={tradition}/>
-            <Instagram insta_tag={tradition.insta_tag}/>
-          </ScrollView>
-        </SafeAreaView>
-      );
-    }
+            <View style={[{ flex: 2 }, styles.actionBar]}>
+              <Celebration tradition={tradition} />
+              <TouchableOpacity
+                style={styles.tabItem}
+                onPress={() => this.props.navigation.navigate('Map', {
+                  id: tradition.nid
+                })}
+              >
+                <Icon name="place" size={25} style={styles.tabIcon} />
+                <Text style={styles.tabTitle}>Visa var</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.tabItem} onPress={() => this.onShare(tradition.title)}>
+                <Icon name="share" size={25} style={styles.tabIcon} />
+                <Text style={styles.tabTitle}>Dela</Text>
+              </TouchableOpacity>
+              <Reminder nid={tradition.nid} title={tradition.title} />
+            </View>
+            <View style={styles.intro}>
+              <Text style={styles.text}>{tradition.intro}</Text>
+            </View>
+          </View>
+          <Accordion tradition={tradition} navigation={this.props.navigation} />
+          <ExternalLinks tradition={tradition} />
+          <Instagram insta_tag={tradition.insta_tag} />
+        </ScrollView>
+      </SafeAreaView>
+    );
   }
 }
 
@@ -142,7 +150,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    resizeMode: "cover",
+    resizeMode: 'cover',
     height: 250,
     width: null
   },
@@ -206,4 +214,4 @@ const styles = StyleSheet.create({
   celebText: {
     color: '#7f7f7f'
   }
-})
+});

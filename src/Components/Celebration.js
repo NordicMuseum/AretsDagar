@@ -1,13 +1,14 @@
 // @flow
 
-'use strict';
 
 import React, { Component } from 'react';
-import { Alert, AsyncStorage, Platform, StyleSheet, Text, TouchableOpacity, View  } from 'react-native';
+import {
+  Alert, AsyncStorage, Platform, StyleSheet, Text, TouchableOpacity, View
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Geolocation from 'react-native-geolocation-service';
-import { FormatCoords } from '../Utils/helpers';
 import Config from 'react-native-config';
+import { FormatCoords } from '../Utils/helpers';
 
 export default class Celebration extends Component {
   state = {
@@ -52,9 +53,9 @@ export default class Celebration extends Component {
   }
 
   componentWillMount() {
-    const nid = this.props.tradition.nid;
+    const { nid } = this.props.tradition;
     this.setState({
-      nid: nid,
+      nid,
       title: this.props.tradition.title,
     });
     this.setStatus(nid);
@@ -62,7 +63,7 @@ export default class Celebration extends Component {
 
   setStatus = async (nid) => {
     try {
-      await AsyncStorage.getItem('celebration:' + nid).then((status) => {
+      await AsyncStorage.getItem(`celebration:${nid}`).then((status) => {
         if (status !== null) {
           if (Object.keys(status).length === 0 && status.constructor === Object) {
             this.setState({
@@ -84,7 +85,7 @@ export default class Celebration extends Component {
     if (hasLocationPermission) {
       Geolocation.getCurrentPosition(
         (position) => {
-          let coords = FormatCoords(position.coords);
+          const coords = FormatCoords(position.coords);
           this.setState({
             latitude: coords.latitude,
             longitude: coords.longitude,
@@ -102,43 +103,43 @@ export default class Celebration extends Component {
     // Users position.
     this.getPosition();
 
-    let status = this.state.status;
-    const nid = this.state.nid;
-    const title = this.state.title;
+    const { status } = this.state;
+    const { nid } = this.state;
+    const { title } = this.state;
 
     if (status === 'inactive') {
-      let celebration = {
-        nid: nid,
-        title: title,
+      const celebration = {
+        nid,
+        title,
         time: Math.floor(Date.now() / 1000),
-      }
+      };
 
       // Store celebration in backend to be displayed on map.
       try {
-        const url = Config.NM_API_URL + 'celebration';
-        let params = {
-            nid: nid,
-            latitude: this.state.latitude,
-            longitude: this.state.longitude
+        const url = `${Config.NM_API_URL}celebration`;
+        const params = {
+          nid,
+          latitude: this.state.latitude,
+          longitude: this.state.longitude
         };
         fetch(url, {
           method: 'POST',
           headers: {
             Accept: 'application/json',
-            "content-type": "application/json",
+            'content-type': 'application/json',
           },
           body: JSON.stringify(params),
         })
-        .then(response => response.json())
-        .then(responseJson => {
-          console.log(responseJson);
-        });
+          .then(response => response.json())
+          .then((responseJson) => {
+            console.log(responseJson);
+          });
       } catch (error) {
         alert(error.message);
       }
       // Store celebration locally to be displayed on UserScreen.
       try {
-        await AsyncStorage.setItem('celebration:' + nid, JSON.stringify(celebration)).then(() => {
+        await AsyncStorage.setItem(`celebration:${nid}`, JSON.stringify(celebration)).then(() => {
           this.setState({
             status: 'active',
             textColor: '#f2d49c',
@@ -152,15 +153,18 @@ export default class Celebration extends Component {
   };
 
   render() {
-    let status = this.state.status;
+    const { status } = this.state;
     return (
       <TouchableOpacity style={styles.tabItem} onPress={this.setCelebration}>
-        <Icon name="favorite" size={25} style={{color: this.state.iconColor}}/>
+        <Icon name="favorite" size={25} style={{ color: this.state.iconColor }} />
         <Text style={{
           color: this.state.textColor,
           fontSize: 11,
           marginTop: 4
-        }}>Fira</Text>
+        }}
+        >
+Fira
+        </Text>
       </TouchableOpacity>
     );
   }
@@ -171,4 +175,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   }
-})
+});

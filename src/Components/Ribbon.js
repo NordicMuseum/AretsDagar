@@ -1,9 +1,8 @@
 // @flow
 
-'use strict';
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View  } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default class Ribbon extends Component {
   constructor(props) {
@@ -11,53 +10,51 @@ export default class Ribbon extends Component {
     this.state = {
       doRender: false,
       day: null,
-    }
+    };
   }
 
   _checkDay(timestamp) {
-    const date = new Date(timestamp*1000);
+    const date = new Date(timestamp * 1000);
     const today = new Date();
-    let tomorrow = new Date();
-    tomorrow.setDate(today.getDate()+1);
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
     // Calculate if we have a day for today or tomorrow.
     if (date.getDate() == today.getDate() &&
       date.getMonth() == today.getMonth() &&
       date.getFullYear() == today.getFullYear()) {
       return 'Idag';
     }
-    else if (date.getDate() == tomorrow.getDate() &&
+    if (date.getDate() == tomorrow.getDate() &&
       date.getMonth() == tomorrow.getMonth() &&
       date.getFullYear() == tomorrow.getFullYear()) {
       return 'Imorgon';
     }
-    else {
-      return false;
-    }
+
+    return false;
   }
 
   componentWillMount() {
     const dates = this.props.date.split(', ');
-    for (let i = 0; i < dates.length; i +=1) {
-      let day = this._checkDay(dates[i]);
+    for (let i = 0; i < dates.length; i += 1) {
+      const day = this._checkDay(dates[i]);
       if (day) {
         // Since future days are also stored we break out to not override.
-        this.setState({doRender: true, day: day});
+        this.setState({ doRender: true, day });
         break;
       }
     }
   }
 
   render() {
-    let doRender = this.state.doRender;
+    const { doRender } = this.state;
     if (doRender) {
       return (
         <View style={styles.banner}>
           <Text style={styles.bannerText}>{this.state.day}</Text>
         </View>
       );
-    } else {
-      return null;
     }
+    return null;
   }
 }
 
@@ -78,4 +75,4 @@ const styles = StyleSheet.create({
     color: '#f2d49c',
     textAlign: 'center'
   }
-})
+});
