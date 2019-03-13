@@ -1,9 +1,10 @@
 // @flow
 
-'use strict';
 
 import React, { Component } from 'react';
-import { ActivityIndicator, AsyncStorage, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator, AsyncStorage, Image, SafeAreaView, ScrollView, StyleSheet, Text, View
+} from 'react-native';
 import Config from 'react-native-config';
 import Hyperlink from 'react-native-hyperlink';
 import Loader from '../Components/Loader';
@@ -19,7 +20,7 @@ export default class InfoScreen extends Component {
     super(props);
     this.state = {
       isLoading: true,
-    }
+    };
   }
 
   componentWillMount() {
@@ -32,47 +33,45 @@ export default class InfoScreen extends Component {
   };
 
   fetchData = async () => {
-    const response = await fetch(Config.NM_API_URL + 'views/info');
+    const response = await fetch(`${Config.NM_API_URL}views/info`);
     const json = await response.json();
     this.setState({ data: json, isLoading: false });
   };
 
-  render () {
+  render() {
     // AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove);
     if (this.state.isLoading) {
       return (
-        <Loader/>
+        <Loader />
       );
     }
-    else {
-      const info = this.state.data[0];
-      return (
-        <SafeAreaView style={styles.container}>
-          <ScrollView
-            contentContainerStyle={{ flexGrow: 1 }}
-            scrollEnabled={true}
-            onContentSizeChange={this.onContentSizeChange}
-          >
-            <View style={styles.imageWrapper}>
-              <Image
-                style={styles.image}
-                source={require('AretsDagar/assets/nmlogo.png')}
-              />
-            </View>
-            <View style={styles.contentWrapper}>
-              <Text style={styles.headerTextStyle}>
-                {info.title}
+    const info = this.state.data[0];
+    return (
+      <SafeAreaView style={styles.container}>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          scrollEnabled
+          onContentSizeChange={this.onContentSizeChange}
+        >
+          <View style={styles.imageWrapper}>
+            <Image
+              style={styles.image}
+              source={require('AretsDagar/assets/nmlogo.png')}
+            />
+          </View>
+          <View style={styles.contentWrapper}>
+            <Text style={styles.headerTextStyle}>
+              {info.title}
+            </Text>
+            <Hyperlink linkStyle={{ fontWeight: 'bold' }} linkDefault>
+              <Text style={styles.textBody}>
+                {info.body}
               </Text>
-              <Hyperlink linkStyle={{ fontWeight: 'bold' }} linkDefault={true}>
-                <Text style={styles.textBody}>
-                  {info.body}
-                </Text>
-              </Hyperlink>
-            </View>
-          </ScrollView>
-        </SafeAreaView>
-      );
-    }
+            </Hyperlink>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    );
   }
 }
 

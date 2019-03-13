@@ -1,9 +1,10 @@
 // @flow
 
-'use strict';
 
 import React, { Component } from 'react';
-import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator, Image, StyleSheet, Text, View
+} from 'react-native';
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Config from 'react-native-config';
@@ -19,7 +20,7 @@ export default class MapScreen extends Component {
     super(props);
     this.state = {
       isLoading: true,
-    }
+    };
   }
 
   componentWillMount() {
@@ -28,7 +29,7 @@ export default class MapScreen extends Component {
   }
 
   fetchData = async (id) => {
-    const response = await fetch(Config.NM_API_URL + 'celebration/'+id);
+    const response = await fetch(`${Config.NM_API_URL}celebration/${id}`);
     const json = await response.json();
     this.setState({ data: json, isLoading: false });
   };
@@ -36,34 +37,33 @@ export default class MapScreen extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <Loader/>
+        <Loader />
       );
     }
-    else {
-      return (
-        <View style={styles.container}>
-          <MapView
-            initialRegion={{
-              latitude : 62.00,
-              longitude : 15.00,
-              latitudeDelta : 13.00,
-              longitudeDelta : 13.00
-            }}
-            style={ {flex:1 }}
-          >
+
+    return (
+      <View style={styles.container}>
+        <MapView
+          initialRegion={{
+            latitude: 62.00,
+            longitude: 15.00,
+            latitudeDelta: 13.00,
+            longitudeDelta: 13.00
+          }}
+          style={{ flex: 1 }}
+        >
           {this.state.data.map(marker => (
-            <MapView.Marker key={marker.id} coordinate={{latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude)}}>
-            <Image
+            <MapView.Marker key={marker.id} coordinate={{ latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude) }}>
+              <Image
                 source={require('AretsDagar/assets/marker.png')}
                 style={{ width: 18, height: 18 }}
-             />
+              />
             </MapView.Marker>
           ))}
 
-          </MapView>
-        </View>
-      );
-    }
+        </MapView>
+      </View>
+    );
   }
 }
 
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     color: '#fff'
   }
-})
+});

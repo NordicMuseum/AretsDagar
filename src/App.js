@@ -120,10 +120,11 @@ const TraditionStack = createStackNavigator({
           />
         </View>
       ),
-      headerLeft:
+      headerLeft: (
         <TouchableOpacity onPress={() => navigation.goBack(null)}>
           <Text style={backButtonStyles}>Tillbaka</Text>
         </TouchableOpacity>
+      )
     }),
   },
   Map: {
@@ -143,10 +144,11 @@ const TraditionStack = createStackNavigator({
           />
         </View>
       ),
-      headerLeft:
+      headerLeft: (
         <TouchableOpacity onPress={() => navigation.navigate('Tradition')}>
-        <Text style={backButtonStyles}>Tillbaka</Text>
+          <Text style={backButtonStyles}>Tillbaka</Text>
         </TouchableOpacity>
+      )
     }),
   },
   Images: {
@@ -166,10 +168,11 @@ const TraditionStack = createStackNavigator({
           />
         </View>
       ),
-      headerLeft:
+      headerLeft: (
         <TouchableOpacity onPress={() => navigation.navigate('Tradition')}>
           <Text style={backButtonStyles}>Tillbaka</Text>
         </TouchableOpacity>
+      )
     }),
   }
 }, { initialRouteName: 'Tradition' });
@@ -193,16 +196,17 @@ const UserStack = createStackNavigator({
           />
         </View>
       ),
-      headerRight:
+      headerRight: (
         <View>
-          {navigation.getParam('update')
-          ? <TouchableOpacity onPress={() => navigation.setParams({ update: false })}>
-            <Text style={changeButtonStyles}>Avbryt</Text>
-          </TouchableOpacity>
-          : <TouchableOpacity onPress={() => navigation.setParams({ update: true })}>
-            <Text style={changeButtonStyles}>Ändra</Text>
-          </TouchableOpacity>}
+          {navigation.getParam('update') ?
+            <TouchableOpacity onPress={() => navigation.setParams({ update: false })}>
+              <Text style={changeButtonStyles}>Avbryt</Text>
+            </TouchableOpacity> :
+            <TouchableOpacity onPress={() => navigation.setParams({ update: true })}>
+              <Text style={changeButtonStyles}>Ändra</Text>
+            </TouchableOpacity>}
         </View>
+      )
     }),
   },
   Tradition: {

@@ -1,9 +1,10 @@
 // @flow
 
-'use strict';
 
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View  } from 'react-native';
+import {
+  Image, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View
+} from 'react-native';
 import { Collapse, CollapseHeader, CollapseBody } from 'accordion-collapse-react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -13,54 +14,63 @@ class Collection extends Component {
     this.state = {
       collapsed: false,
       collection: null
-    }
+    };
   }
 
   componentWillMount() {
-    const collection = this.props.collection;
-    this.setState({collection: collection});
+    const { collection } = this.props;
+    this.setState({ collection });
   }
 
   openImage = (image, imageText) => {
-    this.props.navigation.navigate('Images', {
-      image: image,
-      imageText: imageText,
+    const { navigation } = this.props;
+    navigation.navigate('Images', {
+      image,
+      imageText,
     });
   }
 
   render() {
     const imageDir = 'http://aretsdagar.nordiskamuseet.se/sites/default/files/styles/content_image/public/';
-    const collection = this.state.collection;
-    const key = collection.key;
-    let collapsed = this.state.collapsed;
-    let name = collapsed ? 'expand-less' : 'expand-more';
+    const { collection } = this.state;
+    const { key } = collection;
+    const { collapsed } = this.state;
+    const name = collapsed ? 'expand-less' : 'expand-more';
     return (
-      <Collapse key={key}
+      <Collapse
+        key={key}
         isCollapsed={collapsed}
         onToggle={(isCollapsed) => {
           if (isCollapsed) {
-            this.setState({collapsed: true})
-          } else  {
-            this.setState({collapsed: false});
+            this.setState({ collapsed: true });
+          } else {
+            this.setState({ collapsed: false });
           }
-        }}>
+        }}
+      >
         <CollapseHeader style={styles.header}>
           <View style={styles.colHeader}>
             <Text style={styles.title}>{collection.title}</Text>
-            <Icon style={styles.colIcon} size={20} name={name}/>
+            <Icon style={styles.colIcon} size={20} name={name} />
           </View>
         </CollapseHeader>
         <CollapseBody>
           {collection.image.length ?
-          <TouchableWithoutFeedback onPress={() => this.openImage(collection.image, collection.imageText)}>
-            <View style={styles.imageWrapper}>
-              <Image style={styles.image} source={{ uri: imageDir + collection.image }}/>
-              <TouchableOpacity style={styles.enlarge} onPress={() => this.openImage(collection.image, collection.imageText)}>
-                <Icon name="zoom-in" size={30} style={styles.enlargeIcon}/>
-              </TouchableOpacity>
-            </View>
-          </TouchableWithoutFeedback>
-           : null}
+            <TouchableWithoutFeedback onPress={() => this.openImage(
+              collection.image, collection.imageText
+            )}
+            >
+              <View style={styles.imageWrapper}>
+                <Image style={styles.image} source={{ uri: imageDir + collection.image }} />
+                <TouchableOpacity
+                  style={styles.enlarge}
+                  onPress={() => this.openImage(collection.image, collection.imageText)}
+                >
+                  <Icon name="zoom-in" size={30} style={styles.enlargeIcon} />
+                </TouchableOpacity>
+              </View>
+            </TouchableWithoutFeedback>
+            : null}
           <Text style={styles.text}>{collection.text}</Text>
         </CollapseBody>
       </Collapse>
@@ -77,12 +87,12 @@ export default class Accordion extends Component {
   }
 
   componentWillMount() {
-    const tradition = this.props.tradition;
-    let collapses = [];
+    const { tradition } = this.props;
+    const collapses = [];
 
     // Structure our data.
     if (tradition.collection1_title && tradition.collection1_title.length) {
-      let collapse = {
+      const collapse = {
         key: 1,
         title: tradition.collection1_title,
         text: tradition.collection1_text,
@@ -92,7 +102,7 @@ export default class Accordion extends Component {
       collapses.push(collapse);
     }
     if (tradition.collection2_title && tradition.collection2_title.length) {
-      let collapse = {
+      const collapse = {
         key: 2,
         title: tradition.collection2_title,
         text: tradition.collection2_text,
@@ -102,7 +112,7 @@ export default class Accordion extends Component {
       collapses.push(collapse);
     }
     if (tradition.collection3_title && tradition.collection3_title.length) {
-      let collapse = {
+      const collapse = {
         key: 3,
         title: tradition.collection3_title,
         text: tradition.collection3_text,
@@ -112,7 +122,7 @@ export default class Accordion extends Component {
       collapses.push(collapse);
     }
     if (tradition.collection4_title && tradition.collection4_title.length) {
-      let collapse = {
+      const collapse = {
         key: 4,
         title: tradition.collection4_title,
         text: tradition.collection4_text,
@@ -125,14 +135,13 @@ export default class Accordion extends Component {
   }
 
   render() {
-    const data = this.state.accordion;
+    const { accordion } = this.state;
+    const { navigation } = this.props;
     return (
       <View>
-      {data.map((collection, i) => {
-        return (
-          <Collection key={i} navigation={this.props.navigation} collection={collection}/>
-        )
-      })}
+        {accordion.map(collection => (
+          <Collection key={collection.key} navigation={navigation} collection={collection} />
+        ))}
       </View>
     );
   }
@@ -186,4 +195,4 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingBottom: 5
   }
-})
+});

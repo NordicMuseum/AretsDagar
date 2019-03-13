@@ -1,9 +1,10 @@
 // @flow
 
-'use strict';
 
 import React, { Component } from 'react';
-import { Linking, StyleSheet, Text, TouchableOpacity, View  } from 'react-native';
+import {
+  Linking, StyleSheet, Text, TouchableOpacity, View
+} from 'react-native';
 
 export default class Instagram extends Component {
   state = {
@@ -15,20 +16,27 @@ export default class Instagram extends Component {
   }
 
   componentWillMount() {
-    const insta_tag = this.props.insta_tag;
+    const { insta_tag } = this.props;
     if (insta_tag && insta_tag.length) {
       this.setState({ hashtag: insta_tag });
     }
   }
 
   render() {
-    let hashtag = this.state.hashtag;
-    let url = 'https://instagram.com/explore/tags/' + hashtag.substring(1);
+    const { hashtag } = this.state;
+    const url = `https://instagram.com/explore/tags/${hashtag.substring(1)}`;
     return (
       <View style={styles.wrapper}>
-        <Text style={styles.info}>Lägg till en Instagrambild för den här dagen
-        med hashtaggen <Text style={styles.link} onPress={() => {Linking.openURL(url)}}
-        >{hashtag}</Text></Text>
+        <Text style={styles.info}>
+Lägg till en Instagrambild för den här dagen
+        med hashtaggen
+          <Text
+            style={styles.link}
+            onPress={() => { Linking.openURL(url); }}
+          >
+            {hashtag}
+          </Text>
+        </Text>
       </View>
     );
   }
@@ -49,4 +57,4 @@ const styles = StyleSheet.create({
     paddingLeft: '20%',
     textAlign: 'center'
   }
-})
+});

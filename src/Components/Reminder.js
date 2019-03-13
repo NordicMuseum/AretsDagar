@@ -1,9 +1,10 @@
 // @flow
 
-'use strict';
 
 import React, { Component } from 'react';
-import { AsyncStorage, StyleSheet, Text, TouchableOpacity, View  } from 'react-native';
+import {
+  AsyncStorage, StyleSheet, Text, TouchableOpacity, View
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class Reminder extends Component {
@@ -20,18 +21,18 @@ export default class Reminder extends Component {
   }
 
   componentWillMount() {
-    const nid = this.props.nid;
-    const title = this.props.title;
+    const { nid } = this.props;
+    const { title } = this.props;
     this.setState({
-      nid: nid,
-      title: title,
+      nid,
+      title,
     });
     this.setStatus(nid);
   }
 
   setStatus = async (nid) => {
     try {
-      await AsyncStorage.getItem('reminder:' + nid).then((status) => {
+      await AsyncStorage.getItem(`reminder:${nid}`).then((status) => {
         if (status !== null) {
           if (Object.keys(status).length === 0 && status.constructor === Object) {
             this.setState({
@@ -48,16 +49,16 @@ export default class Reminder extends Component {
   };
 
   setReminder = async () => {
-    let status = this.state.status;
-    let nid = this.state.nid;
-    let title = this.state.title;
+    const { status } = this.state;
+    const { nid } = this.state;
+    const { title } = this.state;
     if (status === 'inactive') {
-      let reminder = {
-        nid: nid,
-        title: title,
-      }
+      const reminder = {
+        nid,
+        title,
+      };
       try {
-        await AsyncStorage.setItem('reminder:' + nid, JSON.stringify(reminder)).then(() => {
+        await AsyncStorage.setItem(`reminder:${nid}`, JSON.stringify(reminder)).then(() => {
           this.setState({
             status: 'active',
             textColor: '#f2d49c',
@@ -67,10 +68,9 @@ export default class Reminder extends Component {
       } catch (error) {
         alert(error.message);
       }
-    }
-    else {
+    } else {
       try {
-        await AsyncStorage.removeItem('reminder:' + nid).then(() => {
+        await AsyncStorage.removeItem(`reminder:${nid}`).then(() => {
           this.setState({
             status: 'inactive',
             textColor: '#fff',
@@ -84,15 +84,18 @@ export default class Reminder extends Component {
   };
 
   render() {
-    let status = this.state.status;
+    const { status } = this.state;
     return (
       <TouchableOpacity style={styles.tabItem} onPress={this.setReminder}>
-        <Icon name="alarm" size={25} style={{color: this.state.iconColor}}/>
+        <Icon name="alarm" size={25} style={{ color: this.state.iconColor }} />
         <Text style={{
           color: this.state.textColor,
           fontSize: 11,
           marginTop: 4
-        }}>Påminn</Text>
+        }}
+        >
+Påminn
+        </Text>
       </TouchableOpacity>
     );
   }
@@ -103,4 +106,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   }
-})
+});

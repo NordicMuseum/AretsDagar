@@ -1,9 +1,10 @@
 // @flow
 
-'use strict';
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import {
+  StyleSheet, Text, View, ActivityIndicator
+} from 'react-native';
 
 export default class Loader extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export default class Loader extends Component {
         <Text style={styles.loaderText}>
           Laddar innehåll…
         </Text>
-        <ActivityIndicator color='#fff'/>
+        <ActivityIndicator color="#fff" />
       </View>
     );
   }
@@ -38,4 +39,4 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     color: '#fff'
   }
-})
+});

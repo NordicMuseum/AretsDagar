@@ -1,9 +1,10 @@
 // @flow
 
-'use strict';
 
 import React, { Component } from 'react';
-import { Linking, StyleSheet, Text, View  } from 'react-native';
+import {
+  Linking, StyleSheet, Text, View
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class ExternalLinks extends Component {
@@ -16,16 +17,16 @@ export default class ExternalLinks extends Component {
   }
 
   componentWillMount() {
-    const tradition = this.props.tradition;
+    const { tradition } = this.props;
     if (tradition.links && tradition.links.length) {
-      let links = [];
-      let linkData = tradition.links.split(', ');
+      const links = [];
+      const linkData = tradition.links.split(', ');
 
-      for (let i = 0; i < linkData.length; i +=1) {
-        let linkText = linkData[i].replace(/<(?:.|\n)*?>/gm, '');
-        let splitUrl = linkData[i].split('">');
-        let linkUrl = splitUrl[0].replace('<a href="', '');
-        let linkItem = {
+      for (let i = 0; i < linkData.length; i += 1) {
+        const linkText = linkData[i].replace(/<(?:.|\n)*?>/gm, '');
+        const splitUrl = linkData[i].split('">');
+        const linkUrl = splitUrl[0].replace('<a href="', '');
+        const linkItem = {
           key: i,
           url: linkUrl,
           text: linkText,
@@ -41,11 +42,14 @@ export default class ExternalLinks extends Component {
       <View key={item.key}>
         {item.key === 0 && <Text style={styles.label}>Läs mer</Text>}
         <Text
-            style={styles.link}
-            onPress={() => {Linking.openURL(item.url)}}
-          >
-          {this.props.tradition.title} på {item.text}
-          <Icon name="launch" size={14} style={styles.linkicon}/>
+          style={styles.link}
+          onPress={() => { Linking.openURL(item.url); }}
+        >
+          {this.props.tradition.title}
+          {' '}
+på
+          {item.text}
+          <Icon name="launch" size={14} style={styles.linkicon} />
         </Text>
       </View>
     );
@@ -73,4 +77,4 @@ const styles = StyleSheet.create({
   linkicon: {
     paddingLeft: 10
   }
-})
+});

@@ -1,9 +1,10 @@
 // @flow
 
-'use strict';
 
 import React, { Component } from 'react';
-import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import Gs from '../Utils/styles';
@@ -20,7 +21,7 @@ export default class ImageScreen extends Component {
     this.state = {
       isLoading: true,
       status: true,
-    }
+    };
   }
 
   componentWillMount() {
@@ -33,27 +34,26 @@ export default class ImageScreen extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <Loader/>
+        <Loader />
       );
     }
-    else {
-      const image = [{
-        url: this.state.image
-      }];
-      return (
-        <View style={styles.container}>
-          <ImageViewer imageUrls={image} renderIndicator={() => null}/>
-          {this.state.status ? <View style={styles.textWrapper}>
-            <TouchableOpacity style={styles.closeWrapper} onPress={() => this.setState({status: false})}>
-              <Icon name="highlight-off" size={30} style={styles.close}/>
-            </TouchableOpacity>
-            <ScrollView style={styles.scroll}>
-              <Text style={styles.text}>{this.state.text}</Text>
-            </ScrollView>
-          </View> : null}
-        </View>
-      );
-    }
+
+    const image = [{
+      url: this.state.image
+    }];
+    return (
+      <View style={styles.container}>
+        <ImageViewer imageUrls={image} renderIndicator={() => null} />
+        {this.state.status ? <View style={styles.textWrapper}>
+          <TouchableOpacity style={styles.closeWrapper} onPress={() => this.setState({ status: false })}>
+            <Icon name="highlight-off" size={30} style={styles.close} />
+          </TouchableOpacity>
+          <ScrollView style={styles.scroll}>
+            <Text style={styles.text}>{this.state.text}</Text>
+          </ScrollView>
+        </View> : null}
+      </View>
+    );
   }
 }
 
@@ -89,4 +89,4 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff'
   }
-})
+});

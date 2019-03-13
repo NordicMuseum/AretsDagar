@@ -1,14 +1,15 @@
 // @flow
 
-'use strict';
 
 import React, { Component } from 'react';
-import { ActivityIndicator, Text, TextInput, View, SafeAreaView, StyleSheet, TouchableOpacity, TouchableHighlight, FlatList  } from 'react-native';
+import {
+  ActivityIndicator, Text, TextInput, View, SafeAreaView, StyleSheet, TouchableOpacity, TouchableHighlight, FlatList
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Config from 'react-native-config';
 import { FormatDate } from '../Utils/helpers';
 import Gs from '../Utils/styles';
 import Loader from '../Components/Loader';
-import Config from 'react-native-config';
 
 export default class Alphabetic extends Component {
   state = {
@@ -21,7 +22,7 @@ export default class Alphabetic extends Component {
     super(props);
     this.state = {
       isLoading: true,
-    }
+    };
     this.arrayholder = [];
   }
 
@@ -40,87 +41,87 @@ export default class Alphabetic extends Component {
   }
 
   fetchData = async () => {
-    const response = await fetch(Config.NM_API_URL + 'views/traditions_alphabetic');
+    const response = await fetch(`${Config.NM_API_URL}views/traditions_alphabetic`);
     const json = await response.json();
     this.setState({ data: json, searchData: json, isLoading: false });
     this.arrayholder = json;
   };
 
   SearchFilterFunction(text) {
-    const newData = this.arrayholder.filter(function(item){
-      const itemData = item.title.toUpperCase()
-      const textData = text.toUpperCase()
-      return itemData.indexOf(textData) > -1
-    })
+    const newData = this.arrayholder.filter((item) => {
+      const itemData = item.title.toUpperCase();
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
     this.setState({
       searchData: newData,
       searchInput: text
-    })
+    });
   }
 
   render() {
     if (this.state.isLoading) {
       return (
-        <Loader/>
+        <Loader />
       );
     }
-    else {
-      let data = [];
-      if (this.state.searchInput) {
-        data = this.state.searchData.filter(item => item.title.includes(this.state.searchInput));
-      }
-      else {
-        data = this.state.data;
-      }
-      return (
-        <View>
-          <View style={styles.searchWrapper}>
-            <Icon name="search" style={styles.searchIcon} size={18}/>
-            <TextInput
-              style={styles.input}
-              placeholder="Sök efter dag"
-              placeholderTextColor="#7f7f7f"
-              onChangeText={(text) => this.SearchFilterFunction(text)}
-              value={this.state.searchInput}
-            />
-          </View>
-          <View>
-            <FlatList
-              data={data}
-              renderItem={({item, separators}) => (
-                <TouchableHighlight
-                  onPress={() => this.loadTradition(item)}
-                  onShowUnderlay={separators.highlight}
-                  onHideUnderlay={separators.unhighlight}>
-                  <View style={Gs.row}>
-                    <View style={styles.rowStyle}>
-                      <Text style={styles.rowTextStyle}>{item.title}</Text>
-                      <View style={Gs.celebRow}>
-                        <Icon name="favorite" style={Gs.celebIcon} size={16}/><Text style={Gs.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
-                      </View>
-                    </View>
-                    <View style={Gs.nextWrapper}>
-                      <Icon name="navigate-next" size={30} style={Gs.next}/>
-                    </View>
-                  </View>
-                </TouchableHighlight>
-              )}
-              keyExtractor={(item)=>item.nid}
-              ItemSeparatorComponent={()=><View style={Gs.listSeparator}/>}
-            />
-          </View>
+
+    let data = [];
+    if (this.state.searchInput) {
+      data = this.state.searchData.filter(item => item.title.includes(this.state.searchInput));
+    } else {
+      data = this.state.data;
+    }
+    return (
+      <View>
+        <View style={styles.searchWrapper}>
+          <Icon name="search" style={styles.searchIcon} size={18} />
+          <TextInput
+            style={styles.input}
+            placeholder="Sök efter dag"
+            placeholderTextColor="#7f7f7f"
+            onChangeText={text => this.SearchFilterFunction(text)}
+            value={this.state.searchInput}
+          />
         </View>
-      );
-    }
+        <View>
+          <FlatList
+            data={data}
+            renderItem={({ item, separators }) => (
+              <TouchableHighlight
+                onPress={() => this.loadTradition(item)}
+                onShowUnderlay={separators.highlight}
+                onHideUnderlay={separators.unhighlight}
+              >
+                <View style={Gs.row}>
+                  <View style={styles.rowStyle}>
+                    <Text style={styles.rowTextStyle}>{item.title}</Text>
+                    <View style={Gs.celebRow}>
+                        <Icon name="favorite" style={Gs.celebIcon} size={16} />
+                        <Text style={Gs.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
+                      </View>
+                  </View>
+                  <View style={Gs.nextWrapper}>
+                    <Icon name="navigate-next" size={30} style={Gs.next} />
+                  </View>
+                </View>
+              </TouchableHighlight>
+            )}
+            keyExtractor={item => item.nid}
+            ItemSeparatorComponent={() => <View style={Gs.listSeparator} />}
+          />
+        </View>
+      </View>
+    );
   }
 }
 const styles = StyleSheet.create({
   listWrapper: {
     alignItems: 'center',
-    alignContent:'center',
+    alignContent: 'center',
     flexDirection: 'row',
-    flexWrap:'wrap',
-    justifyContent:'center'
+    flexWrap: 'wrap',
+    justifyContent: 'center'
   },
   searchWrapper: {
     borderBottomWidth: 1,
@@ -153,4 +154,4 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
   }
-})
+});
