@@ -5,6 +5,7 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import ImageViewer from 'react-native-image-zoom-viewer';
 import Gs from '../Utils/styles';
 import Loader from '../Components/Loader';
 
@@ -36,12 +37,12 @@ export default class ImageScreen extends Component {
       );
     }
     else {
+      const image = [{
+        url: this.state.image
+      }];
       return (
         <View style={styles.container}>
-          <Image
-            style={styles.image}
-            source={{ uri: this.state.image }}
-          />
+          <ImageViewer imageUrls={image} renderIndicator={() => null}/>
           {this.state.status ? <View style={styles.textWrapper}>
             <TouchableOpacity style={styles.closeWrapper} onPress={() => this.setState({status: false})}>
               <Icon name="highlight-off" size={30} style={styles.close}/>
@@ -71,9 +72,6 @@ const styles = StyleSheet.create({
   },
   close: {
     color: '#fff'
-  },
-  image: {
-    flex: 1,
   },
   textWrapper: {
     backgroundColor: 'rgba(0,0,0,0.7)',
