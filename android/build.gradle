@@ -8,6 +8,7 @@ buildscript {
         targetSdkVersion = 26
         supportLibVersion = "27.1.1"
         googlePlayServicesVersion = "11.0.0"
+        firebaseVersion = "+"
     }
     repositories {
         google()
