@@ -3,6 +3,7 @@
 import React from 'react';
 import {
   Image,
+  Platform,
   SafeAreaView,
   StatusBar,
   Text,
@@ -13,6 +14,8 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import Notifications from './Services/Notifications';
+
 import CalendarScreen from './Screens/CalendarScreen';
 import AlphabeticScreen from './Screens/AlphabeticScreen';
 import InfoScreen from './Screens/InfoScreen';
@@ -22,6 +25,27 @@ import MapScreen from './Screens/MapScreen';
 import ImagesScreen from './Screens/ImagesScreen';
 
 class Calendar extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.notif = new Notifications(this.onRegister.bind(this), this.onNotif.bind(this));
+  }
+
+  componentWillMount() {
+    this.notif.configure(this.onRegister.bind(this), this.onNotif.bind(this));
+  }
+
+  onRegister(token) {
+    Alert.alert("Registered !", JSON.stringify(token));
+    console.log(token);
+    this.setState({ registerToken: token.token, gcmRegistered: true });
+  }
+
+  onNotif(notif) {
+    console.log(notif);
+    Alert.alert(notif.title, notif.message);
+  }
+
   render() {
     const { navigation } = this.props;
     return (

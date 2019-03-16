@@ -45,10 +45,7 @@ export default class ExternalLinks extends Component {
           style={styles.link}
           onPress={() => { Linking.openURL(item.url); }}
         >
-          {this.props.tradition.title}
-          {' '}
-på
-          {item.text}
+          {this.props.tradition.title}{' '}på{' '}{item.text}
           <Icon name="launch" size={14} style={styles.linkicon} />
         </Text>
       </View>

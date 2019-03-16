@@ -7,7 +7,7 @@ buildscript {
         compileSdkVersion = 27
         targetSdkVersion = 26
         supportLibVersion = "27.1.1"
-        googlePlayServicesVersion = "11.0.0"
+        googlePlayServicesVersion = "11.8.0"
         firebaseVersion = "+"
     }
     repositories {
@@ -19,6 +19,17 @@ buildscript {
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+    }
+
+    subprojects {
+        project.configurations.all {
+            resolutionStrategy.eachDependency { details ->
+                if (details.requested.group == 'com.android.support'
+                      && !details.requested.name.contains('multidex') ) {
+                   details.useVersion "27.1.1"
+                }
+            }
+        }
     }
 }
 

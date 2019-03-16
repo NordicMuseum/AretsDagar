@@ -139,6 +139,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-device-info')
     compile project(':react-native-push-notification')
     compile project(':react-native-reanimated')
     compile project(':react-native-config')
@@ -146,13 +147,13 @@ dependencies {
     compile project(':react-native-vector-icons')
     compile project(':react-native-gesture-handler')
     compile project(':react-native-geolocation-service')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':react-native-maps')
-    compile 'com.google.android.gms:play-services-base:16.0.0'
+    compile 'com.google.android.gms:play-services-base:16.0.1'
     compile 'com.google.android.gms:play-services-maps:16.0.0'
-    compile 'com.google.android.gms:play-services-places:16.0.0'
+    compile 'com.google.android.gms:play-services-gcm:16.1.0'
     compile 'com.google.android.gms:play-services-location:16.0.0'
 }
 
