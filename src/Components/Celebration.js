@@ -65,7 +65,7 @@ export default class Celebration extends Component {
     try {
       await AsyncStorage.getItem(`celebration:${nid}`).then((status) => {
         if (status !== null) {
-          if (Object.keys(status).length === 0 && status.constructor === Object) {
+          if (Object.keys(status).length !== 0) {
             this.setState({
               status: 'active',
               textColor: '#f2d49c',

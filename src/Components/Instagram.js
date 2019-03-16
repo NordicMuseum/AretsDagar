@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import {
-  Linking, StyleSheet, Text, View
+  Linking, StyleSheet, Text, TouchableOpacity, View
 } from 'react-native';
 
 export default class Instagram extends Component {
@@ -22,16 +22,16 @@ export default class Instagram extends Component {
     const { hashtag } = this.state;
     const url = `https://instagram.com/explore/tags/${hashtag.substring(1)}`;
     return (
-      <View style={styles.wrapper}>
+      <TouchableOpacity
+        style={styles.wrapper} onPress={() => { Linking.openURL(url); }}>
         <Text style={styles.info}>
           Lägg till en Instagrambild för den här dagen med hashtaggen
           <Text
             style={styles.link}
-            onPress={() => { Linking.openURL(url); }}
           > {hashtag}
           </Text>
         </Text>
-      </View>
+      </TouchableOpacity>
     );
   }
 }

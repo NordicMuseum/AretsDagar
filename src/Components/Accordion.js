@@ -54,7 +54,7 @@ class Collection extends Component {
             <Icon style={styles.colIcon} size={20} name={name} />
           </View>
         </CollapseHeader>
-        <CollapseBody>
+        <CollapseBody style={styles.CollapseBody}>
           {collection.image.length ?
             <TouchableWithoutFeedback onPress={() => this.openImage(
               collection.image, collection.imageText
@@ -159,6 +159,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingVertical: 5
+  },
+  CollapseBody: {
+    paddingVertical: 10
   },
   colIcon: {
     color: '#5f5f5f'

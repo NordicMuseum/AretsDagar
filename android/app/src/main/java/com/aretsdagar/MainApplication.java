@@ -3,6 +3,7 @@ package com.aretsdagar;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNDeviceInfo(),
             new ReactNativePushNotificationPackage(),
             new ReanimatedPackage(),
             new ReactNativeConfigPackage(),
