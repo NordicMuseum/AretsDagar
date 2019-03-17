@@ -74,7 +74,7 @@ export default class Calendar extends Component {
                 </View>
                 <View style={styles.rowContent}>
                   <Text style={styles.rowText}>{item.title}</Text>
-                  <Text style={Gs.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
+                  <Text style={Gs.date}>{FormatDate(item.dates, item.multiple_days)}</Text>
                   <Text style={styles.intro}>{FormatIntro(item.intro)}</Text>
                 </View>
                 <View style={Gs.nextWrapper}>

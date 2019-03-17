@@ -98,7 +98,7 @@ export default class Alphabetic extends Component {
                     <Text style={styles.rowTextStyle}>{item.title}</Text>
                     <View style={Gs.celebRow}>
                         <Icon name="favorite" style={Gs.celebIcon} size={16} />
-                        <Text style={Gs.date}>{FormatDate(item.dates, item.multiple_dates)}</Text>
+                        <Text style={Gs.date}>{FormatDate(item.dates, item.multiple_days)}</Text>
                       </View>
                   </View>
                   <View style={Gs.nextWrapper}>
