@@ -75,7 +75,6 @@ export default class Tradition extends Component {
     }
 
     const tradition = this.state.data[0];
-    console.log(tradition);
     const formattedDate = FormatDate(tradition.dates, tradition.multiple_days);
     const imageDir = 'http://aretsdagar.nordiskamuseet.se/sites/default/files/styles/top_image/public/';
 
