@@ -85,8 +85,7 @@ export default class Calendar extends Component {
                 <Icon name="favorite" style={Gs.celebIcon} size={18} />
                 <Text style={styles.celebrations}>
                   <Text style={{ color: '#fff' }}>{item.celebrations}</Text>
-                  {' '}
-FIRANDEN
+                  {' '}FIRANDEN
                 </Text>
               </View>
             </TouchableOpacity>

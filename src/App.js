@@ -24,6 +24,9 @@ import TraditionScreen from './Screens/TraditionScreen';
 import MapScreen from './Screens/MapScreen';
 import ImagesScreen from './Screens/ImagesScreen';
 
+import HeaderTitle from './Components/HeaderTitle';
+import BackButton from './Components/BackButton';
+
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
@@ -134,19 +137,14 @@ const TraditionStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{
-          flex: 1, flexDirection: 'row', justifyContent: 'center', zIndex: 100
-        }}
-        >
-          <Image
-            source={require('AretsDagar/assets/logo.png')}
-            style={{ width: 100, height: 35, paddingBottom: 3 }}
-          />
-        </View>
+        <HeaderTitle />
       ),
       headerLeft: (
-        <TouchableOpacity onPress={() => navigation.goBack(null)}>
-          <Text style={backButtonStyles}>Tillbaka</Text>
+        <TouchableOpacity
+          onPress={() => navigation.goBack(null)}
+          style={backButton}>
+          <Icon name="chevron-left" color={'#fff'} size={30} />
+          <Text style={backButtonText}>Tillbaka</Text>
         </TouchableOpacity>
       )
     }),
@@ -161,17 +159,10 @@ const TraditionStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
-          <Image
-            source={require('AretsDagar/assets/logo.png')}
-            style={{ width: 100, height: 35, paddingBottom: 3 }}
-          />
-        </View>
+        <HeaderTitle />
       ),
       headerLeft: (
-        <TouchableOpacity onPress={() => navigation.navigate('Tradition')}>
-          <Text style={backButtonStyles}>Tillbaka</Text>
-        </TouchableOpacity>
+        <BackButton navigation={navigation} />
       )
     }),
   },
@@ -185,17 +176,10 @@ const TraditionStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
-          <Image
-            source={require('AretsDagar/assets/logo.png')}
-            style={{ width: 100, height: 35, paddingBottom: 3 }}
-          />
-        </View>
+        <HeaderTitle />
       ),
       headerLeft: (
-        <TouchableOpacity onPress={() => navigation.navigate('Tradition')}>
-          <Text style={backButtonStyles}>Tillbaka</Text>
-        </TouchableOpacity>
+        <BackButton navigation={navigation} />
       )
     }),
   }
@@ -213,12 +197,7 @@ const UserStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
-          <Image
-            source={require('AretsDagar/assets/logo.png')}
-            style={{ width: 100, height: 35, paddingBottom: 3 }}
-          />
-        </View>
+        <HeaderTitle />
       ),
       headerRight: (
         <View>
@@ -255,12 +234,7 @@ const InfoStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
-          <Image
-            source={require('AretsDagar/assets/logo.png')}
-            style={{ width: 100, height: 35, paddingBottom: 3 }}
-          />
-        </View>
+        <HeaderTitle />
       ),
     }),
   },
@@ -278,12 +252,7 @@ const CalendarStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
-          <Image
-            source={require('AretsDagar/assets/logo.png')}
-            style={{ width: 100, height: 35, paddingBottom: 3 }}
-          />
-        </View>
+        <HeaderTitle />
       ),
     }),
   },
@@ -311,12 +280,7 @@ const AlphabeticStack = createStackNavigator({
       },
       headerTintColor: '#fff',
       headerTitle: (
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
-          <Image
-            source={require('AretsDagar/assets/logo.png')}
-            style={{ width: 100, height: 35, paddingBottom: 3 }}
-          />
-        </View>
+        <HeaderTitle />
       ),
     }),
   },
@@ -392,9 +356,15 @@ const baseStyles = {
   flex: 1
 };
 
-const backButtonStyles = {
-  color: '#fff',
-  marginLeft: 20
+const backButton = {
+  flex: 1,
+  flexDirection: 'row',
+  alignContent: 'center',
+  alignItems: 'center'
+};
+
+const backButtonText = {
+  color: '#fff'
 };
 
 const changeButtonStyles = {
