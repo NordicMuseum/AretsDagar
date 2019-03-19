@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   contentWrapper: {
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom: 20,
     paddingLeft: 20,
     paddingRight: 20
   },

@@ -290,7 +290,7 @@ const RouteConfigs = {
   Alphabetic: {
     screen: AlphabeticStack,
     navigationOptions: () => ({
-      tabBarLabel: 'Lista A - Ö',
+      tabBarLabel: 'Lista A–Ö',
       tabBarIcon: ({ tintColor }) => (
         <Icon name="view-list" color={tintColor} size={24} />
       )
