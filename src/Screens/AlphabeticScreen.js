@@ -84,7 +84,7 @@ export default class Alphabetic extends Component {
             value={this.state.searchInput}
           />
         </View>
-        <View>
+        <View style={{ marginBottom: 130 }}>
           <FlatList
             data={data}
             renderItem={({ item, separators }) => (
