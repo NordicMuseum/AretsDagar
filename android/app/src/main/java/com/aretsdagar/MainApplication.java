@@ -1,4 +1,4 @@
-package com.aretsdagar;
+package se.nordiskamuseet.aretsdagar;
 
 import android.app.Application;
 

@@ -1,7 +1,10 @@
+// @flow
+
+
+import React from 'react';
 import Config from 'react-native-config';
 
-
-export const registerDevice = (params) => {
+export function RegisterDevice(params) {
   // Register device to be able to receive notifications.
   alert(params);
   try {
@@ -15,10 +18,10 @@ export const registerDevice = (params) => {
       },
       body: JSON.stringify(params),
     })
-      .then(response => response.json())
-      .then((responseJson) => {
-        console.log(responseJson);
-      });
+    .then(response => response.json())
+    .then((responseJson) => {
+      console.log(responseJson);
+    });
   } catch (error) {
     alert(error.message);
   }

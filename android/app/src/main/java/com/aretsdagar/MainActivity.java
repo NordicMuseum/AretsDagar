@@ -1,4 +1,4 @@
-package com.aretsdagar;
+package se.nordiskamuseet.aretsdagar;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
