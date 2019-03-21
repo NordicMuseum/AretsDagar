@@ -2,7 +2,9 @@
 
 import React from 'react';
 import {
+  Alert,
   Image,
+  PushNotificationIOS,
   Platform,
   SafeAreaView,
   StatusBar,
@@ -29,34 +31,30 @@ import DeviceInfo from 'react-native-device-info';
 import Config from 'react-native-config';
 import PushNotification from 'react-native-push-notification';
 
-import { registerDevice } from './Services/ApiService';
+import { RegisterDevice } from './Services/ApiService';
+
+PushNotificationIOS.addEventListener('registrationError', (e) => { Alert.alert(JSON.stringify(e)) });
 
 PushNotification.configure({
-  // (optional) Called when Token is generated (iOS and Android)
-  onRegister: function(token) {
-    alert(JSON.stringify(token));
+  onRegister: function(response) {
+    let platform = 'ios';
+    if (Platform.OS === 'android') {
+      platform = 'android';
+    }
 
-    if (Platform.OS === 'ios') {
-      const platform = 'ios';
-    }
-    else {
-      const platform = 'android';
-    }
     const params = {
-      token : token,
+      token : response.token,
       type : platform,
       device_id : DeviceInfo.getUniqueID()
     };
-    registerDevice(params);
+    RegisterDevice(params);
   },
 
   onNotification: function(notification) {
     // process the notification
-    // required on iOS only
     notification.finish(PushNotificationIOS.FetchResult.NoData);
   },
 
-  // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
   senderID: Config.GCM_ID,
 
   permissions: {
