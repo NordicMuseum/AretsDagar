@@ -55,6 +55,9 @@
 		7E8158DBE04243849B617ECB /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94BB28038611467CAE0B3EB9 /* libRNGestureHandler.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8808F5A8630B48528D8E7E23 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F799F98F64A45EA958E04DC /* MaterialIcons.ttf */; };
+		90077EA0224139710050F97B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90077E9F224139710050F97B /* GameKit.framework */; };
+		90077EA222413A2D0050F97B /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90077EA122413A2D0050F97B /* ExternalAccessory.framework */; };
+		90077EA422413A310050F97B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90077EA322413A310050F97B /* StoreKit.framework */; };
 		90A8EF1A223A92D400AA40A7 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A8EEF7223A927B00AA40A7 /* libRCTPushNotification.a */; };
 		9ABD76F3651E4208ABF5E946 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F42B6477AAB4F2EA24611DA /* libAirMaps.a */; };
 		A1B5C27D839B43C9A7777528 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6C301278C3949C385950560 /* EvilIcons.ttf */; };
@@ -466,6 +469,10 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8BF34E43E763450B89ECB995 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		8D611C355B624146A8E34E4D /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
+		900462332241368A00E54090 /* AretsDagar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = AretsDagar.entitlements; path = AretsDagar/AretsDagar.entitlements; sourceTree = "<group>"; };
+		90077E9F224139710050F97B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		90077EA122413A2D0050F97B /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		90077EA322413A310050F97B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		90A8EEE4223A927B00AA40A7 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		94BB28038611467CAE0B3EB9 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		97CB4253B731484AB5592863 /* RNReanimated.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNReanimated.xcodeproj; path = "../node_modules/react-native-reanimated/ios/RNReanimated.xcodeproj"; sourceTree = "<group>"; };
@@ -516,7 +523,10 @@
 				9ABD76F3651E4208ABF5E946 /* libAirMaps.a in Frameworks */,
 				47FEEE09C88949BBA40E7F5D /* libReactNativeConfig.a in Frameworks */,
 				258B59474BAE4D2B8205590B /* libRNReanimated.a in Frameworks */,
+				90077EA222413A2D0050F97B /* ExternalAccessory.framework in Frameworks */,
 				1209FC706EC846F5B64B34FA /* libRNDeviceInfo.a in Frameworks */,
+				90077EA0224139710050F97B /* GameKit.framework in Frameworks */,
+				90077EA422413A310050F97B /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +641,7 @@
 		13B07FAE1A68108700A75B9A /* AretsDagar */ = {
 			isa = PBXGroup;
 			children = (
+				900462332241368A00E54090 /* AretsDagar.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -668,6 +679,9 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				90077EA322413A310050F97B /* StoreKit.framework */,
+				90077EA122413A2D0050F97B /* ExternalAccessory.framework */,
+				90077E9F224139710050F97B /* GameKit.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 			);
 			name = Frameworks;
@@ -951,7 +965,22 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = YREQG6Z3AY;
+						DevelopmentTeam = 9XVMLS28YU;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.GameCenter.iOS = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.WAC = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1631,9 +1660,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AretsDagar/AretsDagar.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = YREQG6Z3AY;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
@@ -1652,6 +1684,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = se.nordiskamuseet.aretsdagar;
 				PRODUCT_NAME = AretsDagar;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1661,8 +1694,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AretsDagar/AretsDagar.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YREQG6Z3AY;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
@@ -1681,6 +1717,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = se.nordiskamuseet.aretsdagar;
 				PRODUCT_NAME = AretsDagar;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

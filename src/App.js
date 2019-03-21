@@ -25,6 +25,50 @@ import ImagesScreen from './Screens/ImagesScreen';
 import HeaderTitle from './Components/HeaderTitle';
 import BackButton from './Components/BackButton';
 
+import DeviceInfo from 'react-native-device-info';
+import Config from 'react-native-config';
+import PushNotification from 'react-native-push-notification';
+
+import { registerDevice } from './Services/ApiService';
+
+PushNotification.configure({
+  // (optional) Called when Token is generated (iOS and Android)
+  onRegister: function(token) {
+    alert(JSON.stringify(token));
+
+    if (Platform.OS === 'ios') {
+      const platform = 'ios';
+    }
+    else {
+      const platform = 'android';
+    }
+    const params = {
+      token : token,
+      type : platform,
+      device_id : DeviceInfo.getUniqueID()
+    };
+    registerDevice(params);
+  },
+
+  onNotification: function(notification) {
+    // process the notification
+    // required on iOS only
+    notification.finish(PushNotificationIOS.FetchResult.NoData);
+  },
+
+  // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
+  senderID: Config.GCM_ID,
+
+  permissions: {
+    alert: true,
+    badge: true,
+    sound: true
+  },
+
+  popInitialNotification: true,
+  requestPermissions: true,
+});
+
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
