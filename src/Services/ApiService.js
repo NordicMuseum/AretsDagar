@@ -2,11 +2,11 @@
 
 
 import React from 'react';
+import { Alert } from 'react-native';
 import Config from 'react-native-config';
 
 export function RegisterDevice(params) {
   // Register device to be able to receive notifications.
-  alert(params);
   try {
     const url = `${Config.NM_API_URL}push/register`;
 
@@ -23,6 +23,6 @@ export function RegisterDevice(params) {
       console.log(responseJson);
     });
   } catch (error) {
-    alert(error.message);
+    Alert.alert(error.message);
   }
 }
