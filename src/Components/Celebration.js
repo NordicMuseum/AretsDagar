@@ -162,8 +162,7 @@ export default class Celebration extends Component {
           fontSize: 11,
           marginTop: 4
         }}
-        >
-Fira
+        >Fira
         </Text>
       </TouchableOpacity>
     );
