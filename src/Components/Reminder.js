@@ -6,6 +6,7 @@ import {
   AsyncStorage, StyleSheet, Text, TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { DeletePush, SetPush } from '../Services/ApiService';
 
 export default class Reminder extends Component {
   state = {
@@ -58,6 +59,7 @@ export default class Reminder extends Component {
         title,
       };
       try {
+        await SetPush(nid);
         await AsyncStorage.setItem(`reminder:${nid}`, JSON.stringify(reminder)).then(() => {
           this.setState({
             status: 'active',
@@ -70,6 +72,7 @@ export default class Reminder extends Component {
       }
     } else {
       try {
+        await DeletePush(nid);
         await AsyncStorage.removeItem(`reminder:${nid}`).then(() => {
           this.setState({
             status: 'inactive',
@@ -93,8 +96,7 @@ export default class Reminder extends Component {
           fontSize: 11,
           marginTop: 4
         }}
-        >
-Påminn
+        >Påminn
         </Text>
       </TouchableOpacity>
     );

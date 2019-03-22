@@ -43,9 +43,9 @@ PushNotification.configure({
     }
 
     const params = {
-      token : response.token,
-      type : platform,
-      device_id : DeviceInfo.getUniqueID()
+      token: response.token,
+      type: platform,
+      device_id: DeviceInfo.getUniqueID()
     };
     RegisterDevice(params);
   },
