@@ -3,7 +3,13 @@
 
 import React, { Component } from 'react';
 import {
-  Text, TextInput, View, StyleSheet, TouchableHighlight, FlatList
+  AsyncStorage,
+  Text,
+  TextInput,
+  View,
+  StyleSheet,
+  TouchableHighlight,
+  FlatList
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Config from 'react-native-config';
@@ -31,10 +37,21 @@ export default class Alphabetic extends Component {
   }
 
   fetchData = async () => {
-    const response = await fetch(`${Config.NM_API_URL}views/traditions_alphabetic`);
-    const json = await response.json();
-    this.setState({ data: json, searchData: json, isLoading: false });
-    this.arrayholder = json;
+    try {
+      const response = await fetch(`${Config.NM_API_URL}views/traditions_alphabetic`);
+      const json = await response.json();
+      this.setState({ data: json, searchData: json, isLoading: false });
+      this.arrayholder = json;
+      // Cache result.
+      AsyncStorage.setItem('alphabetic', JSON.stringify(json));
+    } catch (error) {
+      await AsyncStorage.getItem('alphabetic').then((cached) => {
+        if (cached) {
+          this.setState({ data: JSON.parse(cached), isLoading: false });
+          this.arrayholder = JSON.parse(cached);
+        }
+      });
+    }
   };
 
   loadTradition(item) {

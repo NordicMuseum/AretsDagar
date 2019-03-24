@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import {
-  Image, Text, View, StyleSheet, TouchableOpacity, FlatList
+  AsyncStorage, Image, Text, View, StyleSheet, TouchableOpacity, FlatList
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Config from 'react-native-config';
@@ -30,9 +30,19 @@ export default class Calendar extends Component {
 
   fetchData = async () => {
     // Fetcing days from API backend.
-    const response = await fetch(`${Config.NM_API_URL}views/traditions`);
-    const json = await response.json();
-    this.setState({ data: json, isLoading: false });
+    try {
+      const response = await fetch(`${Config.NM_API_URL}views/traditions`);
+      const json = await response.json();
+      this.setState({ data: json, isLoading: false });
+      // Cache result.
+      AsyncStorage.setItem('calendar', JSON.stringify(json));
+    } catch (error) {
+      await AsyncStorage.getItem('calendar').then((cached) => {
+        if (cached) {
+          this.setState({ data: JSON.parse(cached), isLoading: false });
+        }
+      });
+    }
   };
 
   loadTradition(item) {

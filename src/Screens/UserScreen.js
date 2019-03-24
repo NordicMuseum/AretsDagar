@@ -46,16 +46,20 @@ export default class UserScreen extends Component {
       await AsyncStorage.getAllKeys((err, keys) => {
         AsyncStorage.multiGet(keys, (err, stores) => {
           stores.map((result, i, store) => {
-            // Seperate celebrations from reminders and exclude cache.
-            const item = store[i][0].split(':');
-            if (item[1].length) {
-              const type = item[0];
-              if (type === 'reminder') {
-                const reminder = JSON.parse(store[i][1]);
-                reminders.push(reminder);
-              } else if (type === 'celebration') {
-                const celebration = JSON.parse(store[i][1]);
-                celebrations.push(celebration);
+            if (store[i][0] !== 'calendar'
+              && store[i][0] !== 'alphabetic') {
+              // Seperate celebrations from reminders and exclude cache.
+              console.log(store[i][0]);
+              const item = store[i][0].split(':');
+              if (item[1].length) {
+                const type = item[0];
+                if (type === 'reminder') {
+                  const reminder = JSON.parse(store[i][1]);
+                  reminders.push(reminder);
+                } else if (type === 'celebration') {
+                  const celebration = JSON.parse(store[i][1]);
+                  celebrations.push(celebration);
+                }
               }
             }
           });
