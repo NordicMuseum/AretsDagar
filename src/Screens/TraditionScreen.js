@@ -3,7 +3,16 @@
 
 import React, { Component } from 'react';
 import {
-  Dimensions, Image, SafeAreaView, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View
+  AsyncStorage,
+  Dimensions,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Share,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Config from 'react-native-config';
@@ -42,9 +51,19 @@ export default class Tradition extends Component {
   };
 
   fetchData = async (id) => {
-    const response = await fetch(`${Config.NM_API_URL}views/tradition?nid=${id}`);
-    const json = await response.json();
-    this.setState({ data: json, isLoading: false });
+    try {
+      const response = await fetch(`${Config.NM_API_URL}views/tradition?nid=${id}`);
+      const json = await response.json();
+      this.setState({ data: json, isLoading: false });
+      // Cache result.
+      AsyncStorage.setItem(`tradition:${id}`, JSON.stringify(json));
+    } catch (error) {
+      await AsyncStorage.getItem(`tradition:${id}`).then((cached) => {
+        if (cached) {
+          this.setState({ data: JSON.parse(cached), isLoading: false });
+        }
+      });
+    }
   };
 
   onShare = async (title) => {
