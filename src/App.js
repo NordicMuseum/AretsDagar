@@ -4,6 +4,7 @@ import React from 'react';
 import {
   Alert,
   Image,
+  Linking,
   PushNotificationIOS,
   Platform,
   SafeAreaView,
@@ -14,6 +15,7 @@ import {
 } from 'react-native';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import DeepLinking from 'react-native-deep-linking';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import CalendarScreen from './Screens/CalendarScreen';
@@ -70,6 +72,38 @@ PushNotification.configure({
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  // Handle deep linking.
+  componentDidMount () {
+    this.addRoutesToDeepLinking()
+    Linking.addEventListener('url', this.handleUrl)
+  }
+
+  handleUrl ({ url }) {
+    Linking.canOpenURL(url).then((supported) => {
+      if (supported) {
+        DeepLinking.evaluateUrl(url)
+      }
+    })
+  }
+
+  addRoutesToDeepLinking () {
+    DeepLinking.addScheme('aretsdagar://');
+
+    DeepLinking.addRoute('/hogtid/:id', (response) => {
+      this.props.navigation.navigate(
+        'Tradition',
+        {
+          id: response.id,
+          title: response.id
+        }
+      );
+    });
+  }
+
+  componentWillUnmount () {
+    Linking.removeEventListener('url', this.handleUrl)
   }
 
   render() {
