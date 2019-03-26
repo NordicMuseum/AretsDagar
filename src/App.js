@@ -240,7 +240,7 @@ const TraditionStack = createStackNavigator({
       )
     }),
   }
-}, { initialRouteName: 'Tradition' });
+}, { initialRouteName: 'Tradition', headerLayoutPreset: 'center' });
 
 const UserStack = createStackNavigator({
   User: {
@@ -279,7 +279,7 @@ const UserStack = createStackNavigator({
       },
     }),
   }
-}, { initialRouteName: 'User' });
+}, { initialRouteName: 'User', headerLayoutPreset: 'center' });
 
 const InfoStack = createStackNavigator({
   Info: {
@@ -323,7 +323,7 @@ const CalendarStack = createStackNavigator({
       },
     }),
   }
-}, { initialRouteName: 'Calendar' });
+}, { initialRouteName: 'Calendar', headerLayoutPreset: 'center' });
 
 const AlphabeticStack = createStackNavigator({
   Alphabetic: {
@@ -351,7 +351,7 @@ const AlphabeticStack = createStackNavigator({
       },
     }),
   }
-}, { initialRouteName: 'Alphabetic' });
+}, { initialRouteName: 'Alphabetic', headerLayoutPreset: 'center' });
 
 const RouteConfigs = {
   Calendar: {
