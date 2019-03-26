@@ -38,7 +38,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Fetching device position to add the information to celebration map.</string>
+	<string>Hämtar anonymiserad platsinfo för att visa på kartan var du firar.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
