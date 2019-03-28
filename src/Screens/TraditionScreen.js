@@ -66,12 +66,12 @@ export default class Tradition extends Component {
     }
   };
 
-  onShare = async (title) => {
+  onShare = async (title, nid) => {
     try {
       const result = await Share.share({
         message: 'Lär dig om våra högtidsdagar med Nordiska museets app Årets dagar',
         title: `Vad vet du om ${title}?`,
-        url: 'http://aretsdagar.nordiskamuseet.se/',
+        url: 'http://aretsdagar.nordiskamuseet.se/node/' + nid,
       });
 
       if (result.action === Share.sharedAction) {
@@ -136,7 +136,7 @@ export default class Tradition extends Component {
                 <Icon name="place" size={25} style={styles.tabIcon} />
                 <Text style={styles.tabTitle}>Visa var</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.tabItem} onPress={() => this.onShare(tradition.title)}>
+              <TouchableOpacity style={styles.tabItem} onPress={() => this.onShare(tradition.title, tradition.nid)}>
                 <Icon name="share" size={25} style={styles.tabIcon} />
                 <Text style={styles.tabTitle}>Dela</Text>
               </TouchableOpacity>
