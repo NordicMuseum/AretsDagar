@@ -968,6 +968,9 @@
 						DevelopmentTeam = 9XVMLS28YU;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.GameCenter.iOS = {
 								enabled = 1;
 							};
@@ -1001,6 +1004,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
