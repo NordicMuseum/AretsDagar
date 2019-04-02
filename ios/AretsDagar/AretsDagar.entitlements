@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:aretsdagar.nordiskamuseet.se</string>
+		<string>applinks:nordiskamuseet.se</string>
 	</array>
 	<key>com.apple.external-accessory.wireless-configuration</key>
 	<true/>

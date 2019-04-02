@@ -91,7 +91,7 @@ class Calendar extends React.Component {
   addRoutesToDeepLinking () {
     DeepLinking.addScheme('aretsdagar://');
 
-    DeepLinking.addRoute('/node/:id', (response) => {
+    DeepLinking.addRoute('/aretsdagar/:title', (response) => {
       this.props.navigation.navigate(
         'Tradition',
         {
