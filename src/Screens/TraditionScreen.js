@@ -22,7 +22,7 @@ import Instagram from '../Components/Instagram';
 import Celebration from '../Components/Celebration';
 import Loader from '../Components/Loader';
 import Reminder from '../Components/Reminder';
-import { FormatDate } from '../Utils/helpers';
+import { FormatDate, FormatSlug } from '../Utils/helpers';
 import Gs from '../Utils/styles';
 
 const { height } = Dimensions.get('window');
@@ -71,7 +71,7 @@ export default class Tradition extends Component {
       const result = await Share.share({
         message: 'Lär dig om våra högtidsdagar med Nordiska museets app Årets dagar',
         title: `Vad vet du om ${title}?`,
-        url: 'http://aretsdagar.nordiskamuseet.se/node/' + nid,
+        url: 'https://www.nordiskamuseet.se/aretsdagar/' + FormatSlug(title) + '?id=' + nid,
       });
 
       if (result.action === Share.sharedAction) {
@@ -136,7 +136,7 @@ export default class Tradition extends Component {
                 <Icon name="place" size={25} style={styles.tabIcon} />
                 <Text style={styles.tabTitle}>Visa var</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.tabItem} onPress={() => this.onShare(tradition.title, tradition.nid)}>
+              <TouchableOpacity style={styles.tabItem} onPress={() => this.onShare(tradition.title, tradition.nid, tradition.path)}>
                 <Icon name="share" size={25} style={styles.tabIcon} />
                 <Text style={styles.tabTitle}>Dela</Text>
               </TouchableOpacity>
