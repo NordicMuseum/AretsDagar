@@ -53,11 +53,12 @@ PushNotification.configure({
   },
 
   onNotification: function(notification) {
+    Alert.alert(notification.title, notification.message);
     // process the notification
     notification.finish(PushNotificationIOS.FetchResult.NoData);
   },
 
-  senderID: Config.GCM_ID,
+  senderID: Config.FCM_ID,
 
   permissions: {
     alert: true,

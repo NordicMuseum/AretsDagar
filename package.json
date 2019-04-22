@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "accordion-collapse-react-native": "0.1.9",
-    "react": "16.6.3",
-    "react-native": "0.57.8",
+    "react": "16.8.3",
+    "react-native": "0.59.4",
     "react-native-config": "0.11.7",
     "react-native-deep-linking": "^2.2.0",
     "react-native-device-info": "^0.29.1",
@@ -23,12 +23,12 @@
     "react-native-gesture-handler": "1.1.0",
     "react-native-hyperlink": "0.0.14",
     "react-native-image-zoom-viewer": "2.2.25",
-    "react-native-maps": "0.23.0",
-    "react-native-push-notification": "3.1.2",
+    "react-native-maps": "0.24.0",
+    "react-native-push-notification": "https://github.com/zo0r/react-native-push-notification.git#c4c961cf3a76bffe4e9e36cf00201611eecbb898",
     "react-native-reanimated": "1.0.0-alpha.12",
     "react-native-vector-icons": "6.2.0",
-    "react-navigation": "3.3.2",
-    "react-navigation-tabs": "2.0.0-alpha.0"
+    "react-navigation": "3.7.1",
+    "react-navigation-tabs": "2.1.1"
   },
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",
