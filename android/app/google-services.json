@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "255262145782",
+    "firebase_url": "https://api-project-255262145782.firebaseio.com",
+    "project_id": "api-project-255262145782",
+    "storage_bucket": "api-project-255262145782.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255262145782:android:a8076a628b59464c",
+        "android_client_info": {
+          "package_name": "se.nordiskamuseet.aretsdagar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOm9CvA5hQy6sgkZs2Ky0XJ11SBIOYAoQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "255262145782-l56nql9vnc1qndvnavn5h9d6ohrhemda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
