@@ -17,6 +17,7 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import DeepLinking from 'react-native-deep-linking';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import SplashScreen from 'react-native-splash-screen';
 
 import CalendarScreen from './Screens/CalendarScreen';
 import AlphabeticScreen from './Screens/AlphabeticScreen';
@@ -79,6 +80,9 @@ class Calendar extends React.Component {
   componentDidMount () {
     this.addRoutesToDeepLinking()
     Linking.addEventListener('url', this.handleUrl)
+    if (Platform.OS === 'android') {
+      setTimeout(() => SplashScreen.hide() , 1500);
+    }
   }
 
   handleUrl ({ url }) {
