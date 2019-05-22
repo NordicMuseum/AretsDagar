@@ -58,3 +58,5 @@ buck-out/
 # Config
 .env
 android/mykeystore
+android/app/mykeystore
+ios/production_se.nordiskamuseet.aretsdagar.*
