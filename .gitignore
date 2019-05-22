@@ -60,3 +60,4 @@ buck-out/
 android/mykeystore
 android/app/mykeystore
 ios/production_se.nordiskamuseet.aretsdagar.*
+android/app/google-services.json
