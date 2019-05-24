@@ -102,7 +102,7 @@ android {
         applicationId "se.nordiskamuseet.aretsdagar"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 22
+        versionCode 26
         versionName "2.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
