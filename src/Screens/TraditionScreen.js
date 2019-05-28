@@ -69,9 +69,8 @@ export default class Tradition extends Component {
   onShare = async (title, nid) => {
     try {
       const result = await Share.share({
-        message: 'Lär dig om våra högtidsdagar med Nordiska museets app Årets dagar',
-        title: `Vad vet du om ${title}?`,
-        url: 'https://www.nordiskamuseet.se/aretsdagar/' + FormatSlug(title) + '?id=' + nid,
+        message: 'Lär dig om våra högtidsdagar med Nordiska museets app Årets dagar. https://www.nordiskamuseet.se/aretsdagar/' + FormatSlug(title) + '?id=' + nid,
+        title: `Vad vet du om ${title}?`
       });
 
       if (result.action === Share.sharedAction) {
