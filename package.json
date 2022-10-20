@@ -25,7 +25,7 @@
     "react-native-image-zoom-viewer": "2.2.25",
     "react-native-maps": "0.24.0",
     "react-native-push-notification": "https://github.com/zo0r/react-native-push-notification.git#c4c961cf3a76bffe4e9e36cf00201611eecbb898",
-    "react-native-reanimated": "1.0.0-alpha.12",
+    "react-native-reanimated": "2.10.0",
     "react-native-splash-screen": "3.2.0",
     "react-native-vector-icons": "6.2.0",
     "react-navigation": "3.7.1",
